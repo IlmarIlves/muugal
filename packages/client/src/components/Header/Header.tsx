@@ -7,37 +7,28 @@ export interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ name }) => {
   return (
-    <>
+    <div className="menu-bar">
       {/* <!--Roheline riba--> */}
-      <div className="menu-bar">
-        {/* <!--Log Out--> */}
-        <>
-          <div className="dropdown">
-            <button className="dropbtn">{name}</button>
-            <div className="dropdown-content">
-              <div className="logOut">
-                <form>
-                  <button type="submit">Log Out</button>
-                </form>
-              </div>
-            </div>
+      <>
+        <div className={"header"}>
+          <div className={"logo-container"}>
+            {/* <img className={"logo"}  src="img/ouroboros.jpg" /> */}
+            <h1 className={"company-name"}>Muugal</h1>
           </div>
-          {/* <!--Log Out mobla versioon--> */}
-          <>
-            <form>
-              <button type="submit">Log Out</button>
-            </form>
-          </>
-        </>
-
-        <div>{/* <img className="one" src="img/3dprintimse logo.jpg" width="150" height="70" title="Muugal" /> */}</div>
-      </div>
+          <div className={"login-container"}>
+            <span className={"login-text"}>LOG IN</span>
+            <span className={"order-text"}>ORDER</span>
+            <span className={"price-text"}>OUR PRICE OFFER</span>
+          </div>
+        </div>
+        {/* <!--Log Out mobla versioon--> */}
+      </>
 
       {/* <!--Profiil--> */}
-      <>
-        {/* <img className="ouroboros" src="img/ouroboros.jpg" /> */}
-        <div className="profiil-nimi">Kasutaja Nimi</div>
-      </>
+      {/* <>
+        <img className="ouroboros" src="img/ouroboros.jpg" />
+        <div className="profile-name">Kasutaja Nimi</div>
+      </> */}
 
       {/* <!--Profiili-nav--> */}
       <div className="profiil-nav">
@@ -54,6 +45,6 @@ export const Header: React.FC<HeaderProps> = ({ name }) => {
           <span>Instructions Manual</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
