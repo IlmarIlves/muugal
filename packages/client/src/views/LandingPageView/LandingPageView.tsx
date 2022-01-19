@@ -3,70 +3,10 @@ import { Header } from "../../components/Header/Header";
 import "./landingPageView.scss";
 
 export const LandingPageView: React.FC = () => {
+  const viewer = { name: "Juhan Tamm" };
   return (
     <>
-      {/* <!--Roheline riba--> */}
-      <div className="menüüriba">
-        <div className="container">
-          <div className="row">
-            {/* <!--Log Out--> */}
-            <div className="col">
-              <div className="dropdown dropdow-logOut">
-                <button className="dropbtn">(Kasutajanimi)</button>
-                <div className="dropdown-content">
-                  <div className="logOut">
-                    <form>
-                      <button className="form__button" type="submit">
-                        Log Out
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              {/* <!--Log Out mobla versioon--> */}
-              <div className="logOut-mobla">
-                <form>
-                  <button className="form__button-mobla" type="submit">
-                    Log Out
-                  </button>
-                </form>
-              </div>
-            </div>
-
-            <div className="col">
-              <div className="content">
-                {/* <img className="one" src="img/3dprintimse logo.jpg" width="150" height="70" title="Muugal" /> */}
-              </div>
-            </div>
-            <div className="col"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!--Profiil--> */}
-      <div>
-        <div className="FIND-PRINT-REPEAT-valgeümbris profiil">
-          {/* <img className="ouroboros" src="img/ouroboros.jpg" /> */}
-          <div className="profiil-nimi">Kasutaja Nimi</div>
-        </div>
-      </div>
-
-      {/* <!--Profiili-nav--> */}
-      <div className="profiil-nav">
-        <div className="profiil-nav-nupud-orders">
-          <span>Orders</span>
-        </div>
-        <div className="profiil-nav-nupud">
-          <span>User Information</span>
-        </div>
-        <div className="profiil-nav-nupud">
-          <span>Printer Information</span>
-        </div>
-        <div className="profiil-nav-nupud">
-          <span>Instructions Manual</span>
-        </div>
-      </div>
-
+      <Header name={viewer.name} />
       {/* <!--Orders--> */}
       <div className="orders-ümbris-hall">
         <div className="orders-ümbris-valge">
