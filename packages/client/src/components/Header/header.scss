@@ -2,8 +2,41 @@
   width: 100%;
   box-sizing: border-box;
   justify-content: space-around;
+  align-items: center;
   display: flex;
-  padding: 25px;
+  padding: 10px;
   background-color: black;
   color: #fff;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  padding-right: 25px;
+  border-radius: 50%;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-name {
+  padding-left: 25px;
+}
+
+.login-text {
+  padding-right: 50px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.order-text {
+  padding-left: 50px;
+  font-size: 25px;
+  font-weight: bold;
 }

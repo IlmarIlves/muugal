@@ -6,12 +6,13 @@ export const Header: React.FC = () => {
     <>
       <div className={"header"}>
         <div className={"logo-container"}>
-          <span>O</span>
-          <h1>Muugal</h1>
+          <h1 className={"logo"}>Logo</h1>
+          <h1 className={"company-name"}>Muugal</h1>
         </div>
         <div className={"login-container"}>
-          <span>Log in</span>
-          <span>Order</span>
+          <span className={"login-text"}>LOG IN</span>
+          <span className={"order-text"}>ORDER</span>
+          <span className={"price-text"}>OUR PRICE OFFER</span>
         </div>
       </div>
     </>
