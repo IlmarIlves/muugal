@@ -3,5 +3,16 @@
 
 
 type Query {
-  ok: Boolean!
+  """Returns users"""
+  users(
+    """News item id"""
+    id: ID!
+  ): User!
+}
+
+type User {
+  age: String!
+  firstName: ID!
+  id: ID!
+  lastName: String!
 }

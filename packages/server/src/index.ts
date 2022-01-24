@@ -40,7 +40,7 @@ const start = async () => {
 
 	// start server
 	app.listen({ port }, () => {
-		console.log(`Server ready at http://localhost:${port} ${server.graphqlPath}`);
+		console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
 	});
 };
 
