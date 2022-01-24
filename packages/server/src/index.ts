@@ -1,21 +1,47 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { makeSchema } from 'nexus';
+import { loadTypes } from './services/loadTypes';
+import { resolve, join } from 'path';
+import { createConnection } from 'typeorm';
 
-createConnection().then(async connection => {
+const start = async () => {
+	// create database connection
+	await createConnection().catch((error) => console.log('Error while connecting to the database', error));
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
+	// initiate express instance
+	const app = express();
 
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
+	// load schema definitions
+	const types = await loadTypes([join(__dirname, './schema', '**', '*.ts')]);
 
-    console.log("Here you can setup and run express/koa/any other framework.");
+	// redirect to graphql
+	app.get('/', (_req, res) => {
+		res.redirect('/graphql');
+	});
 
-}).catch(error => console.log(error));
+	// construct graphql schema
+	const schema: any = makeSchema({
+		types,
+		outputs: {
+			schema: resolve(__dirname, './generated/schema.graphql'),
+			typegen: resolve(__dirname, './generated/schema-types.d.ts'),
+		},
+	});
+
+	// initiate graphql server
+	const server = new ApolloServer({
+		schema,
+	});
+
+	server.applyMiddleware({ app });
+
+	const port = 4000;
+
+	// start server
+	app.listen({ port }, () => {
+		console.log(`Server ready at http://localhost:${port} ${server.graphqlPath}`);
+	});
+};
+
+start();
