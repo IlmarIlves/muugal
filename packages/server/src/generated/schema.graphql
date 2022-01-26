@@ -2,17 +2,45 @@
 ### Do not make changes to this file directly
 
 
+type Mutation {
+  """Registers new user"""
+  register(
+    """Email address"""
+    email: String
+
+    """First name"""
+    firstName: String
+
+    """Last name"""
+    lastName: String
+
+    """Password"""
+    password: String
+
+    """Username"""
+    userName: String
+  ): Viewer!
+}
+
 type Query {
-  """Returns users"""
-  users(
-    """News item id"""
-    id: ID!
-  ): User!
+  """Query viewer"""
+  viewer: Viewer!
 }
 
 type User {
-  age: String!
-  firstName: ID!
-  id: ID!
+  firstName: String!
+  id: String!
+  lastName: String!
+}
+
+enum UserStatusEnum {
+  ACTIVE
+  DEACTIVATED
+  DISABLED
+}
+
+type Viewer {
+  firstName: String!
+  id: String!
   lastName: String!
 }

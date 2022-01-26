@@ -17,14 +17,20 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  UserStatusEnum: "ACTIVE" | "DEACTIVATED" | "DISABLED"
 }
 
 export interface NexusGenRootTypes {
+  Mutation: {};
   Query: {};
   User: { // root type
-    age: string; // String!
-    firstName: string; // ID!
-    id: string; // ID!
+    firstName: string; // String!
+    id: string; // String!
+    lastName: string; // String!
+  }
+  Viewer: { // root type
+    firstName: string; // String!
+    id: string; // String!
     lastName: string; // String!
   }
   String: string;
@@ -35,24 +41,36 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  UserStatusEnum: NexusGenEnums['UserStatusEnum'];
 }
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    register: NexusGenRootTypes['Viewer']; // Viewer!
+  }
   Query: { // field return type
-    users: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['Viewer']; // Viewer!
   }
   User: { // field return type
-    age: string; // String!
-    firstName: string; // ID!
-    id: string; // ID!
+    firstName: string; // String!
+    id: string; // String!
+    lastName: string; // String!
+  }
+  Viewer: { // field return type
+    firstName: string; // String!
+    id: string; // String!
     lastName: string; // String!
   }
 }
 
 export interface NexusGenArgTypes {
-  Query: {
-    users: { // args
-      id: string; // ID!
+  Mutation: {
+    register: { // args
+      email?: string | null; // String
+      firstName?: string | null; // String
+      lastName?: string | null; // String
+      password?: string | null; // String
+      userName?: string | null; // String
     }
   }
 }
@@ -62,11 +80,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Query" | "User";
+export type NexusGenObjectNames = "Mutation" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "UserStatusEnum";
 
 export type NexusGenInterfaceNames = never;
 
