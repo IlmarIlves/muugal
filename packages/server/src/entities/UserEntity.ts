@@ -6,12 +6,11 @@ import { fieldLength } from "../validators/constants";
 export interface RegisterUserInfo {
     firstName: string;
     lastName: string;
-    userName: string;
     email: string;
     password: string;
   }
 
-enum UserRole {
+export enum UserRole {
     USER = "USER",
     ADMIN = "ADMIN",
 }
@@ -41,9 +40,6 @@ export class UserEntity extends BaseEntity {
     @Index()
     @Column({ type: "varchar", length: fieldLength.medium })
     lastName!: string;
-
-    @Column({type: "varchar", length: fieldLength.medium, default: 'user'})
-    userName: string;
 
     @Column({ type: "varchar", length: fieldLength.hash, nullable: true })
     passwordSalt!: string | null;

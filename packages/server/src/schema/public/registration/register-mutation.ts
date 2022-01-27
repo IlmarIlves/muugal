@@ -9,7 +9,6 @@ export default mutationField("register", {
     args: {
       firstName: stringArg({ description: "First name" }),
       lastName: stringArg({ description: "Last name" }),
-      userName: stringArg({ description: "Username" }),
       email: stringArg({ description: "Email address" }),
       password: stringArg({ description: "Password" }),
     },
@@ -18,7 +17,7 @@ export default mutationField("register", {
     //   context.logout();
   
       // extract arguments
-      const { firstName, lastName, email, password, userName} = args;
+      const { firstName, lastName, email, password} = args;
   
       
   
@@ -28,7 +27,7 @@ export default mutationField("register", {
         lastName,
         email,
         password,
-        userName
+    
       });
   
       // TODO: actually handle giftCode, currently just stored with the user

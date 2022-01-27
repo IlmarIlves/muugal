@@ -16,9 +16,6 @@ type Mutation {
 
     """Password"""
     password: String
-
-    """Username"""
-    userName: String
   ): Viewer!
 }
 

@@ -70,7 +70,6 @@ export interface NexusGenArgTypes {
       firstName?: string | null; // String
       lastName?: string | null; // String
       password?: string | null; // String
-      userName?: string | null; // String
     }
   }
 }
