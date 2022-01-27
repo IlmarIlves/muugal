@@ -1,3 +1,4 @@
+import { Field, ObjectType } from "type-graphql";
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index} from "typeorm";
 import { generateRandomString } from "../services/generateRandomString";
 import { getKeyedHash } from "../services/getKeyedHash";
@@ -21,7 +22,8 @@ export enum UserStatus {
     DISABLED = "DISABLED",
   }
 
-@Entity({ name: 'user' })
+  @Entity({ name: 'user' })
+  @ObjectType()
 export class UserEntity extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     readonly id!: string;
@@ -29,7 +31,7 @@ export class UserEntity extends BaseEntity {
     @Column({ type: "varchar", nullable: true })
     stripeCustomerId!: string | null;
 
-    @Index()
+    @Field()
     @Column({ type: "varchar", length: fieldLength.email })
     email!: string;
     
