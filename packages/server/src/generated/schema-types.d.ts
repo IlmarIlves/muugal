@@ -50,7 +50,7 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['Viewer']; // Viewer!
   }
   Query: { // field return type
-    viewer: NexusGenRootTypes['Viewer']; // Viewer!
+    viewer: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
     firstName: string; // String!

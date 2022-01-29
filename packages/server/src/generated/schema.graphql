@@ -30,7 +30,7 @@ type Mutation {
 
 type Query {
   """Query viewer"""
-  viewer: Viewer!
+  viewer: User!
 }
 
 type User {

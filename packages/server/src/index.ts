@@ -4,6 +4,7 @@ import { makeSchema } from 'nexus';
 import { loadTypes } from './services/loadTypes';
 import { resolve, join } from 'path';
 import { createConnection } from 'typeorm';
+import session from 'express-session';
 
 const start = async () => {
 	// create database connection
@@ -11,6 +12,13 @@ const start = async () => {
 
 	// initiate express instance
 	const app = express();
+
+	app.use(
+		session({
+		secret: 'sdasd342klk', 
+		resave: false, 
+		saveUninitialized: true,
+	}))
 
 	// load schema definitions
 	const types = await loadTypes([join(__dirname, './schema', '**', '*.ts')]);
