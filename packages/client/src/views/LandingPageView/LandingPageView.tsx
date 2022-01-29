@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
+import { MuugalSelection } from "../../components/MuugalSelection/MuugalSelection";
 import "./landingPageView.scss";
 
 export const LandingPageView: React.FC = () => {
@@ -7,8 +8,12 @@ export const LandingPageView: React.FC = () => {
   return (
     <>
       <Header name={viewer.name} />
+
+      <MuugalSelection />
+
       {/* <!--Orders--> */}
-      <div className="orders-ümbris-hall">
+
+      {/* <div className="orders-ümbris-hall">
         <div className="orders-ümbris-valge">
           <div className="pealkiri">Active Orders</div>
           <div className="orders-ümbris-must">
@@ -35,15 +40,18 @@ export const LandingPageView: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {/* <!--Taimer--> */}
+
+              <!--Taimer-->
+
               <div id="taimer" className="timer"></div>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!--Portfoolio--> */}
-      <div className="portfoolio-ümbris">
+
+      {/* <div className="portfoolio-ümbris">
         <div className="portfoolio-ümbris-valge">
           <div className="portfoolio">
             <div className="profiil-portfoolio">Portfolio</div>
@@ -55,14 +63,15 @@ export const LandingPageView: React.FC = () => {
           </div>
           <div>
             <div className="portfoolio-pildiümbris">
-              {/* <img  className="profiil-orders-newOrder-ümbris" src="img/tühipilt.jpg"> */}
+              <img  className="profiil-orders-newOrder-ümbris" src="img/tühipilt.jpg">
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!--User Information--> */}
-      <div className="portfoolio-ümbris">
+
+      {/* <div className="portfoolio-ümbris">
         <div className="portfoolio-ümbris-valge">
           <div className="pealkiri">User Information</div>
           <h4 className="userInformation">Username:</h4>
@@ -70,10 +79,10 @@ export const LandingPageView: React.FC = () => {
           <h4 className="userInformation">Phone:</h4>
           <h4 className="userInformation">Bank Account Number:</h4>
           <h4 className="userInformation">Password:</h4>
-          <button className="infoVahetus">Change information</button>
+          <button className="infoVahetus">Change information</button> */}
 
-          {/* <!-- Siin on andmete muutmise tabel, mis tuleb ette siis kui inimene tahab midagi muuta. Selle ligipääsemiseks peab ta esmalt kinnitama oma kasutaja parooli mis tuleb alerdina ette kui ta vajutab nuppu ´´chanege information´´--> */}
-          <div>
+      {/* <!-- Siin on andmete muutmise tabel, mis tuleb ette siis kui inimene tahab midagi muuta. Selle ligipääsemiseks peab ta esmalt kinnitama oma kasutaja parooli mis tuleb alerdina ette kui ta vajutab nuppu ´´chanege information´´--> */}
+      {/* <div>
             <div>
               <input className="kast" type="text" placeholder="Username" />
             </div>
@@ -96,10 +105,10 @@ export const LandingPageView: React.FC = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!--Printer Information--> */}
-      <div className="portfoolio-ümbris">
+      {/* <div className="portfoolio-ümbris">
         <div className="portfoolio-ümbris-valge">
           <div className="pealkiri">Printer Information</div>
           <h4 className="userInformation">
@@ -115,10 +124,11 @@ export const LandingPageView: React.FC = () => {
             <input className="printerInfo-värv" type="color" />
             <p className="userInformation">(Pantone Reference)</p>
           </div>
-          <button className="infoVahetus">Change information</button>
+          <button className="infoVahetus">Change information</button> */}
 
-          {/* <!--Siin on andmete muutmise tabel, mis tuleb ette siis kui inimene tahab midagi muuta. Selle ligipääsemiseks peab ta esmalt kinnitama oma kasutaja parooli mis tuleb alerdina ette kui ta vajutab nuppu ´´chanege information´´--> */}
-          <div>
+      {/* <!--Siin on andmete muutmise tabel, mis tuleb ette siis kui inimene tahab midagi muuta. Selle ligipääsemiseks peab ta esmalt kinnitama oma kasutaja parooli mis tuleb alerdina ette kui ta vajutab nuppu ´´chanege information´´--> */}
+
+      {/* <div>
             <div>
               <input className="kast" type="number" placeholder="Height (mm)" />
             </div>
@@ -127,9 +137,11 @@ export const LandingPageView: React.FC = () => {
             </div>
             <div>
               <input className="kast" type="number" placeholder="Lenght (mm)" />
-            </div>
-            {/* <!--Lisaks Värvi ja selle nime muutmisele, tahan et kasutajal oleks võimalik ka uusi värve lisada--> */}
-            <div>
+            </div> */}
+
+      {/* <!--Lisaks Värvi ja selle nime muutmisele, tahan et kasutajal oleks võimalik ka uusi värve lisada--> */}
+
+      {/* <div>
               <input className="kast" type="text" placeholder="Pantone Reference" />
             </div>
             <div>
@@ -142,10 +154,11 @@ export const LandingPageView: React.FC = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!--Instructions Manual--> */}
-      <div className="portfoolio-ümbris">
+
+      {/* <div className="portfoolio-ümbris">
         <div className="portfoolio-ümbris-valge">
           <div className="pealkiri">Instructions Manual</div>
           <div>
@@ -170,7 +183,7 @@ export const LandingPageView: React.FC = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({ name }) => {
       </> */}
 
       {/* <!--Profiili-nav--> */}
-      <div className="profiil-nav">
+      {/* <div className="profiil-nav">
         <div className="profiil-nav-nupud-orders">
           <span>Orders</span>
         </div>
@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ name }) => {
         <div className="profiil-nav-nupud">
           <span>Instructions Manual</span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

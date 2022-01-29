@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
 export class Context {
-	private req!: Request;
+	req!: Request;
 
 	constructor(req: Request) {
 		this.req = req;
