@@ -3,6 +3,15 @@
 
 
 type Mutation {
+  """Attempts to log user in"""
+  login(
+    """Email address"""
+    email: String
+
+    """Password"""
+    password: String
+  ): Viewer!
+
   """Registers new user"""
   register(
     """Email address"""

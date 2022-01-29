@@ -46,6 +46,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    login: NexusGenRootTypes['Viewer']; // Viewer!
     register: NexusGenRootTypes['Viewer']; // Viewer!
   }
   Query: { // field return type
@@ -65,6 +66,10 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    login: { // args
+      email?: string | null; // String
+      password?: string | null; // String
+    }
     register: { // args
       email?: string | null; // String
       firstName?: string | null; // String
