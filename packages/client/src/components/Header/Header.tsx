@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./header.scss";
 
 export interface HeaderProps {
@@ -6,6 +7,8 @@ export interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ name }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="menu-bar">
       {/* <!--Roheline riba--> */}
@@ -16,9 +19,15 @@ export const Header: React.FC<HeaderProps> = ({ name }) => {
             <h1 className={"company-name"}>Muugal</h1>
           </div>
           <div className={"login-container"}>
-            <span className={"login-text"}>LOG IN</span>
-            <span className={"order-text"}>ORDER</span>
-            <span className={"price-text"}>OUR PRICE OFFER</span>
+            <span className={"login-text"} onClick={() => navigate("/login")}>
+              LOG IN
+            </span>
+            <span className={"order-text"} onClick={() => navigate("/order")}>
+              ORDER
+            </span>
+            <span className={"price-text"} onClick={() => navigate("/our-price-offer")}>
+              OUR PRICE OFFER
+            </span>
           </div>
         </div>
         {/* <!--Log Out mobla versioon--> */}

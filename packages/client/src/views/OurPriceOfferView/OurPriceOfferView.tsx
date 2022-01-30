@@ -1,11 +1,11 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
 
-export const OrderView: React.FC = () => {
+export const OurPriceOfferView: React.FC = () => {
   return (
     <>
       <Header name={"Ilmar"} />
-      <span>Order</span>
+      <span>Our price offer</span>
     </>
   );
 };
