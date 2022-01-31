@@ -7,6 +7,17 @@ import { LoginView } from "./views/LoginView/LoginView";
 import { NotFoundView } from "./views/NotFoundView/NotFoundView";
 import { OurPriceOfferView } from "./views/OurPriceOfferView/OurPriceOfferView";
 import { OrderView } from "./views/OrderView/OrderView";
+import { gql } from "@apollo/client";
+
+gql`
+  query Viewer {
+    viewer {
+      id
+      firstName
+      lastName
+    }
+  }
+`;
 
 export interface ProtectedRouteProps extends RouteProps {
   isAuthenticated: boolean;

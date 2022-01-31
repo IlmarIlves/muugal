@@ -1,0 +1,20 @@
+documents:
+  - "./src/index.tsx"
+  - "./src/App.tsx"
+  - "./src/components/**/*.tsx"
+  - "./src/views/**/*.tsx"
+  - "./src/components/**/*.graphql"
+  - "./src/views/**/*.graphql"
+
+overwrite: true
+schema: "../server/src/generated/schema.graphql"
+
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
