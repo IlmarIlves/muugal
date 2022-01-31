@@ -8,6 +8,7 @@ import { NotFoundView } from "./views/NotFoundView/NotFoundView";
 import { OurPriceOfferView } from "./views/OurPriceOfferView/OurPriceOfferView";
 import { OrderView } from "./views/OrderView/OrderView";
 import { gql } from "@apollo/client";
+import { useViewerQuery } from "./generated/graphql";
 
 gql`
   query Viewer {
@@ -25,6 +26,8 @@ export interface ProtectedRouteProps extends RouteProps {
 }
 
 export const App: React.FC = () => {
+  const { data, loading, error } = useViewerQuery();
+
   return (
     <>
       <BrowserRouter>
