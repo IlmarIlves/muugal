@@ -1,13 +1,14 @@
 import { queryField } from "nexus";
 import { UserEntity } from "../../../entities/UserEntity";
 import { UserType } from "../user/UserType";
-import { Viewer } from "./ViewerType";
 
 export default queryField("viewer", {
     type: UserType,
     description: "Query viewer",
   
     resolve: async (_parent, _args, context) => {
+
+      console.log(context.req.session.userId);
 
       if(!context) {
         return null;

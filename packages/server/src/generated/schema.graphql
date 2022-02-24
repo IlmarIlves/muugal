@@ -12,6 +12,9 @@ type Mutation {
     password: String
   ): Viewer!
 
+  """Logs out signed-in user if any"""
+  logout: Boolean!
+
   """Registers new user"""
   register(
     """Email address"""

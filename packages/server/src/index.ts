@@ -3,8 +3,10 @@ import { ApolloServer } from 'apollo-server-express';
 import { makeSchema } from 'nexus';
 import { loadTypes } from './services/loadTypes';
 import { resolve, join } from 'path';
-import { createConnection } from 'typeorm';
+import { createConnection, getConnection } from 'typeorm';
 import session from 'express-session';
+import { Session } from './entities/Session';
+import { TypeormStore } from 'typeorm-store';
 
 const start = async () => {
 	// create database connection
@@ -13,11 +15,14 @@ const start = async () => {
 	// initiate express instance
 	const app = express();
 
+	const repository = getConnection().getRepository(Session);
+
 	app.use(
 		session({
 		secret: 'sdasd342klk', 
 		resave: false, 
 		saveUninitialized: true,
+		store: new TypeormStore({ repository })
 	}))
 
 	// load schema definitions

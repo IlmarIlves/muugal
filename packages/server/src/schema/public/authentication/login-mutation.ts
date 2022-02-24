@@ -16,15 +16,20 @@ export default mutationField("login", {
     email: stringArg({ description: "Email address" }),
     password: stringArg({ description: "Password" }),
   },
-  resolve: async (_parent, args, {req}) => {
+  resolve: async (_parent, args, context) => {
     // extract arguments
     const { email, password } = args;
+
+    console.log(context.req.session);
 
     const user = await UserEntity.findOne({ where: { email } });
     
     const valid = password == user.passwordHash;
 
-    req.session.userId = user.id;
+    context.req.session.userId = user.id;
+
+    console.log("after login", context.req.session);
+
 
     return user ;
   },
