@@ -16,7 +16,9 @@ export const Header: React.FC<HeaderProps> = ({ name }) => {
         <div className={"header"}>
           <div className={"logo-container"}>
             {/* <img className={"logo"}  src="img/ouroboros.jpg" /> */}
-            <h1 className={"company-name"}>Muugal</h1>
+            <h1 className={"company-name"} onClick={() => navigate("/")}>
+              Muugal
+            </h1>
           </div>
           <div className={"login-container"}>
             <span className={"login-text"} onClick={() => navigate("/login")}>

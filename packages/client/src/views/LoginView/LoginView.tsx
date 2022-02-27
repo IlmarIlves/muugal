@@ -1,6 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { gql } from "@apollo/client";
 import { Header } from "../../components/Header/Header";
+
+gql`
+  mutation Logout {
+    logout
+  }
+`;
 
 export const LoginView: React.FC = () => {
   const {

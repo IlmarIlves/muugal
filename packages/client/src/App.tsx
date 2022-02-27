@@ -28,6 +28,8 @@ export interface ProtectedRouteProps extends RouteProps {
 export const App: React.FC = () => {
   const { data, loading, error } = useViewerQuery();
 
+  console.log(data);
+
   return (
     <>
       <BrowserRouter>

@@ -17,8 +17,11 @@ export default queryField("viewer", {
       if(!context.req) {
         return null;
       }
-      
 
-      return UserEntity.findOne(context.req.session.userId);
+      if(!context.req.session) {
+        return null;
+      }
+      
+      return UserEntity.findOne({id: context.req.session.userId});
     },
   });
