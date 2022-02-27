@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm"
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm"
+import { UserEntity } from "./UserEntity"
 
 @Entity()
 export class FileEntity{
@@ -12,8 +13,11 @@ export class FileEntity{
     @Column({
         type: "longblob"
     })
-    data: string
+    data: Buffer
 
     @Column()
     mimeType:string
+
+    @ManyToOne(() => UserEntity, (user) => user.file)
+    user!: Promise<UserEntity>;
 }

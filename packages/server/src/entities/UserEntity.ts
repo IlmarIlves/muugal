@@ -1,8 +1,9 @@
 import { Field, ObjectType } from "type-graphql";
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index, OneToMany} from "typeorm";
 import { generateRandomString } from "../services/generateRandomString";
 import { getKeyedHash } from "../services/getKeyedHash";
 import { fieldLength } from "../validators/constants";
+import { FileEntity } from "./FileEntity";
 
 export interface RegisterUserInfo {
     firstName: string;
@@ -54,6 +55,9 @@ export class UserEntity extends BaseEntity {
 
     @Column({type: "enum", enum: UserStatus, default: UserStatus.ACTIVE})
     userStatus: UserStatus;
+
+    @OneToMany(() => FileEntity, file => file.user)
+    file: Promise<FileEntity[]>;
 
     static async register(info: RegisterUserInfo): Promise<UserEntity> {
         const passwordSalt = generateRandomString(fieldLength.hash);
