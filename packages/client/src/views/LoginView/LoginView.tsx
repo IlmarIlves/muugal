@@ -1,7 +1,24 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { gql } from "@apollo/client";
 import { Header } from "../../components/Header/Header";
+import { useLoginMutation } from "../../generated/graphql";
+import { useNavigate } from "react-router-dom";
+
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      id
+      firstName
+      lastName
+    }
+  }
+`;
 
 gql`
   mutation Logout {
@@ -10,28 +27,37 @@ gql`
 `;
 
 export const LoginView: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const { register, handleSubmit, formState } = useForm<LoginFormValues>();
+
+  const [login, loginResult] = useLoginMutation({
+    // refetchQueries: ["Viewer"],
+    // awaitRefetchQueries: true,
+  });
+
+  // login user on submit
+  const onSubmit: SubmitHandler<LoginFormValues> = async ({ email, password }) => {
+    const response = await login({
+      variables: { email, password },
+    });
+
+    if (response.data) {
+      navigate("/");
+    }
   };
-  const { onChange, ...rest } = register("username");
 
   return (
     <>
       <Header name={"ilmar"} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Username</label>
-        <input {...register("username")} />
-        {errors.username && <p>{errors.username.message}</p>}
+        <input type={"email"} {...register("email")} />
+        {/* {errors.email && <p>{errors.email.message}</p>} */}
         <label>Password</label>
-        <input {...register("lastName")} />
-        {errors.firstName && <p>{errors.firstName.message}</p>}
-        <button
+        <input type={"password"} {...register("password")} />
+        {/* {errors.password && <p>{errors.password.message}</p>} */}
+        {/* <button
           type="button"
           onClick={() => {
             [
@@ -49,7 +75,7 @@ export const LoginView: React.FC = () => {
           }}
         >
           Trigger Name Errors
-        </button>
+        </button> */}
         <input type="submit" />
       </form>
     </>

@@ -1,5 +1,4 @@
 import { mutationField, stringArg } from "@nexus/schema";
-import { JSONSchema4 } from "json-schema";
 import { UserEntity, UserStatus } from "../../../entities/UserEntity";
 
 declare module 'express-session' {
@@ -20,17 +19,20 @@ export default mutationField("login", {
     // extract arguments
     const { email, password } = args;
 
-    console.log(context.req.session);
+    const user = await UserEntity.findOne({ where: { email, userStatus: UserStatus.ACTIVE } });
 
-    const user = await UserEntity.findOne({ where: { email } });
-    
-    const valid = password == user.passwordHash;
+    // if (password != user.passwordHash) {
+    //   throw new Error("Password is incorrect");
+    // }   
 
+    if (!user) {
+      throw new Error("Email passed validation but the user could not be found, this should not happen");
+    }
+
+    // login user (logged in user id is stored in session)
     context.req.session.userId = user.id;
 
-    console.log("after login", context.req.session);
-
-
-    return user ;
+    // return logged in user info
+    return user;
   },
 });

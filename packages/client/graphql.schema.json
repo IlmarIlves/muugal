@@ -65,6 +65,22 @@
             "deprecationReason": null
           },
           {
+            "name": "logout",
+            "description": "Logs out signed-in user if any",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "register",
             "description": "Registers new user",
             "args": [
