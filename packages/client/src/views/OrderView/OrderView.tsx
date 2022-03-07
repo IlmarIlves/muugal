@@ -2,9 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Header } from "../../components/Header/Header";
 import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
+import { ViewerQuery } from "../../generated/graphql";
 import "./orderView.scss";
 
-export const OrderView: React.FC = () => {
+interface OrderViewProps {
+  viewer: ViewerQuery | undefined;
+}
+
+export const OrderView: React.FC<OrderViewProps> = ({ viewer }) => {
   const {
     register,
     handleSubmit,
@@ -18,7 +23,7 @@ export const OrderView: React.FC = () => {
 
   return (
     <>
-      <Header name={"Ilmar"} />
+      <Header viewer={viewer} />
 
       <div className={"order-information"}>
         <div className="image">

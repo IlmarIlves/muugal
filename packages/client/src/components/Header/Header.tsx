@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Viewer, ViewerQuery } from "../../generated/graphql";
 import "./header.scss";
 
 export interface HeaderProps {
-  name: string;
+  viewer?: ViewerQuery | undefined;
 }
 
-export const Header: React.FC<HeaderProps> = ({ name }) => {
+export const Header: React.FC<HeaderProps> = ({ viewer }) => {
   const navigate = useNavigate();
 
   return (

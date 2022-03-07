@@ -2,12 +2,17 @@ import React from "react";
 import { Header } from "../../components/Header/Header";
 import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
 import { ProgressBar } from "../../components/ProgressBar/ProgressBar";
+import { ViewerQuery } from "../../generated/graphql";
 import "./ourPriceOffer.scss";
 
-export const OurPriceOfferView: React.FC = () => {
+interface OurPriceOfferViewProps {
+  viewer: ViewerQuery | undefined;
+}
+
+export const OurPriceOfferView: React.FC<OurPriceOfferViewProps> = ({ viewer }) => {
   return (
     <>
-      <Header name={"Ilmar"} />
+      <Header viewer={viewer} />
 
       <div className={"price-offer"}>
         <div className="image">

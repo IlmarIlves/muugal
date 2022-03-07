@@ -49,7 +49,7 @@ export const LoginView: React.FC = () => {
 
   return (
     <>
-      <Header name={"ilmar"} />
+      <Header />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Username</label>
         <input type={"email"} {...register("email")} />

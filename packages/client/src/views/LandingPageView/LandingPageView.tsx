@@ -1,13 +1,17 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
 import { MuugalSelection } from "../../components/MuugalSelection/MuugalSelection";
+import { Viewer } from "../../generated/graphql";
 import "./landingPageView.scss";
 
-export const LandingPageView: React.FC = () => {
-  const viewer = { name: "Juhan Tamm" };
+export interface LandingPageViewProps {
+  viewer: Viewer | undefined;
+}
+
+export const LandingPageView: React.FC<LandingPageViewProps> = ({ viewer }) => {
   return (
     <>
-      <Header name={viewer.name} />
+      <Header viewer={viewer} />
 
       <MuugalSelection />
 
