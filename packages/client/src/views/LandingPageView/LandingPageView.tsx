@@ -1,11 +1,12 @@
 import React from "react";
+import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import { MuugalSelection } from "../../components/MuugalSelection/MuugalSelection";
-import { Viewer } from "../../generated/graphql";
+import { ViewerQuery } from "../../generated/graphql";
 import "./landingPageView.scss";
 
 export interface LandingPageViewProps {
-  viewer: Viewer | undefined;
+  viewer: ViewerQuery | undefined;
 }
 
 export const LandingPageView: React.FC<LandingPageViewProps> = ({ viewer }) => {
@@ -14,6 +15,8 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({ viewer }) => {
       <Header viewer={viewer} />
 
       <MuugalSelection />
+
+      <Footer />
 
       {/* <!--Orders--> */}
 

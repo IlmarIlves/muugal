@@ -4,9 +4,11 @@ import { gql } from "@apollo/client";
 import { Header } from "../../components/Header/Header";
 import { useLoginMutation } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
-import "./loginView.scss";
+import "./registerView.scss";
 
-interface LoginFormValues {
+interface RegisterFormValues {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
@@ -27,10 +29,10 @@ gql`
   }
 `;
 
-export const LoginView: React.FC = () => {
+export const RegisterView: React.FC = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState } = useForm<LoginFormValues>();
+  const { register, handleSubmit, formState } = useForm<RegisterFormValues>();
 
   const [login, loginResult] = useLoginMutation({
     // refetchQueries: ["Viewer"],
@@ -38,7 +40,7 @@ export const LoginView: React.FC = () => {
   });
 
   // login user on submit
-  const onSubmit: SubmitHandler<LoginFormValues> = async ({ email, password }) => {
+  const onSubmit: SubmitHandler<RegisterFormValues> = async ({ firstName, lastName, email, password }) => {
     const response = await login({
       variables: { email, password },
     });
@@ -53,16 +55,22 @@ export const LoginView: React.FC = () => {
       <Header />
       <div className={"form-container"}>
         <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
-          <label>Username</label>
+          <label>Email</label>
           <input className={"input"} type={"email"} {...register("email")} />
+          {/* {errors.password && <p>{errors.password.message}</p>} */}
+          <label>First Name</label>
+          <input className={"input"} type={"firstName"} {...register("firstName")} />
           {/* {errors.email && <p>{errors.email.message}</p>} */}
+          <label>Last Name</label>
+          <input className={"input"} type={"lastName"} {...register("lastName")} />
+          {/* {errors.password && <p>{errors.password.message}</p>} */}
           <label>Password</label>
           <input className={"input"} type={"password"} {...register("password")} />
           {/* {errors.password && <p>{errors.password.message}</p>} */}
-          <input className={"submit"} type="submit" value="Log in" />
-          <div className={"register"}>
-            <span onClick={() => navigate("/register")}>Sign up now</span>
-          </div>
+          <label>Confirm password</label>
+          <input className={"input"} type={"password"} {...register("password")} />
+          {/* {errors.password && <p>{errors.password.message}</p>} */}
+          <input className={"submit"} type="submit" value="Register" />
         </form>
       </div>
     </>
