@@ -2,7 +2,7 @@ import { Field, ObjectType } from "type-graphql";
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index, OneToMany} from "typeorm";
 import { generateRandomString } from "../services/generateRandomString";
 import { getKeyedHash } from "../services/getKeyedHash";
-import { fieldLength } from "../validators/constants";
+import { fieldLength } from "../../lib/validate/constants";
 import { FileEntity } from "./FileEntity";
 import { PaymentEntity } from "./PaymentEntity";
 
@@ -58,7 +58,7 @@ export class UserEntity extends BaseEntity {
     userStatus: UserStatus;
 
     @OneToMany(() => PaymentEntity, payment => payment.user)
-    payment: Promise<PaymentEntity[]>;
+    payments: Promise<PaymentEntity[]>;
 
     @OneToMany(() => FileEntity, file => file.user)
     file: Promise<FileEntity[]>;
