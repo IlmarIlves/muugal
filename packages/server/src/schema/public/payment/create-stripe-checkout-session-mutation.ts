@@ -1,6 +1,6 @@
 import { mutationField, stringArg } from "@nexus/schema";
 import { JSONSchema4 } from "json-schema";
-import { UnauthorizedError, validate } from "../../../../lib/validate";
+// import { UnauthorizedError, validate } from "../../../../lib/validate";
 import { config } from "../../../config";
 import { fieldLength } from "../../../constants";
 import { PaymentEntity, PaymentMethod, PaymentStatus } from "../../../entities/PaymentEntity";
@@ -29,12 +29,12 @@ export default mutationField("createStripeCheckoutSession", {
   resolve: async (_parent, args, context) => {
     const { viewer } = context;
 
-    if (!viewer) {
-      throw new UnauthorizedError();
-    }
+    // if (!viewer) {
+    //   throw new UnauthorizedError();
+    // }
 
-    // validate arguments
-    await validate(args, schema);
+    // // validate arguments
+    // await validate(args, schema);
 
     // create stripe session
     const stripeSession = await stripe.checkout.sessions.create({

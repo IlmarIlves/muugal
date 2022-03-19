@@ -1,0 +1,95 @@
+/*menüüriba*/
+.menu-bar {
+  background-color: black;
+  margin-bottom: 50px;
+}
+
+.header {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  color: #fff;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  padding-right: 25px;
+  border-radius: 50%;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-name {
+  margin-left: 25px;
+  cursor: pointer;
+}
+
+.login-text {
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.order-text {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.price-text {
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.profile-name {
+  font-size: 2.4em;
+  font-weight: bold;
+  align-items: center;
+  font-weight: 700;
+  font-family: "Permanent Marker", cursive;
+  font-size: 4.5rem;
+  flex-grow: 1;
+}
+
+/*Profiil-nav - Profile Page*/
+.profiil-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 1rem;
+}
+
+.profiil-nav-nupud {
+  flex-grow: 1;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: mediumblue;
+}
+
+.profiil-nav-nupud-orders {
+  flex-grow: 1;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: mediumblue;
+}
