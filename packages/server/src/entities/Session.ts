@@ -7,6 +7,9 @@ export class Session extends BaseEntity implements SessionEntity {
     id: string;
 
     @Column()
+    userId: string;
+
+    @Column()
     expiresAt: number;
 
     @Column()

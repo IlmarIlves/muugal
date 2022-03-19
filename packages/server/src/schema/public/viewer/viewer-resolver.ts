@@ -1,14 +1,16 @@
 import { queryField } from "nexus";
+import { Session } from "../../../entities/Session";
 import { UserEntity } from "../../../entities/UserEntity";
 import { UserType } from "../user/UserType";
 
 export default queryField("viewer", {
     type: UserType,
     description: "Query viewer",
-  
     resolve: async (_parent, _args, context) => {
 
-      console.log(context.req.session.userId);
+      console.log(context.req.sessionID);
+
+      console.log("viewer resolver", context.req.session.userId);
 
       if(!context) {
         return null;
@@ -18,10 +20,12 @@ export default queryField("viewer", {
         return null;
       }
 
-      if(!context.req.session) {
+      if(!context.req.sessionID) {
         return null;
       }
+
+      const session = await Session.findOne({where: {id: context.req.sessionID}});
       
-      return UserEntity.findOne({id: context.req.session.userId});
+      return UserEntity.findOne({id: session.userId});
     },
   });

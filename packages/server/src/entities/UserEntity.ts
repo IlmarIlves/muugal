@@ -4,6 +4,7 @@ import { generateRandomString } from "../services/generateRandomString";
 import { getKeyedHash } from "../services/getKeyedHash";
 import { fieldLength } from "../validators/constants";
 import { FileEntity } from "./FileEntity";
+import { PaymentEntity } from "./PaymentEntity";
 
 export interface RegisterUserInfo {
     firstName: string;
@@ -55,6 +56,9 @@ export class UserEntity extends BaseEntity {
 
     @Column({type: "enum", enum: UserStatus, default: UserStatus.ACTIVE})
     userStatus: UserStatus;
+
+    @OneToMany(() => PaymentEntity, payment => payment.user)
+    payment: Promise<PaymentEntity[]>;
 
     @OneToMany(() => FileEntity, file => file.user)
     file: Promise<FileEntity[]>;

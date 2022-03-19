@@ -10,6 +10,7 @@ export interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ viewer }) => {
   const navigate = useNavigate();
 
+  console.log(viewer?.viewer);
   return (
     <div className="menu-bar">
       {/* <!--Roheline riba--> */}
@@ -28,9 +29,11 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
             <span className={"order-text"} onClick={() => navigate("/order")}>
               ORDER
             </span>
-            <span className={"price-text"} onClick={() => navigate("/our-price-offer")}>
-              OUR PRICE OFFER
-            </span>
+            {viewer?.viewer != null ? (
+              <span className={"price-text"} onClick={() => navigate("/our-price-offer")}>
+                OUR PRICE OFFER
+              </span>
+            ) : null}
           </div>
         </div>
         {/* <!--Log Out mobla versioon--> */}

@@ -3,7 +3,7 @@ import { Factory, Seeder } from "typeorm-seeding";
 import { UserEntity, UserStatus, UserRole } from "../src/entities/UserEntity";
 import { generateRandomString } from "../src/services/generateRandomString";
 import { getKeyedHash } from "../src/services/getKeyedHash";
-import { fieldLength } from "../src/validators/constants";
+import { fieldLength } from "../lib/validate/constants";
 
 const users: Partial<UserEntity>[] = [
 

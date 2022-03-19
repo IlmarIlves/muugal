@@ -43,8 +43,7 @@ export default mutationField("register", {
       if (!isPasswordCorrect) {
         throw new Error("Password passed validation but the password is incorrect, this should not happen");
       }
-  
-  
+
       return user;
     },
   });

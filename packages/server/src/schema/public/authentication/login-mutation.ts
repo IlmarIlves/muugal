@@ -1,11 +1,25 @@
 import { mutationField, stringArg } from "@nexus/schema";
+import { JSONSchema4 } from "json-schema";
+import { Session } from "../../../entities/Session";
 import { UserEntity, UserStatus } from "../../../entities/UserEntity";
 
-declare module 'express-session' {
-    interface Session {
-        userId: string
-    }
-  }
+const schema: JSONSchema4 = {
+  $async: true,
+  type: "object",
+  properties: {
+    email: {
+      title: "Email",
+      type: "string",
+      format: "email",
+    },
+    password: {
+      title: "Password",
+      type: "string",
+      format: "valid-password",
+    },
+  },
+  required: ["email", "password"],
+};
 
 
 export default mutationField("login", {
@@ -17,20 +31,17 @@ export default mutationField("login", {
   },
   resolve: async (_parent, args, context) => {
     // extract arguments
-    const { email, password } = args;
+    const { email } = args;
 
     const user = await UserEntity.findOne({ where: { email, userStatus: UserStatus.ACTIVE } });
-
-    // if (password != user.passwordHash) {
-    //   throw new Error("Password is incorrect");
-    // }   
 
     if (!user) {
       throw new Error("Email passed validation but the user could not be found, this should not happen");
     }
 
-    // login user (logged in user id is stored in session)
-    context.req.session.userId = user.id;
+    const session = await Session.findOne({where: {id: context.req.sessionID}});
+
+    session.userId = user.id;
 
     // return logged in user info
     return user;

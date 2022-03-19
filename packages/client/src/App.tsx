@@ -16,7 +16,6 @@ gql`
     viewer {
       id
       firstName
-      lastName
     }
   }
 `;
@@ -28,6 +27,8 @@ export interface ProtectedRouteProps extends RouteProps {
 
 export const App: React.FC = () => {
   const { data, loading, error } = useViewerQuery();
+
+  console.log("app viewer query", data?.viewer.id);
 
   // if (error) {
   //   return <div>error</div>;

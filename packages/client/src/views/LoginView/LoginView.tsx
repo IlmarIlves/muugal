@@ -2,7 +2,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { gql } from "@apollo/client";
 import { Header } from "../../components/Header/Header";
-import { useLoginMutation } from "../../generated/graphql";
+import { useLoginMutation, useViewerQuery } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
 import "./loginView.scss";
 
@@ -32,6 +32,8 @@ export const LoginView: React.FC = () => {
 
   const { register, handleSubmit, formState } = useForm<LoginFormValues>();
 
+  const { data, loading, error } = useViewerQuery();
+
   const [login, loginResult] = useLoginMutation({
     // refetchQueries: ["Viewer"],
     // awaitRefetchQueries: true,
@@ -43,7 +45,9 @@ export const LoginView: React.FC = () => {
       variables: { email, password },
     });
 
-    if (response.data) {
+    if (response.data?.login) {
+      console.log("login viewer query after mutation", data?.viewer.id);
+      console.log("login response user id after mutation", response.data.login.id);
       navigate("/");
     }
   };

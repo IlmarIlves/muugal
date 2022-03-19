@@ -22,7 +22,7 @@ const start = async () => {
 		secret: 'sdasd342klk', 
 		resave: false, 
 		saveUninitialized: true,
-		store: new TypeormStore({ repository })
+		store: new TypeormStore({ repository, clearExpired: true, })
 	}))
 
 	// load schema definitions
