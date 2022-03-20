@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, RouteProps, Routes } from "react-router";
 import { BrowserRouter, Navigate } from "react-router-dom";
-import { LandingPageView } from "./views/LandingPageView/LandingPageView";
+import { AdminView } from "./views/AdminView/AdminView";
 import { LoginView } from "./views/LoginView/LoginView";
 import { useViewerQuery } from "./generated/graphql";
 import { NotFoundView } from "./views/NotFoundView/NotFoundView";
@@ -40,7 +40,7 @@ export const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Navigate to={"/"} />} />
           <Route path="login" element={<LoginView />} />
-          <Route path="main" element={<LandingPageView viewer={data!} />} />
+          <Route path="main" element={<AdminView viewer={data!} />} />
           <Route path="main/:menu/*" /* element={authenticatedAdminView} */ />
           <Route path="*" element={<NotFoundView />} />
         </Routes>
