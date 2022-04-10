@@ -1,6 +1,5 @@
 import { mutationField, stringArg } from "@nexus/schema";
 import { JSONSchema4 } from "json-schema";
-import { Session } from "../../../entities/Session";
 import { UserEntity, UserStatus } from "../../../entities/UserEntity";
 
 const schema: JSONSchema4 = {
@@ -39,9 +38,11 @@ export default mutationField("login", {
       throw new Error("Email passed validation but the user could not be found, this should not happen");
     }
 
-    const session = await Session.findOne({where: {id: context.req.sessionID}});
+    console.log("login sessionID", context.req.sessionID)
 
-    session.userId = user.id;
+    context.req.session.userId = user.id;
+
+    // console.log("after session", context.req.session.userId)
 
     // return logged in user info
     return user;

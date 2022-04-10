@@ -13,7 +13,7 @@ export const MuugalSelection: React.FC = () => {
   return (
     <div className={"muugal-selection"}>
       {files.map((file, index) => (
-        <FileContainer name={file.name} information={file.information} />
+        <FileContainer key={index} name={file.name} information={file.information} />
       ))}
     </div>
   );

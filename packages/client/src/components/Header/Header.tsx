@@ -4,13 +4,12 @@ import { Viewer, ViewerQuery } from "../../generated/graphql";
 import "./header.scss";
 
 export interface HeaderProps {
-  viewer?: ViewerQuery | undefined;
+  viewer?: any;
 }
 
 export const Header: React.FC<HeaderProps> = ({ viewer }) => {
   const navigate = useNavigate();
 
-  console.log(viewer?.viewer);
   return (
     <div className="menu-bar">
       {/* <!--Roheline riba--> */}

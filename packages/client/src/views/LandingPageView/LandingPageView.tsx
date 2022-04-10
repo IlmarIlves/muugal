@@ -2,14 +2,19 @@ import React from "react";
 import { Footer } from "../../components/Footer/Footer";
 import { Header } from "../../components/Header/Header";
 import { MuugalSelection } from "../../components/MuugalSelection/MuugalSelection";
-import { ViewerQuery } from "../../generated/graphql";
+import { useViewerQuery, ViewerQuery } from "../../generated/graphql";
 import "./landingPageView.scss";
 
-export interface LandingPageViewProps {
-  viewer: ViewerQuery | undefined;
-}
+export const LandingPageView: React.FC = () => {
+  const { data, loading, error } = useViewerQuery();
 
-export const LandingPageView: React.FC<LandingPageViewProps> = ({ viewer }) => {
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  console.log(data?.viewer.firstName);
+  const viewer = data?.viewer;
+
   return (
     <>
       <Header viewer={viewer} />
