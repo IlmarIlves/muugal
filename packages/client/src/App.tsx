@@ -42,7 +42,7 @@ export const App: React.FC = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPageView viewer={data} />} />
+          <Route path="/" element={<LandingPageView />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/our-price-offer" element={<OurPriceOfferView viewer={data} />} />

@@ -12,7 +12,7 @@ interface OurPriceOfferViewProps {
 export const OurPriceOfferView: React.FC<OurPriceOfferViewProps> = ({ viewer }) => {
   return (
     <>
-      <Header viewer={viewer} />
+      <Header />
 
       <div className={"price-offer"}>
         <div className="image">

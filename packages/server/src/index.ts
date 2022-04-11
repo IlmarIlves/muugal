@@ -19,8 +19,11 @@ const start = async () => {
 	// initiate express instance
 	const app = express();
 
+	
 	const cors = require('cors')
 
+	app.use(cors({origin: 'localhost:3000', credentials: true}))
+	
 	var MySQLStore = require('express-mysql-session')(session);
 
 	var options = {
@@ -106,7 +109,7 @@ const start = async () => {
 		}
 	});
 
-	server.applyMiddleware({ app });
+	server.applyMiddleware({ app, cors: false });
 
 	const port = 4000;
 

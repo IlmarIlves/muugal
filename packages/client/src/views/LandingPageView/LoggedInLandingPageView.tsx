@@ -11,7 +11,7 @@ export interface LoggedInLandingPageViewProps {
 export const LoggedInLandingPageView: React.FC<LoggedInLandingPageViewProps> = ({ viewer }) => {
   return (
     <>
-      <Header viewer={viewer} />
+      <Header />
 
       <MuugalSelection />
     </>

@@ -23,7 +23,7 @@ export const OrderView: React.FC<OrderViewProps> = ({ viewer }) => {
 
   return (
     <>
-      <Header viewer={viewer} />
+      <Header />
 
       <div className={"order-information"}>
         <div className="image">

@@ -1,13 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Viewer, ViewerQuery } from "../../generated/graphql";
 import "./header.scss";
 
-export interface HeaderProps {
-  viewer?: any;
-}
-
-export const Header: React.FC<HeaderProps> = ({ viewer }) => {
+export const Header: React.FC = ({}) => {
   const navigate = useNavigate();
 
   return (
@@ -28,11 +23,11 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
             <span className={"order-text"} onClick={() => navigate("/order")}>
               ORDER
             </span>
-            {viewer?.viewer != null ? (
+            {/* {viewer?.viewer != null ? (
               <span className={"price-text"} onClick={() => navigate("/our-price-offer")}>
                 OUR PRICE OFFER
               </span>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
         {/* <!--Log Out mobla versioon--> */}
