@@ -4,8 +4,11 @@ import { makeSchema } from 'nexus';
 import { loadTypes } from './services/loadTypes';
 import { resolve, join } from 'path';
 import { createConnection } from 'typeorm';
-import axios from 'axios';
-import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import { verify } from 'jsonwebtoken';
+import { UserEntity } from './entities/UserEntity';
+import { createAccessToken, createRefreshToken } from './services/auth';
+import { sendRefreshToken } from './services/sendRefreshToken';
 
 const start = async () => {
 	// create database connection
@@ -30,13 +33,6 @@ const start = async () => {
 	
 	var sessionStore = new MySQLStore(options);
 
-	app.use(bodyParser.urlencoded({
-		extended: true
-	}));
-
-	app.use(bodyParser.json())
-
-	app.use(bodyParser.json());
 	app.use(cors());
 
 	app.use(
@@ -56,16 +52,42 @@ const start = async () => {
 	// load schema definitions
 	const types = await loadTypes([join(__dirname, './schema', '**', '*.ts')]);
 
+	app.use(cookieParser());
 	// redirect to graphql
-	app.get('/', (req, res, next) => {
-		res.json({user: 'CORS enabled'})
-		console.log("res");
-		console.log(res);
-		console.log(req.session.userId);
-		// res.redirect('/graphql');
+	app.get('/', (_req, res, next) => {
+		res.redirect('/graphql');
 	});
-	
 
+	app.post('/refresh_token', async (req, res) => {
+		const token = req.cookies.jid;
+
+		if(!token) {
+			return res.send({ok: false, accessToken: ''})
+		}
+
+		let payload: any = null ;
+		try {
+			payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
+		} catch (error) {
+			console.log(error);
+			return res.send({ok: false, accessToken: ''})
+		}
+
+		const user = await UserEntity.findOne({id: payload.userId})
+
+		if(!user) {
+			return res.send({ ok: false, accessToken: ''});
+		}
+
+		if(user.tokenVersion !== payload.tokenVersion) {
+			return res.send({ok: false, accessToken: ''})
+		}
+
+		//login successful
+		sendRefreshToken(res, createRefreshToken(user))
+
+		return res.send({ok: true, accessToken: createAccessToken(user)})
+	});
 
 	// construct graphql schema
 	const schema: any = makeSchema({
@@ -80,14 +102,8 @@ const start = async () => {
 	const server = new ApolloServer({
 		schema,
 		context: ({ req, res }) => {
-			          res.header(
-			              "Access-Control-Allow-Origin",
-			              "http://localhost:4000/graphql",
-			          );
-			          res.header("Access-Control-Allow-Credentials", "true");
-			
-						return { req, res };
-					}
+			return { req, res };
+		}
 	});
 
 	server.applyMiddleware({ app });

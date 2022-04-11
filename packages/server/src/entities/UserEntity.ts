@@ -52,16 +52,19 @@ export class UserEntity extends BaseEntity {
     passwordHash!: string | null;
 
     @Column({type: "enum", enum: UserRole, default: UserRole.USER})
-    userRole: UserRole;
+    userRole!: UserRole;
+
+    @Column({ type: "int", default: 0 })
+    tokenVersion!: number;
 
     @Column({type: "enum", enum: UserStatus, default: UserStatus.ACTIVE})
-    userStatus: UserStatus;
+    userStatus!: UserStatus;
 
     @OneToMany(() => PaymentEntity, payment => payment.user)
-    payments: Promise<PaymentEntity[]>;
+    payments!: Promise<PaymentEntity[]>;
 
     @OneToMany(() => FileEntity, file => file.user)
-    file: Promise<FileEntity[]>;
+    file!: Promise<FileEntity[]>;
 
     static async register(info: RegisterUserInfo): Promise<UserEntity> {
         const passwordSalt = generateRandomString(fieldLength.hash);

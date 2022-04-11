@@ -15,10 +15,15 @@ export type Scalars = {
   Float: number;
 };
 
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  accessToken: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Attempts to log user in */
-  login: Viewer;
+  login: LoginResponse;
   /** Logs out signed-in user if any */
   logout: Scalars['Boolean'];
   /** Registers new user */
@@ -60,9 +65,7 @@ export enum UserStatusEnum {
 
 export type Viewer = {
   __typename?: 'Viewer';
-  firstName: Scalars['String'];
-  id: Scalars['String'];
-  lastName: Scalars['String'];
+  accessToken: Scalars['String'];
 };
 
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
@@ -76,7 +79,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Viewer', id: string, firstName: string, lastName: string } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -122,9 +125,7 @@ export type ViewerQueryResult = Apollo.QueryResult<ViewerQuery, ViewerQueryVaria
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
-    id
-    firstName
-    lastName
+    accessToken
   }
 }
     `;

@@ -21,6 +21,9 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  LoginResponse: { // root type
+    accessToken: string; // String!
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -29,9 +32,7 @@ export interface NexusGenRootTypes {
     lastName: string; // String!
   }
   Viewer: { // root type
-    firstName: string; // String!
-    id: string; // String!
-    lastName: string; // String!
+    accessToken: string; // String!
   }
   String: string;
   Int: number;
@@ -45,8 +46,11 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  LoginResponse: { // field return type
+    accessToken: string; // String!
+  }
   Mutation: { // field return type
-    login: NexusGenRootTypes['Viewer']; // Viewer!
+    login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
     register: NexusGenRootTypes['Viewer']; // Viewer!
   }
@@ -59,9 +63,7 @@ export interface NexusGenFieldTypes {
     lastName: string; // String!
   }
   Viewer: { // field return type
-    firstName: string; // String!
-    id: string; // String!
-    lastName: string; // String!
+    accessToken: string; // String!
   }
 }
 
@@ -85,7 +87,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "LoginResponse" | "Mutation" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = never;
 

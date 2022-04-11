@@ -9,10 +9,9 @@ import { getFormats } from "./getFormats";
 import { ValidationError } from "./ValidationError";
 
 
-
 // list of default validators always available
 const defaultValidators: CustomValidatorDef[] = [
-
+  
 ];
 
 // TODO: not sure how to get ValidationError from Ajv typings directly
@@ -57,7 +56,17 @@ export async function validate(data: JSONObject, schema: JSONSchema4, extraValid
     const { message, errors } = error as AjvValidationError;
 
     // log validation error with details
-  
+    console.log(
+      {
+        message,
+        error,
+        errors,
+        schema,
+        data,
+      },
+      "validation failed",
+    );
+
     // rethrow unknown errors
     if (!(error instanceof Ajv.ValidationError)) {
       throw error;

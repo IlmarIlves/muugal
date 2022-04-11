@@ -2,6 +2,10 @@
 ### Do not make changes to this file directly
 
 
+type LoginResponse {
+  accessToken: String!
+}
+
 type Mutation {
   """Attempts to log user in"""
   login(
@@ -10,7 +14,7 @@ type Mutation {
 
     """Password"""
     password: String
-  ): Viewer!
+  ): LoginResponse!
 
   """Logs out signed-in user if any"""
   logout: Boolean!
@@ -49,7 +53,5 @@ enum UserStatusEnum {
 }
 
 type Viewer {
-  firstName: String!
-  id: String!
-  lastName: String!
+  accessToken: String!
 }

@@ -5,18 +5,18 @@ import { UserEntity } from "./UserEntity"
 export class FileEntity{
 
     @PrimaryGeneratedColumn()
-    id: number 
+    id!: number 
 
     @Column()
-    name: string
+    name!: string
 
     @Column({
         type: "longblob"
     })
-    data: Buffer
+    data!: Buffer
 
     @Column()
-    mimeType:string
+    mimeType!:string
 
     @ManyToOne(() => UserEntity, (user) => user.file)
     user!: Promise<UserEntity>;
