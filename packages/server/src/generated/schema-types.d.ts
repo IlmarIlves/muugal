@@ -17,6 +17,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  UserRoleEnum: "ADMIN" | "USER"
   UserStatusEnum: "ACTIVE" | "DEACTIVATED" | "DISABLED"
 }
 
@@ -27,9 +28,11 @@ export interface NexusGenRootTypes {
   Mutation: {};
   Query: {};
   User: { // root type
+    email: string; // String!
     firstName: string; // String!
-    id: string; // String!
+    id: string; // ID!
     lastName: string; // String!
+    userStatus: NexusGenEnums['UserStatusEnum']; // UserStatusEnum!
   }
   Viewer: { // root type
     accessToken: string; // String!
@@ -42,6 +45,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  UserRoleEnum: NexusGenEnums['UserRoleEnum'];
   UserStatusEnum: NexusGenEnums['UserStatusEnum'];
 }
 
@@ -52,15 +56,17 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
-    register: NexusGenRootTypes['Viewer']; // Viewer!
+    register: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
     viewer: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
+    email: string; // String!
     firstName: string; // String!
-    id: string; // String!
+    id: string; // ID!
     lastName: string; // String!
+    userStatus: NexusGenEnums['UserStatusEnum']; // UserStatusEnum!
   }
   Viewer: { // field return type
     accessToken: string; // String!
@@ -91,7 +97,7 @@ export type NexusGenObjectNames = "LoginResponse" | "Mutation" | "Query" | "User
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = "UserStatusEnum";
+export type NexusGenEnumNames = "UserRoleEnum" | "UserStatusEnum";
 
 export type NexusGenInterfaceNames = never;
 

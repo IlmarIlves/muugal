@@ -1,49 +1,98 @@
-import { mutationField, stringArg } from "nexus";
-import { UserEntity } from "../../../entities/UserEntity";
+import { arg, mutationField, nullable, stringArg } from "@nexus/schema";
+import { JSONSchema4 } from "json-schema";
+import { validate } from "../../../../lib/validate/validate";
+import { fieldLength } from "../../../constants";
+import { UserEntity, UserRole } from "../../../entities/UserEntity";
 import { getKeyedHash } from "../../../services/getKeyedHash";
-import { Viewer } from "../viewer/ViewerType";
+import { UserType } from "../user/UserType";
+
+const schema: JSONSchema4 = {
+  $async: true,
+  type: "object",
+  properties: {
+    name: {
+      title: "Name",
+      type: "string",
+      minLength: 1,
+      maxLength: fieldLength.medium,
+    },
+    email: {
+      title: "Email",
+      type: "string",
+      maxLength: fieldLength.email,
+      allOf: [
+        {
+          format: "email",
+        },
+        {
+          format: "unique-email",
+        },
+      ],
+    },
+    password: {
+      title: "Password",
+      type: "string",
+      // format: "strong-password",
+      minLength: 8,
+    },
+  },
+  required: ["firstName", "lastName", "email", "password"],
+};
 
 export default mutationField("register", {
-    type: Viewer,
-    description: "Registers new user",
-    args: {
-      firstName: stringArg({ description: "First name" }),
-      lastName: stringArg({ description: "Last name" }),
-      email: stringArg({ description: "Email address" }),
-      password: stringArg({ description: "Password" }),
-    },
-    resolve: async (_parent, args, context) => {
-      // log out existing user if any
-    //   context.logout();
-  
-      // extract arguments
-      const { firstName, lastName, email, password} = args;
-  
-      
+  type: "User",
+  description: "Registers new user",
+  args: {
+    firstName: stringArg({ description: "Full name" }),
+    lastName: stringArg({ description: "Full name" }),
+    email: stringArg({ description: "Email address" }),
+    password: stringArg({ description: "Password" }),
+  },
+  resolve: async (_parent, args, context) => {
+    // log out existing user if any
+    context.logout();
 
-      const user = await UserEntity.register({
-        firstName,
-        lastName,
+    // extract arguments
+    const { firstName, lastName, email, password, giftCode } = args;
+
+    // validate arguments
+    await validate(args, schema);
+
+    // register user
+    const user = await UserEntity.register({
+      firstName,
+      lastName,
+      email,
+      password,
+      userRole: [UserRole.USER],
+    });
+
+    // TODO: actually handle giftCode, currently just stored with the user
+
+    // check if user has password associated with his account
+    /* istanbul ignore next */
+    if (!user.passwordSalt || !user.passwordHash) {
+      throw new Error("Created user does not have password set, this should not happen");
+    }
+
+    // calculate salted password hash
+    const passwordHash = getKeyedHash(password, user.passwordSalt);
+    const isPasswordCorrect = passwordHash === user.passwordHash;
+
+    if (!isPasswordCorrect) {
+      throw new Error("Password passed validation but the password is incorrect, this should not happen");
+    }
+
+    console.log(
+      {
         email,
-        password,
-    
-      });
-  
-      // TODO: actually handle giftCode, currently just stored with the user
-  
- 
-      if (!user.passwordSalt || !user.passwordHash) {
-        throw new Error("Created user does not have password set, this should not happen");
-      }
-  
-  
-      const passwordHash = getKeyedHash(password, user.passwordSalt);
-      const isPasswordCorrect = passwordHash === user.passwordHash;
-  
-      if (!isPasswordCorrect) {
-        throw new Error("Password passed validation but the password is incorrect, this should not happen");
-      }
+        user,
+        giftCode,
+      },
+      "registered new user",
+    );
 
-      return user;
-    },
-  });
+    // return logged in user info
+    return user;
+  },
+});

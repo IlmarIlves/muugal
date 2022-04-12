@@ -47,7 +47,7 @@ export const App: React.FC = () => {
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/our-price-offer" element={<OurPriceOfferView viewer={data} />} />
-          <Route path="/order" element={<OrderView viewer={data} />} />
+          <Route path="/order" element={<OrderView />} />
           <Route path="*" element={<NotFoundView />} />
           {/* <Route path="dashboard" element={<PrivateRoute roles={[ROLE.ADMIN]} component={Dashboard} />} />
           <Route path="users" element={<PrivateRoute roles={[ROLE.ADMIN, ROLE.USER]} component={Users} />} /> */}

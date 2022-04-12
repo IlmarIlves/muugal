@@ -2,14 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Header } from "../../components/Header/Header";
 import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
-import { ViewerQuery } from "../../generated/graphql";
+import { User, useViewerQuery, ViewerQuery } from "../../generated/graphql";
 import "./orderView.scss";
 
-interface OrderViewProps {
-  viewer: ViewerQuery | undefined;
-}
+export const OrderView: React.FC = ({}) => {
+  const { data } = useViewerQuery();
 
-export const OrderView: React.FC<OrderViewProps> = ({ viewer }) => {
   const {
     register,
     handleSubmit,

@@ -5,12 +5,14 @@ import { getKeyedHash } from "../services/getKeyedHash";
 import { fieldLength } from "../../lib/validate/constants";
 import { FileEntity } from "./FileEntity";
 import { PaymentEntity } from "./PaymentEntity";
+import { config } from "../config";
 
 export interface RegisterUserInfo {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
+    userRole: UserRole[];
   }
 
 export enum UserRole {
@@ -52,7 +54,7 @@ export class UserEntity extends BaseEntity {
     passwordHash!: string | null;
 
     @Column({type: "enum", enum: UserRole, default: UserRole.USER})
-    userRole!: UserRole;
+    userRole!: UserRole[];
 
     @Column({ type: "int", default: 0 })
     tokenVersion!: number;
@@ -76,14 +78,13 @@ export class UserEntity extends BaseEntity {
           lastName: info.lastName,
           passwordSalt,
           passwordHash,
+          userRole: info.userRole,
+      // userRole: info.userRole,
+
         }).save(); 
  
      return user;
-   }
-
-
-
-      
+   }      
 }
 
 

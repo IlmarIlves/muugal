@@ -24,15 +24,15 @@ type Mutation {
     """Email address"""
     email: String
 
-    """First name"""
+    """Full name"""
     firstName: String
 
-    """Last name"""
+    """Full name"""
     lastName: String
 
     """Password"""
     password: String
-  ): Viewer!
+  ): User!
 }
 
 type Query {
@@ -41,9 +41,18 @@ type Query {
 }
 
 type User {
+  email: String!
   firstName: String!
-  id: String!
+  id: ID!
   lastName: String!
+
+  """User status"""
+  userStatus: UserStatusEnum!
+}
+
+enum UserRoleEnum {
+  ADMIN
+  USER
 }
 
 enum UserStatusEnum {

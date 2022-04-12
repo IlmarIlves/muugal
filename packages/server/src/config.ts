@@ -10,9 +10,8 @@ export interface Config {
   graphql: GraphqlConfig;
   session: SessionConfig;
   database: DatabaseConfig;
-  logger: LoggerConfig;
+  rules: RulesConfig;
   admin: AdminConfig;
-  slack: SlackConfig;
   email: EmailConfig;
   stripe: StripeConfig;
 }
@@ -85,6 +84,11 @@ export interface StripeConfig {
   privateKey: string;
   successUrl: string;
   cancelUrl: string;
+}
+
+
+export interface RulesConfig {
+  validateEmailValidForSeconds: number;
 }
 
 // always load from config directory relative to given file

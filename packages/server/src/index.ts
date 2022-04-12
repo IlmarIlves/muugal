@@ -56,10 +56,7 @@ const start = async () => {
 	const types = await loadTypes([join(__dirname, './schema', '**', '*.ts')]);
 
 	app.use(cookieParser());
-	// redirect to graphql
-	app.get('/', (_req, res, next) => {
-		res.redirect('/graphql');
-	});
+
 
 	app.post('/refresh_token', async (req, res) => {
 		const token = req.cookies.jid;
