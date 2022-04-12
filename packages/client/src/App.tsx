@@ -16,6 +16,7 @@ gql`
     viewer {
       id
       firstName
+      lastName
     }
   }
 `;

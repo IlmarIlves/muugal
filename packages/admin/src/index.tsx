@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { App } from "./App";
+import { AdminApp } from "./AdminApp";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -15,4 +15,4 @@ const ApolloApp = (App: React.FC) => (
   </ApolloProvider>
 );
 
-ReactDOM.render(ApolloApp(App), document.getElementById("root"));
+ReactDOM.render(ApolloApp(AdminApp), document.getElementById("root"));

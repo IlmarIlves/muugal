@@ -71,7 +71,7 @@ export type Viewer = {
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, firstName: string } };
+export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, firstName: string, lastName: string } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -92,6 +92,7 @@ export const ViewerDocument = gql`
   viewer {
     id
     firstName
+    lastName
   }
 }
     `;

@@ -17,7 +17,7 @@ export const LandingPageView: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <Header viewer={viewer} />
 
       <MuugalSelection />
 

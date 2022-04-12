@@ -1,8 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { User, Viewer, ViewerQueryResult } from "../../generated/graphql";
 import "./header.scss";
 
-export const Header: React.FC = ({}) => {
+export interface HeaderProps {
+  viewer?: User;
+}
+
+export const Header: React.FC<HeaderProps> = ({ viewer }) => {
   const navigate = useNavigate();
 
   return (
@@ -17,17 +22,23 @@ export const Header: React.FC = ({}) => {
             </h1>
           </div>
           <div className={"login-container"}>
-            <span className={"login-text"} onClick={() => navigate("/login")}>
-              LOG IN
-            </span>
+            {viewer === null ? (
+              <span className={"login-text"} onClick={() => navigate("/login")}>
+                LOG IN
+              </span>
+            ) : (
+              <span className={"login-text"} onClick={() => navigate("/login")}>
+                {viewer!.firstName}
+              </span>
+            )}
             <span className={"order-text"} onClick={() => navigate("/order")}>
               ORDER
             </span>
-            {/* {viewer?.viewer != null ? (
+            {viewer !== null ? (
               <span className={"price-text"} onClick={() => navigate("/our-price-offer")}>
                 OUR PRICE OFFER
               </span>
-            ) : null} */}
+            ) : null}
           </div>
         </div>
         {/* <!--Log Out mobla versioon--> */}

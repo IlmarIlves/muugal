@@ -1,7 +1,6 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { gql } from "@apollo/client";
-import { Header } from "../../components/Header/Header";
 import { useLoginMutation, useViewerQuery } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
 import "./loginView.scss";
@@ -52,7 +51,6 @@ export const LoginView: React.FC = () => {
 
   return (
     <>
-      <Header />
       <div className={"form-container"}>
         <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
           <label>Username</label>

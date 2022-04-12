@@ -2,7 +2,7 @@ import React from "react";
 import { Route, RouteProps, Routes } from "react-router";
 import { BrowserRouter, Navigate } from "react-router-dom";
 import { AdminView } from "./views/AdminView/AdminView";
-import { LoginView } from "./views/LoginView/LoginView";
+import { LoginView as AdminLoginView } from "./views/LoginView/AdminLoginView";
 import { useViewerQuery } from "./generated/graphql";
 import { NotFoundView } from "./views/NotFoundView/NotFoundView";
 import { gql } from "@apollo/client";
@@ -21,7 +21,7 @@ export interface ProtectedRouteProps extends RouteProps {
   authenticationPath: string;
 }
 
-export const App: React.FC = () => {
+export const AdminApp: React.FC = () => {
   const { data, loading, error } = useViewerQuery();
 
   console.log("app viewer query", data?.viewer.id);
@@ -39,7 +39,7 @@ export const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to={"/"} />} />
-          <Route path="login" element={<LoginView />} />
+          <Route path="login" element={<AdminLoginView />} />
           <Route path="main" element={<AdminView viewer={data!} />} />
           <Route path="main/:menu/*" /* element={authenticatedAdminView} */ />
           <Route path="*" element={<NotFoundView />} />
