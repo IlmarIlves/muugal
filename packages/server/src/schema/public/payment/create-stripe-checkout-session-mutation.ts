@@ -1,26 +1,10 @@
 // import { mutationField, stringArg } from "@nexus/schema";
 // import { JSONSchema4 } from "json-schema";
-// // import { UnauthorizedError, validate } from "../../../../lib/validate";
 // import { config } from "../../../config";
 // import { fieldLength } from "../../../constants";
 // import { PaymentEntity, PaymentMethod, PaymentStatus } from "../../../entities/PaymentEntity";
 
 // import { stripe } from "../../../services/setupStripe";
-
-// const schema: JSONSchema4 = {
-//   $async: true,
-//   type: "object",
-//   properties: {
-//     subscriptionId: {
-//       title: "Subscription ID",
-//       type: "string",
-//       minLength: 1,
-//       maxLength: fieldLength.uuid,
-//       // format: "existing-product",
-//     },
-//   },
-//   required: ["subscriptionId"],
-// };
 
 // export default mutationField("createStripeCheckoutSession", {
 //   type: "Payment",
@@ -32,9 +16,6 @@
 //     // if (!viewer) {
 //     //   throw new UnauthorizedError();
 //     // }
-
-//     // // validate arguments
-//     // await validate(args, schema);
 
 //     // create stripe session
 //     const stripeSession = await stripe.checkout.sessions.create({

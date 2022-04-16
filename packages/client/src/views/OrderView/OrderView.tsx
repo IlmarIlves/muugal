@@ -59,7 +59,6 @@ export const OrderView: React.FC = ({}) => {
       <div className={"order-information"}>
         <div className="image">
           {/* <FileContainer name={"Order 1"} /> */}
-          {/* <StlViewer style={style} orbitControls shadows url={file} /> */}
           <input type="file" name="file" ref={fileInputRef} onChange={handleFileUpload} />
         </div>
 

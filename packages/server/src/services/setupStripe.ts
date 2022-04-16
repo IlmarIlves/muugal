@@ -1,4 +1,4 @@
 import { Stripe } from "stripe";
 import { config } from "../config";
 
-export const stripe = new Stripe(config.stripe.privateKey, { apiVersion: "2020-08-27" });
+export const stripe = new Stripe(process.env.privateKey, { apiVersion: "2020-08-27" });

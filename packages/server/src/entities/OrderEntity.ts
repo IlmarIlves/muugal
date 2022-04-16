@@ -4,7 +4,10 @@ import { UserEntity } from "./UserEntity"
 @Entity()
 export class OrderEntity{
     @PrimaryGeneratedColumn()
-    id!: number 
+    id!: number
+
+    @Column()
+    userId: string;
 
     @Column()
     email!: string
@@ -13,7 +16,7 @@ export class OrderEntity{
     telephone!: string
 
     @Column()
-    colors!: string[]
+    colors!: string
 
     @Column()
     amount!: number

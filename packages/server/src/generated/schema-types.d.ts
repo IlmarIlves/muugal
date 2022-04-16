@@ -4,9 +4,17 @@
  */
 
 
-
-
-
+import { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    upload<FieldName extends string>(fieldName: FieldName, opts?: core.ScalarInputFieldConfig<core.GetGen3<"inputTypes", TypeName, FieldName>>): void // "Upload";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    upload<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Upload";
+  }
+}
 
 
 declare global {
@@ -17,12 +25,13 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  ConditionModeEnum: "AND" | "OR"
+  MatchModeEnum: "CONTAINS" | "EXACT" | "STARTS_WITH"
   UserRoleEnum: "ADMIN" | "USER"
   UserStatusEnum: "ACTIVE" | "DEACTIVATED" | "DISABLED"
 }
 
 export interface NexusGenRootTypes {
-  Admin: {};
   LoginResponse: { // root type
     accessToken: string; // String!
   }
@@ -43,17 +52,17 @@ export interface NexusGenRootTypes {
   Float: number;
   Boolean: boolean;
   ID: string;
+  Upload: Promise<FileUpload>;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  ConditionModeEnum: NexusGenEnums['ConditionModeEnum'];
+  MatchModeEnum: NexusGenEnums['MatchModeEnum'];
   UserRoleEnum: NexusGenEnums['UserRoleEnum'];
   UserStatusEnum: NexusGenEnums['UserStatusEnum'];
 }
 
 export interface NexusGenFieldTypes {
-  Admin: { // field return type
-    user: any; // NEXUS__UNKNOWN__TYPE!
-  }
   LoginResponse: { // field return type
     accessToken: string; // String!
   }
@@ -61,6 +70,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
     register: NexusGenRootTypes['User']; // User!
+    uploadFile: NexusGenRootTypes['Viewer']; // Viewer!
   }
   Query: { // field return type
     viewer: NexusGenRootTypes['User']; // User!
@@ -78,11 +88,6 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
-  Admin: {
-    user: { // args
-      userId?: string | null; // ID
-    }
-  }
   Mutation: {
     login: { // args
       email?: string | null; // String
@@ -94,6 +99,9 @@ export interface NexusGenArgTypes {
       lastName?: string | null; // String
       password?: string | null; // String
     }
+    uploadFile: { // args
+      file?: any | null; // Upload
+    }
   }
 }
 
@@ -102,15 +110,15 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Admin" | "LoginResponse" | "Mutation" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "LoginResponse" | "Mutation" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = "UserRoleEnum" | "UserStatusEnum";
+export type NexusGenEnumNames = "ConditionModeEnum" | "MatchModeEnum" | "UserRoleEnum" | "UserStatusEnum";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String" | "Upload";
 
 export type NexusGenUnionNames = never;
 
