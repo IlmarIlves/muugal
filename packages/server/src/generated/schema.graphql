@@ -2,6 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type Admin {
+  """Admin user by id"""
+  user(
+    """User identifier"""
+    userId: ID
+  ): NEXUS__UNKNOWN__TYPE!
+}
+
 type LoginResponse {
   accessToken: String!
 }
@@ -34,6 +42,15 @@ type Mutation {
     password: String
   ): User!
 }
+
+"""
+
+    This scalar should never make it into production. It is used as a placeholder for situations
+    where GraphQL Nexus encounters a missing type. We don't want to error immedately, otherwise
+    the TypeScript definitions will not be updated.
+  
+"""
+scalar NEXUS__UNKNOWN__TYPE
 
 type Query {
   """Query viewer"""

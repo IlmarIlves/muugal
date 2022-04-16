@@ -2,13 +2,24 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm"
 import { UserEntity } from "./UserEntity"
 
 @Entity()
-export class FileEntity{
-
+export class OrderEntity{
     @PrimaryGeneratedColumn()
     id!: number 
 
     @Column()
-    name!: string
+    email!: string
+
+    @Column()
+    telephone!: string
+
+    @Column()
+    colors!: string[]
+
+    @Column()
+    amount!: number
+
+    @Column({nullable: true})
+    additionalInfo!: string | null
 
     @Column({
         type: "longblob"

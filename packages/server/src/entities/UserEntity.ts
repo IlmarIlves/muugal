@@ -3,7 +3,7 @@ import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index, OneToMany} fr
 import { generateRandomString } from "../services/generateRandomString";
 import { getKeyedHash } from "../services/getKeyedHash";
 import { fieldLength } from "../../lib/validate/constants";
-import { FileEntity } from "./FileEntity";
+import { OrderEntity } from "./OrderEntity";
 import { PaymentEntity } from "./PaymentEntity";
 import { config } from "../config";
 
@@ -65,22 +65,21 @@ export class UserEntity extends BaseEntity {
     @OneToMany(() => PaymentEntity, payment => payment.user)
     payments!: Promise<PaymentEntity[]>;
 
-    @OneToMany(() => FileEntity, file => file.user)
-    file!: Promise<FileEntity[]>;
+    @OneToMany(() => OrderEntity, file => file.user)
+    file!: Promise<OrderEntity[]>;
 
     static async register(info: RegisterUserInfo): Promise<UserEntity> {
         const passwordSalt = generateRandomString(fieldLength.hash);
         const passwordHash = getKeyedHash(info.password, passwordSalt);
     
         const user = await UserEntity.create({
-          email: info.email.toLowerCase(),
+          email: info.email,
           firstName: info.firstName,
           lastName: info.lastName,
           passwordSalt,
           passwordHash,
           userRole: info.userRole,
       // userRole: info.userRole,
-
         }).save(); 
  
      return user;

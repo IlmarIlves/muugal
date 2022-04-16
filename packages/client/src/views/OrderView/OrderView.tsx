@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Header } from "../../components/Header/Header";
 import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
@@ -7,6 +7,8 @@ import "./orderView.scss";
 
 export const OrderView: React.FC = ({}) => {
   const { data } = useViewerQuery();
+
+  const [file, setFile] = useState<File>();
 
   const {
     register,
@@ -19,13 +21,46 @@ export const OrderView: React.FC = ({}) => {
   };
   const { onChange, ...rest } = register("username");
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
+
+    const selectedFiles = event.target.files[0];
+
+    if (!selectedFiles) {
+      return;
+    }
+
+    const file = selectedFiles;
+
+    setFile(file);
+
+    // await updateAvatar({
+    //   variables: {
+    //     avatar,
+    //   },
+    // });
+  };
+
+  const style = {
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+  };
+
   return (
     <>
       <Header />
 
       <div className={"order-information"}>
         <div className="image">
-          <FileContainer name={"Order 1"} />
+          {/* <FileContainer name={"Order 1"} /> */}
+          {/* <StlViewer style={style} orbitControls shadows url={file} /> */}
+          <input type="file" name="file" ref={fileInputRef} onChange={handleFileUpload} />
         </div>
 
         <div className={"form"}>

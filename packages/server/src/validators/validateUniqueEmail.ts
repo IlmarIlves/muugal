@@ -7,7 +7,7 @@ export function validateUniqueEmail(): CustomValidator<string> {
     name: "unique-email",
     validate: async (email: string) => {
       // do not allow letter case differences here
-      const normalizedEmail = email.trim().toLowerCase();
+      const normalizedEmail = email.trim();
 
       const user = await UserEntity.createQueryBuilder("user")
         .where("LOWER(TRIM(user.email)) = :normalizedEmail", { normalizedEmail })

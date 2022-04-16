@@ -22,6 +22,7 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Admin: {};
   LoginResponse: { // root type
     accessToken: string; // String!
   }
@@ -50,6 +51,9 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Admin: { // field return type
+    user: any; // NEXUS__UNKNOWN__TYPE!
+  }
   LoginResponse: { // field return type
     accessToken: string; // String!
   }
@@ -74,6 +78,11 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Admin: {
+    user: { // args
+      userId?: string | null; // ID
+    }
+  }
   Mutation: {
     login: { // args
       email?: string | null; // String
@@ -93,7 +102,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "LoginResponse" | "Mutation" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "Admin" | "LoginResponse" | "Mutation" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = never;
 
