@@ -3,6 +3,10 @@ import { Navigate, Routes, Route, useParams } from "react-router-dom";
 import { MainMenu, MainMenuItemInfo } from "../../components/MainMenu/MainMenu";
 import { AdminViewParams, ADMIN_VIEW_PATH, AdminViewMenu, ViewerInfo } from "../../routes";
 import { buildUrl } from "../../services/buildUrl";
+import { OrdersDetailsView } from "../OrdersDetailsView/OrdersDetailsView";
+import { OrdersListView } from "../OrdersListView/OrdersListView";
+import { PaymentDetailsView } from "../PaymentDetailsView/PaymentDetailsView";
+import { PaymentListView } from "../PaymentListView/PaymentListView";
 import { UserDetailsView } from "../UserDetailsView/UserDetailsView";
 import { UserListView } from "../UserListView/UserListView";
 
@@ -33,34 +37,34 @@ export const AdminView: React.FC<AdminViewProps> = (props) => {
           </Routes>
         ),
       },
-      // {
-      //   name: "payments",
-      //   title: "Payments",
-      //   url: buildUrl<AdminViewParams>(ADMIN_VIEW_PATH, { menu: "payments" }),
-      //   // authorizedScopes: [UserScopeEnum.SUPERADMIN, UserScopeEnum.ADMIN_PAYMENTS, UserScopeEnum.ADMIN_PAYMENTS_LIST],
-      //   content: ({ viewer }) => (
-      //     <Routes>
-      //       <Route index element={<PaymentListView viewer={viewer} />} />
-      //       <Route path="payment/:id/*" element={<PaymentDetailsView viewer={viewer} />} />
-      //     </Routes>
-      //   ),
-      // },
-      // {
-      //   name: "orders",
-      //   title: "Orders",
-      //   // authorizedScopes: [
-      //   // UserScopeEnum.SUPERADMIN,
-      //   // UserScopeEnum.ADMIN_SUBSCRIPTIONS,
-      //   // UserScopeEnum.ADMIN_SUBSCRIPTIONS_LIST,
-      //   // ],
-      //   url: buildUrl<AdminViewParams>(ADMIN_VIEW_PATH, { menu: "orders" }),
-      //   content: ({ viewer }) => (
-      //     <Routes>
-      //       <Route index element={<SubscriptionListView viewer={viewer} />} />
-      //       <Route path="subscription/:id/*" element={<SubscriptionDetailsView viewer={viewer} />} />
-      //     </Routes>
-      //   ),
-      // },
+      {
+        name: "payments",
+        title: "Payments",
+        url: buildUrl<AdminViewParams>(ADMIN_VIEW_PATH, { menu: "payments" }),
+        // authorizedScopes: [UserScopeEnum.SUPERADMIN, UserScopeEnum.ADMIN_PAYMENTS, UserScopeEnum.ADMIN_PAYMENTS_LIST],
+        content: ({ viewer }) => (
+          <Routes>
+            <Route index element={<PaymentListView viewer={viewer} />} />
+            <Route path="payment/:id/*" element={<PaymentDetailsView viewer={viewer} />} />
+          </Routes>
+        ),
+      },
+      {
+        name: "orders",
+        title: "Orders",
+        // authorizedScopes: [
+        // UserScopeEnum.SUPERADMIN,
+        // UserScopeEnum.ADMIN_SUBSCRIPTIONS,
+        // UserScopeEnum.ADMIN_SUBSCRIPTIONS_LIST,
+        // ],
+        url: buildUrl<AdminViewParams>(ADMIN_VIEW_PATH, { menu: "orders" }),
+        content: ({ viewer }) => (
+          <Routes>
+            <Route index element={<OrdersListView viewer={viewer} />} />
+            <Route path="order/:id/*" element={<OrdersDetailsView viewer={viewer} />} />
+          </Routes>
+        ),
+      },
     ],
     [],
   );
@@ -99,9 +103,12 @@ export const AdminView: React.FC<AdminViewProps> = (props) => {
     //     </Column>
     //   </Row>
     // </Column>
-    <div>
-      <MainMenu items={menus} activeItemIndex={activeItemIndex} /* viewerScopes={viewer.scopes} */ />
-    </div>
+    <>
+      <div>Muugal admin</div>
+      <div>
+        <MainMenu items={menus} activeItemIndex={activeItemIndex} /* viewerScopes={viewer.scopes} */ />
+      </div>
+    </>
   );
 };
 

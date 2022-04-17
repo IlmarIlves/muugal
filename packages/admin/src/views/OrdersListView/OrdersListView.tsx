@@ -37,7 +37,9 @@ interface UsersFilterData extends FilterBaseData {
 }
 
 // TODO: implement pagination "show all"
-export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
+export const OrdersListView: React.FC<AdminViewProps> = ({ viewer }) => {
+  const navigate = useNavigate();
+
   // parse filter url parameters
   const params = useUrlParams<UsersFilterData>((params) => ({
     userId: params.userId ?? "",
@@ -84,7 +86,7 @@ export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
   // render view
   return (
     <>
-      <div>{usersData?.admin.users.users}</div>
+      <div>users</div>
     </>
   );
 };

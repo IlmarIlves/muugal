@@ -26,6 +26,8 @@ export const MainMenu: React.FC<MainMenuProps> = ({
       //   return null;
       // }
 
+      console.log(item);
+
       return <MainMenuItem key={index} item={item} active={index === activeItemIndex} />;
     })}
   </div>
