@@ -1,5 +1,4 @@
 import { ReadStream } from "fs";
-import { config } from "../config";
 import { getStreamBody } from "./getStreamBody";
 import { getUuid } from "./getUuid";
 

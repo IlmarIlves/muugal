@@ -1,5 +1,4 @@
 import { objectType } from "@nexus/schema";
-import { getRootTypingImport } from "../../../services/getRootTyping";
 
 export default objectType({
   name: "AdminUser",

@@ -1,10 +1,9 @@
-import { arg, mutationField, nullable, stringArg } from "@nexus/schema";
+import {  mutationField,  stringArg } from "@nexus/schema";
 import { JSONSchema4 } from "json-schema";
 import { validate } from "../../../../lib/validate/validate";
 import { fieldLength } from "../../../constants";
 import { UserEntity, UserRole } from "../../../entities/UserEntity";
 import { getKeyedHash } from "../../../services/getKeyedHash";
-import { UserType } from "../user/UserType";
 
 const schema: JSONSchema4 = {
   $async: true,
@@ -43,17 +42,14 @@ export default mutationField("register", {
   type: "User",
   description: "Registers new user",
   args: {
-    firstName: stringArg({ description: "Full name" }),
-    lastName: stringArg({ description: "Full name" }),
+    firstName: stringArg({ description: "First name" }),
+    lastName: stringArg({ description: "Last name" }),
     email: stringArg({ description: "Email address" }),
     password: stringArg({ description: "Password" }),
   },
-  resolve: async (_parent, args, context) => {
-    // log out existing user if any
-    context.logout();
-
+  resolve: async (_parent, args, _context) => {
     // extract arguments
-    const { firstName, lastName, email, password, giftCode } = args;
+    const { firstName, lastName, email, password } = args;
 
     // validate arguments
     await validate(args, schema);
@@ -67,10 +63,8 @@ export default mutationField("register", {
       userRole: [UserRole.USER],
     });
 
-    // TODO: actually handle giftCode, currently just stored with the user
 
     // check if user has password associated with his account
-    /* istanbul ignore next */
     if (!user.passwordSalt || !user.passwordHash) {
       throw new Error("Created user does not have password set, this should not happen");
     }
@@ -87,7 +81,6 @@ export default mutationField("register", {
       {
         email,
         user,
-        giftCode,
       },
       "registered new user",
     );

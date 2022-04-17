@@ -1,5 +1,4 @@
 import { ErrorObject } from "ajv";
-
 import { CustomValidatorDef } from "./customValidator";
 import { formatInvalidFormatMessage } from "./formatInvalidFormatMessage";
 import { formatSchemaMessage } from "./formatSchemaMessage";

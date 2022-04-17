@@ -1,8 +1,6 @@
 import { arg, mutationField } from "@nexus/schema";
 import { verify } from "jsonwebtoken";
-import { UnauthorizedError } from "../../../../lib/validate/UnauthorizedError";
 import { OrderEntity } from "../../../entities/OrderEntity";
-import { UserEntity } from "../../../entities/UserEntity";
 import { Upload } from "../../../scalars/UploadScalar";
 import { uploadFile } from "../../../services/uploadFile";
 
@@ -32,7 +30,7 @@ export default mutationField("uploadFile", {
         return context.res.send({ok: false, accessToken: ''})
     }
 
-    const user = await UserEntity.findOne({id: payload.userId})
+    // const user = await UserEntity.findOne({id: payload.userId})
 
     const order = new OrderEntity;
     order.userId = payload.userId;

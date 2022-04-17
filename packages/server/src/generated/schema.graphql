@@ -90,10 +90,10 @@ type Mutation {
     """Email address"""
     email: String
 
-    """Full name"""
+    """First name"""
     firstName: String
 
-    """Full name"""
+    """Last name"""
     lastName: String
 
     """Password"""

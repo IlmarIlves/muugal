@@ -1,7 +1,5 @@
 import { mutationField, stringArg } from "@nexus/schema";
-import { JSONSchema4 } from "json-schema";
 import { config } from "../../../config";
-import { fieldLength } from "../../../constants";
 import { PaymentEntity, PaymentMethod, PaymentStatus } from "../../../entities/PaymentEntity";
 
 import { stripe } from "../../../services/setupStripe";

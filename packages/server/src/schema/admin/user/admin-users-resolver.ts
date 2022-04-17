@@ -1,9 +1,7 @@
-import { extendType, inputObjectType, nullable } from "@nexus/schema";
+import { extendType, inputObjectType } from "@nexus/schema";
 import { JSONSchema4 } from "json-schema";
-import { Brackets } from "typeorm";
 import { validate } from "../../../../lib/validate/validate";
-import { UserEntity, UserRole, UserStatus } from "../../../entities/UserEntity";
-import { formatDate } from "../../../services/formatDate";
+import { UserEntity, UserRole } from "../../../entities/UserEntity";
 import { getFilterWhere } from "../../../services/getFilterWhere";
 import { getPaginationOptions } from "../../../services/getPaginationOptions";
 import { MatchInput, matchSchema } from "../../public/filter/match-input";

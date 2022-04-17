@@ -2,6 +2,8 @@ import Ajv, { ErrorObject } from "ajv";
 import ajvErrors from "ajv-errors";
 import addFormats from "ajv-formats";
 import { JSONSchema4 } from "json-schema";
+import { validateExistingUser } from "../../src/validators/validateExistingUser";
+import { validateUniqueEmail } from "../../src/validators/validateUniqueEmail";
 import { JSONObject } from "../json";
 import { CustomValidatorDef } from "./customValidator";
 import { formatValidationError } from "./formatValidationError";
@@ -11,7 +13,8 @@ import { ValidationError } from "./ValidationError";
 
 // list of default validators always available
 const defaultValidators: CustomValidatorDef[] = [
-  
+  validateUniqueEmail(),
+  validateExistingUser(),
 ];
 
 // TODO: not sure how to get ValidationError from Ajv typings directly

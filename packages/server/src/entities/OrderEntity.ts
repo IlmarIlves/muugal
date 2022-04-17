@@ -1,4 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm"
+import { fieldLength } from "../constants";
 import { UserEntity } from "./UserEntity"
 
 @Entity()
@@ -6,22 +7,22 @@ export class OrderEntity{
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Column()
-    userId: string;
+    @Column({type: "string"})
+    userId!: string;
 
-    @Column()
-    email!: string
+    @Column({ type: "varchar", length: fieldLength.email })
+    email!: string;
 
-    @Column()
+    @Column({type: "varchar"})
     telephone!: string
 
-    @Column()
+    @Column({type: "varchar"})
     colors!: string
 
-    @Column()
+    @Column({type: "int"})
     amount!: number
 
-    @Column({nullable: true})
+    @Column({type: "varchar", nullable: true})
     additionalInfo!: string | null
 
     @Column({
@@ -29,7 +30,7 @@ export class OrderEntity{
     })
     data!: Buffer
 
-    @Column()
+    @Column({type: "varchar"})
     mimeType!:string
 
     @ManyToOne(() => UserEntity, (user) => user.file)

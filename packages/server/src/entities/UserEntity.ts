@@ -5,7 +5,6 @@ import { getKeyedHash } from "../services/getKeyedHash";
 import { fieldLength } from "../../lib/validate/constants";
 import { OrderEntity } from "./OrderEntity";
 import { PaymentEntity } from "./PaymentEntity";
-import { config } from "../config";
 
 export interface RegisterUserInfo {
     firstName: string;

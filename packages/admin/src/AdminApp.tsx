@@ -2,7 +2,7 @@ import React from "react";
 import { Route, RouteProps, Routes } from "react-router";
 import { BrowserRouter, Navigate } from "react-router-dom";
 import { AdminView } from "./views/AdminView/AdminView";
-import { LoginView as AdminLoginView, LoginView } from "./views/LoginView/AdminLoginView";
+import { LoginView } from "./views/LoginView/AdminLoginView";
 import { useViewerQuery } from "./generated/graphql";
 import { NotFoundView } from "./views/NotFoundView/NotFoundView";
 import { gql } from "@apollo/client";
@@ -19,23 +19,16 @@ gql`
   }
 `;
 
-export interface ProtectedRouteProps extends RouteProps {
-  isAuthenticated: boolean;
-  authenticationPath: string;
-}
-
 export const AdminApp: React.FC = () => {
   const { data, loading, error } = useViewerQuery();
-
-  console.log("app viewer query", data?.viewer.id);
 
   // if (error) {
   //   return <div>error</div>;
   // }
 
-  if (loading) {
-    return <div>loading</div>;
-  }
+  // if (loading) {
+  //   return <div>loading</div>;
+  // }
 
   // get viewer info and check whether the user is logged in
   const viewer = data?.viewer;
