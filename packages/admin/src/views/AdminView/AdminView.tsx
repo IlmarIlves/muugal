@@ -86,27 +86,11 @@ export const AdminView: React.FC<AdminViewProps> = (props) => {
   }
 
   return (
-    // <Column cover>
-    //   <Row overflow className={styles.header}>
-    //     <Container mainAxisAlignment="center" className={styles.logo}>
-    //       Beginning Admin
-    //     </Container>
-    //     <Expanded />
-    //     <ViewerMenu padLeft viewer={viewer} />
-    //   </Row>
-    //   <Row expanded crossAxisAlignment="stretch">
-    //     <Column overflow className={styles.menu}>
-    //       <MainMenu items={menus} activeItemIndex={activeItemIndex} /* viewerScopes={viewer.scopes} */ />
-    //     </Column>
-    //     <Column expanded className={styles.content}>
-    //       {activeMenuInfo.content(props)}
-    //     </Column>
-    //   </Row>
-    // </Column>
     <>
       <div>Muugal admin</div>
       <div>
         <MainMenu items={menus} activeItemIndex={activeItemIndex} /* viewerScopes={viewer.scopes} */ />
+        <div className={"info"}>{activeMenuInfo.content(props)}</div>
       </div>
     </>
   );

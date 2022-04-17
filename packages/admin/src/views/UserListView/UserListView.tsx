@@ -1,12 +1,14 @@
 import { gql } from "@apollo/client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FilterBaseData } from "../../components/Filter/Filter";
 import { ConditionModeEnum, MatchModeEnum, useUsersQuery } from "../../generated/graphql";
 import { useUrlParams } from "../../hooks/useUrlParams";
+import { getPageCount } from "../../services/getPageCount";
 import { getSkipTake } from "../../services/getSkipTake";
 import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
+import "./userListView.scss";
 
 // fetch filtered and paginated list of admin users
 gql`
@@ -76,6 +78,77 @@ export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
     },
   });
 
+  // pagination info
+  const users = useMemo(() => usersData?.admin.users.users ?? [], [usersData?.admin.users.users]);
+  const total = usersData?.admin.users.total ?? 0;
+  const pageCount = getPageCount(total);
+
+  // data table rows
+  const rows = useMemo(
+    () =>
+      users.map((user) => {
+        // TODO: this will be used when restoring "Login as" functionality
+        // const isRegularUser = user.roles.length === 1 && user.roles[0] === UserRoleEnum.USER;
+
+        return {
+          id: user.id,
+          cells: [
+            {
+              content: user.firstName,
+            },
+            {
+              content: user.email,
+            },
+          ],
+          actions: [
+            // user.status !== UserStatusEnum.DISABLED
+            //   ? {
+            //       label: "Disable",
+            //       authorizedScopes: [
+            //         UserScopeEnum.SUPERADMIN,
+            //         UserScopeEnum.ADMIN_USERS,
+            //         UserScopeEnum.ADMIN_USERS_UPDATE_INFO,
+            //         UserScopeEnum.ADMIN_USERS_UPDATE_STATUS,
+            //       ],
+            //       loading: adminUpdateUserDisableStatusResult.loading,
+            //       onClick: () =>
+            //         adminUpdateUserDisableStatus({
+            //           variables: {
+            //             userIds: [user.id],
+            //             status: UserStatusEnum.DISABLED,
+            //           },
+            //         }),
+            //     }
+            //   : null,
+            // user.status !== UserStatusEnum.ACTIVE
+            //   ? {
+            //       label: "Activate",
+            //       authorizedScopes: [
+            //         UserScopeEnum.SUPERADMIN,
+            //         UserScopeEnum.ADMIN_USERS,
+            //         UserScopeEnum.ADMIN_USERS_UPDATE_INFO,
+            //         UserScopeEnum.ADMIN_USERS_UPDATE_STATUS,
+            //       ],
+            //       loading: adminUpdateUserActiveStatusResult.loading,
+            //       onClick: () =>
+            //         adminUpdateUserActiveStatus({
+            //           variables: {
+            //             userIds: [user.id],
+            //             status: UserStatusEnum.ACTIVE,
+            //           },
+            //         }),
+            //     }
+            //   : null,
+            // {
+            //   label: "Reset password",
+            //   onClick: () => setShowConfirmResetPasswordModal(user),
+            // },
+          ],
+        };
+      }),
+    [],
+  );
+
   // handle errors
   if (usersError) {
     return <ErrorView title="Fetching users failed" error={usersError} />;
@@ -84,7 +157,20 @@ export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
   // render view
   return (
     <>
-      <div>{usersData?.admin.users.users}</div>
+      <div>Muugal users</div>
+      <div>
+        {users.map((user) => {
+          return (
+            <div className={"cell"}>
+              <span>{user.id}</span>
+              <span>" "</span>
+              <span>{user.firstName}</span>
+              <span>" "</span>
+              <span>{user.lastName}</span>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };

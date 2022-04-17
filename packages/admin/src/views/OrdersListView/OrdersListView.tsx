@@ -86,7 +86,7 @@ export const OrdersListView: React.FC<AdminViewProps> = ({ viewer }) => {
   // render view
   return (
     <>
-      <div>users</div>
+      <div>Orders</div>
     </>
   );
 };

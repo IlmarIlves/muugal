@@ -86,7 +86,7 @@ export const PaymentListView: React.FC<AdminViewProps> = ({ viewer }) => {
   // render view
   return (
     <>
-      <div>users</div>
+      <div>Payments</div>
     </>
   );
 };
