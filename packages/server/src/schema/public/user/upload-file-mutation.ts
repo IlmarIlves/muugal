@@ -13,25 +13,22 @@ export default mutationField("uploadFile", {
     file: arg({ type: Upload, description: "Upload file" }),
   },
   resolve: async (_parent, args, context) => {
-    if (!context.res) {
-      throw new UnauthorizedError();
-    }
+      const token = context.req.cookies.jid;
+
+      let payload: any = null ;
+      try {
+          payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
+      } catch (error) {
+          console.log(error);
+          return context.res.send({ok: false, accessToken: ''})
+      }
 
     const file = await args.file;
     
     const upload = await uploadFile(file.createReadStream(), file.mimetype);
 
-    const token = context.req.cookies.jid;
 
     if(!token) {
-        return context.res.send({ok: false, accessToken: ''})
-    }
-
-    let payload: any = null ;
-    try {
-        payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
-    } catch (error) {
-        console.log(error);
         return context.res.send({ok: false, accessToken: ''})
     }
 

@@ -12,10 +12,8 @@ export async function uploadFile(readStream: ReadStream, mimetype: string): Prom
 
   // validate mimetype
   if (!validMimeTypes.includes(mimetype)) {
-    throw new Error("Invalid audio file provided (we support .stl files)");
+    throw new Error("Invalid audio file provided (we support .stl  files)");
   }
-
-  // initialize s3 class
 
   // set upload params
   const params = {

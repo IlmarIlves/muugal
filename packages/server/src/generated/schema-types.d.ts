@@ -22,6 +22,20 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AdminUsersFilterInput: { // input type
+    email?: string | null; // String
+    firstName?: string | null; // String
+    lastName?: string | null; // String
+    userId?: string | null; // String
+  }
+  MatchInput: { // input type
+    conditionMode?: NexusGenEnums['ConditionModeEnum'] | null; // ConditionModeEnum
+    matchMode?: NexusGenEnums['MatchModeEnum'] | null; // MatchModeEnum
+  }
+  PaginationInput: { // input type
+    skip?: number | null; // Int
+    take?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
@@ -32,10 +46,28 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Admin: {};
+  AdminUser: { // root type
+    email: string; // String!
+    firstName: string; // String!
+    id: string; // ID!
+    lastName: string; // String!
+    userRole: NexusGenEnums['UserRoleEnum'][]; // [UserRoleEnum!]!
+    userStatus: NexusGenEnums['UserStatusEnum']; // UserStatusEnum!
+  }
+  AdminUsers: { // root type
+    skip: number; // Int!
+    take: number; // Int!
+    total: number; // Int!
+    users: NexusGenRootTypes['AdminUser'][]; // [AdminUser!]!
+  }
   LoginResponse: { // root type
     accessToken: string; // String!
   }
   Mutation: {};
+  Payment: { // root type
+    id: string; // ID!
+  }
   Query: {};
   User: { // root type
     email: string; // String!
@@ -56,6 +88,9 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  AdminUsersFilterInput: NexusGenInputs['AdminUsersFilterInput'];
+  MatchInput: NexusGenInputs['MatchInput'];
+  PaginationInput: NexusGenInputs['PaginationInput'];
   ConditionModeEnum: NexusGenEnums['ConditionModeEnum'];
   MatchModeEnum: NexusGenEnums['MatchModeEnum'];
   UserRoleEnum: NexusGenEnums['UserRoleEnum'];
@@ -63,14 +98,36 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Admin: { // field return type
+    user: NexusGenRootTypes['AdminUser']; // AdminUser!
+    users: NexusGenRootTypes['AdminUsers']; // AdminUsers!
+  }
+  AdminUser: { // field return type
+    email: string; // String!
+    firstName: string; // String!
+    id: string; // ID!
+    lastName: string; // String!
+    userRole: NexusGenEnums['UserRoleEnum'][]; // [UserRoleEnum!]!
+    userStatus: NexusGenEnums['UserStatusEnum']; // UserStatusEnum!
+  }
+  AdminUsers: { // field return type
+    skip: number; // Int!
+    take: number; // Int!
+    total: number; // Int!
+    users: NexusGenRootTypes['AdminUser'][]; // [AdminUser!]!
+  }
   LoginResponse: { // field return type
     accessToken: string; // String!
   }
   Mutation: { // field return type
+    createStripeCheckoutSession: NexusGenRootTypes['Payment']; // Payment!
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
     register: NexusGenRootTypes['User']; // User!
     uploadFile: NexusGenRootTypes['Viewer']; // Viewer!
+  }
+  Payment: { // field return type
+    id: string; // ID!
   }
   Query: { // field return type
     viewer: NexusGenRootTypes['User']; // User!
@@ -88,7 +145,20 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Admin: {
+    user: { // args
+      userId?: string | null; // ID
+    }
+    users: { // args
+      filter?: NexusGenInputs['AdminUsersFilterInput'] | null; // AdminUsersFilterInput
+      match?: NexusGenInputs['MatchInput'] | null; // MatchInput
+      pagination?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
+    }
+  }
   Mutation: {
+    createStripeCheckoutSession: { // args
+      subscriptionId?: string | null; // String
+    }
     login: { // args
       email?: string | null; // String
       password?: string | null; // String
@@ -110,9 +180,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "LoginResponse" | "Mutation" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "Admin" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Payment" | "Query" | "User" | "Viewer";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "AdminUsersFilterInput" | "MatchInput" | "PaginationInput";
 
 export type NexusGenEnumNames = "ConditionModeEnum" | "MatchModeEnum" | "UserRoleEnum" | "UserStatusEnum";
 

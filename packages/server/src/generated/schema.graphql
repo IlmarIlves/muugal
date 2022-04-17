@@ -2,6 +2,53 @@
 ### Do not make changes to this file directly
 
 
+type Admin {
+  """Admin user by id"""
+  user(
+    """User identifier"""
+    userId: ID
+  ): AdminUser!
+
+  """List of users"""
+  users(filter: AdminUsersFilterInput, match: MatchInput, pagination: PaginationInput): AdminUsers!
+}
+
+type AdminUser {
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+
+  """User role"""
+  userRole: [UserRoleEnum!]!
+
+  """User status"""
+  userStatus: UserStatusEnum!
+}
+
+type AdminUsers {
+  skip: Int!
+  take: Int!
+  total: Int!
+
+  """List of paginated users"""
+  users: [AdminUser!]!
+}
+
+input AdminUsersFilterInput {
+  """Filter users by email"""
+  email: String
+
+  """Filter users by first name"""
+  firstName: String
+
+  """Filter users by last name"""
+  lastName: String
+
+  """Filter users by id"""
+  userId: String
+}
+
 enum ConditionModeEnum {
   AND
   OR
@@ -11,6 +58,11 @@ type LoginResponse {
   accessToken: String!
 }
 
+input MatchInput {
+  conditionMode: ConditionModeEnum = AND
+  matchMode: MatchModeEnum = STARTS_WITH
+}
+
 enum MatchModeEnum {
   CONTAINS
   EXACT
@@ -18,6 +70,9 @@ enum MatchModeEnum {
 }
 
 type Mutation {
+  """Creates new Stripe checkout session"""
+  createStripeCheckoutSession(subscriptionId: String): Payment!
+
   """Attempts to log user in"""
   login(
     """Email address"""
@@ -50,6 +105,19 @@ type Mutation {
     """Upload file"""
     file: Upload
   ): Viewer!
+}
+
+input PaginationInput {
+  """Number of items to skip"""
+  skip: Int
+
+  """Number of items to take"""
+  take: Int
+}
+
+type Payment {
+  """Payment unique id"""
+  id: ID!
 }
 
 type Query {
