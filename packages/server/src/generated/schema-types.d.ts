@@ -130,6 +130,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
   }
   Query: { // field return type
+    admin: NexusGenRootTypes['Admin']; // Admin!
     viewer: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type

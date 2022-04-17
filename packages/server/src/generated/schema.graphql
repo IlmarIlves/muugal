@@ -121,6 +121,9 @@ type Payment {
 }
 
 type Query {
+  """Admin resolvers"""
+  admin: Admin!
+
   """Query viewer"""
   viewer: User!
 }

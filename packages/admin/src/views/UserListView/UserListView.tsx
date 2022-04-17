@@ -5,20 +5,20 @@ import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
 
 // fetch filtered and paginated list of admin users
-// gql`
-//   query Users($filter: AdminUsersFilterInput, $pagination: PaginationInput, $match: MatchInput) {
-//     admin {
-//       users(filter: $filter, pagination: $pagination, match: $match) {
-//         skip
-//         take
-//         total
-//         users {
-//           ...AdminUserInfo
-//         }
-//       }
-//     }
-//   }
-// `;
+gql`
+  query Users($filter: AdminUsersFilterInput, $pagination: PaginationInput, $match: MatchInput) {
+    admin {
+      users(filter: $filter, pagination: $pagination, match: $match) {
+        skip
+        take
+        total
+        users {
+          ...AdminUserInfo
+        }
+      }
+    }
+  }
+`;
 
 interface UsersFilterData {
   userId: string;
