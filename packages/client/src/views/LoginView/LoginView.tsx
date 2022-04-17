@@ -51,7 +51,7 @@ export const LoginView: React.FC = () => {
       <Header />
       <div className={"form-container"}>
         <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
-          <label>Username</label>
+          <label>Add Username</label>
           <input className={"input"} type={"email"} {...register("email")} />
           {/* {errors.email && <p>{errors.email.message}</p>} */}
           <label>Password</label>
