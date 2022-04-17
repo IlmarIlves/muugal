@@ -60,7 +60,6 @@ export const AdminApp: React.FC = () => {
         <Routes>
           <Route path="/" element={<Navigate to={indexPath} />} />
           <Route path="login" element={<LoginView />} />
-          <Route path="experiments/*" element={<ExperimentsView />} />
           <Route path="main" element={authenticatedAdminView} />
           <Route path="main/:menu/*" element={authenticatedAdminView} />
           <Route path="*" element={<NotFoundView />} />

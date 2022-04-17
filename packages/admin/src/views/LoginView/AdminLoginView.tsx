@@ -10,6 +10,18 @@ interface LoginFormValues {
   password: string;
 }
 
+// fetch logged in user info (null if not logged in)
+gql`
+  query Viewer {
+    viewer {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+`;
+
 gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -44,7 +56,7 @@ export const LoginView: React.FC = () => {
 
     if (response.data?.login) {
       console.log("login viewer query after mutation", data?.viewer.id);
-      console.log("login response user id after mutation", response.data.login.id);
+      console.log("login response user id after mutation", response.data.login.accessToken);
       navigate("/");
     }
   };

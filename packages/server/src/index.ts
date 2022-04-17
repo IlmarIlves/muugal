@@ -22,7 +22,7 @@ const start = async () => {
 	
 	const cors = require('cors')
 
-	app.use(cors({origin: 'localhost:3000', credentials: true}))
+	app.use(cors({origin: ['localhost:3000', 'localhost:3001'], credentials: true}))
 	
 	var MySQLStore = require('express-mysql-session')(session);
 

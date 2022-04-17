@@ -175,6 +175,11 @@ export type Viewer = {
   accessToken: Scalars['String'];
 };
 
+export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, email: string, firstName: string, lastName: string } };
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -198,6 +203,43 @@ export type UsersQueryVariables = Exact<{
 export type UsersQuery = { __typename?: 'Query', admin: { __typename?: 'Admin', users: { __typename?: 'AdminUsers', skip: number, take: number, total: number, users: Array<{ __typename?: 'AdminUser', id: string, email: string, firstName: string, lastName: string }> } } };
 
 
+export const ViewerDocument = gql`
+    query Viewer {
+  viewer {
+    id
+    email
+    firstName
+    lastName
+  }
+}
+    `;
+
+/**
+ * __useViewerQuery__
+ *
+ * To run a query within a React component, call `useViewerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useViewerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useViewerQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useViewerQuery(baseOptions?: Apollo.QueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ViewerQuery, ViewerQueryVariables>(ViewerDocument, options);
+      }
+export function useViewerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ViewerQuery, ViewerQueryVariables>(ViewerDocument, options);
+        }
+export type ViewerQueryHookResult = ReturnType<typeof useViewerQuery>;
+export type ViewerLazyQueryHookResult = ReturnType<typeof useViewerLazyQuery>;
+export type ViewerQueryResult = Apollo.QueryResult<ViewerQuery, ViewerQueryVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
