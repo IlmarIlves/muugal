@@ -85,6 +85,12 @@ type Mutation {
   """Logs out signed-in user if any"""
   logout: Boolean!
 
+  """Uploads file"""
+  order(
+    """Upload file"""
+    file: Upload
+  ): Order!
+
   """Registers new user"""
   register(
     """Email address"""
@@ -105,6 +111,11 @@ type Mutation {
     """Upload file"""
     file: Upload
   ): Viewer!
+}
+
+type Order {
+  id: ID!
+  userId: String!
 }
 
 input PaginationInput {

@@ -11,7 +11,7 @@ export interface RegisterUserInfo {
     lastName: string;
     email: string;
     password: string;
-    userRole: UserRole[];
+    userRole: UserRole;
   }
 
 export enum UserRole {
@@ -53,7 +53,7 @@ export class UserEntity extends BaseEntity {
     passwordHash!: string | null;
 
     @Column({type: "enum", enum: UserRole, default: UserRole.USER})
-    userRole!: UserRole[];
+    userRole!: UserRole;
 
     @Column({ type: "int", default: 0 })
     tokenVersion!: number;

@@ -4,6 +4,7 @@ import { validate } from "../../../../lib/validate/validate";
 import { fieldLength } from "../../../constants";
 import { UserEntity, UserRole } from "../../../entities/UserEntity";
 import { getKeyedHash } from "../../../services/getKeyedHash";
+import { sendUserReigisterEmail } from "../../../services/sendUserRegisteredEmail";
 
 const schema: JSONSchema4 = {
   $async: true,
@@ -60,7 +61,7 @@ export default mutationField("register", {
       lastName,
       email,
       password,
-      userRole: [UserRole.USER],
+      userRole: UserRole.USER,
     });
 
 
@@ -84,6 +85,33 @@ export default mutationField("register", {
       },
       "registered new user",
     );
+
+    try {
+      
+      await sendUserReigisterEmail({ name: user.firstName, email: user.email });
+
+      console.log(
+        
+        "registered new user email sent",
+      );
+    } catch (error) {
+      console.log(
+        {
+          error
+        },
+        "registered new user email error", 
+      );
+    }
+
+
+    console.log(
+      {
+        email,
+        user,
+      },
+      "registered new user",
+    );
+    
 
     // return logged in user info
     return user;

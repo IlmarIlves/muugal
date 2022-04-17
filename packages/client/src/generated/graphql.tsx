@@ -98,6 +98,8 @@ export type Mutation = {
   login: LoginResponse;
   /** Logs out signed-in user if any */
   logout: Scalars['Boolean'];
+  /** Uploads file */
+  order: Order;
   /** Registers new user */
   register: User;
   /** Uploads file */
@@ -116,6 +118,11 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationOrderArgs = {
+  file?: InputMaybe<Scalars['Upload']>;
+};
+
+
 export type MutationRegisterArgs = {
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
@@ -126,6 +133,12 @@ export type MutationRegisterArgs = {
 
 export type MutationUploadFileArgs = {
   file?: InputMaybe<Scalars['Upload']>;
+};
+
+export type Order = {
+  __typename?: 'Order';
+  id: Scalars['ID'];
+  userId: Scalars['String'];
 };
 
 export type PaginationInput = {
@@ -192,6 +205,13 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
+export type OrderMutationVariables = Exact<{
+  file: Scalars['Upload'];
+}>;
+
+
+export type OrderMutation = { __typename?: 'Mutation', order: { __typename?: 'Order', id: string } };
 
 
 export const ViewerDocument = gql`
@@ -294,3 +314,36 @@ export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<Logou
 export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
+export const OrderDocument = gql`
+    mutation Order($file: Upload!) {
+  order(file: $file) {
+    id
+  }
+}
+    `;
+export type OrderMutationFn = Apollo.MutationFunction<OrderMutation, OrderMutationVariables>;
+
+/**
+ * __useOrderMutation__
+ *
+ * To run a mutation, you first call `useOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [orderMutation, { data, loading, error }] = useOrderMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useOrderMutation(baseOptions?: Apollo.MutationHookOptions<OrderMutation, OrderMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<OrderMutation, OrderMutationVariables>(OrderDocument, options);
+      }
+export type OrderMutationHookResult = ReturnType<typeof useOrderMutation>;
+export type OrderMutationResult = Apollo.MutationResult<OrderMutation>;
+export type OrderMutationOptions = Apollo.BaseMutationOptions<OrderMutation, OrderMutationVariables>;

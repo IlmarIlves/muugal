@@ -1,12 +1,25 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { gql } from "@apollo/client";
 import { Header } from "../../components/Header/Header";
 import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
-import { User, useViewerQuery, ViewerQuery } from "../../generated/graphql";
+
+import { useOrderMutation, User, useViewerQuery, ViewerQuery } from "../../generated/graphql";
+
 import "./orderView.scss";
+
+gql`
+  mutation Order($file: Upload!) {
+    order(file: $file) {
+      id
+    }
+  }
+`;
 
 export const OrderView: React.FC = ({}) => {
   const { data } = useViewerQuery();
+
+  const [order, orderResult] = useOrderMutation();
 
   const [file, setFile] = useState<File>();
 
@@ -38,11 +51,11 @@ export const OrderView: React.FC = ({}) => {
 
     setFile(file);
 
-    // await updateAvatar({
-    //   variables: {
-    //     avatar,
-    //   },
-    // });
+    await order({
+      variables: {
+        file,
+      },
+    });
   };
 
   const style = {
@@ -59,6 +72,7 @@ export const OrderView: React.FC = ({}) => {
       <div className={"order-information"}>
         <div className="image">
           {/* <FileContainer name={"Order 1"} /> */}
+
           <input type="file" name="file" ref={fileInputRef} onChange={handleFileUpload} />
         </div>
 

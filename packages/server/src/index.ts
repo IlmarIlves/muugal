@@ -9,6 +9,7 @@ import { verify } from 'jsonwebtoken';
 import { UserEntity } from './entities/UserEntity';
 import { createAccessToken, createRefreshToken } from './services/auth';
 import { sendRefreshToken } from './services/sendRefreshToken';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 const start = async () => {
 	// create database connection
@@ -57,6 +58,7 @@ const start = async () => {
 
 	app.use(cookieParser());
 
+	app.use(graphqlUploadExpress({ maxFiles: 10 }));
 
 	app.post('/refresh_token', async (req, res) => {
 		const token = req.cookies.jid;
@@ -101,6 +103,7 @@ const start = async () => {
 	// initiate graphql server
 	const server = new ApolloServer({
 		schema,
+		uploads: false,
 		context: ({ req, res }) => {
 			return { req, res };
 		}

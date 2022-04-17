@@ -6,12 +6,14 @@ import { getUuid } from "./getUuid";
 export async function uploadFile(readStream: ReadStream, mimetype: string): Promise<{Body: Buffer, Key: string, ContentType: string}> {
   const recordingBuffer = await getStreamBody(readStream);
 
+  console.log(mimetype);
+
   // validate file type
-  const validMimeTypes = ["file/stl"];
+  const validMimeTypes = ["application/sla", "application/x-navistyle", "application/vnd.ms-pki.stl", "application/octet-stream"];
 
   // validate mimetype
   if (!validMimeTypes.includes(mimetype)) {
-    throw new Error("Invalid audio file provided (we support .stl  files)");
+    throw new Error("Invalid file provided (we support .stl  files)");
   }
 
   // set upload params

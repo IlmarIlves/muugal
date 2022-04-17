@@ -65,6 +65,10 @@ export interface NexusGenRootTypes {
     accessToken: string; // String!
   }
   Mutation: {};
+  Order: { // root type
+    id: string; // ID!
+    userId: string; // String!
+  }
   Payment: { // root type
     id: string; // ID!
   }
@@ -123,8 +127,13 @@ export interface NexusGenFieldTypes {
     createStripeCheckoutSession: NexusGenRootTypes['Payment']; // Payment!
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
+    order: NexusGenRootTypes['Order']; // Order!
     register: NexusGenRootTypes['User']; // User!
     uploadFile: NexusGenRootTypes['Viewer']; // Viewer!
+  }
+  Order: { // field return type
+    id: string; // ID!
+    userId: string; // String!
   }
   Payment: { // field return type
     id: string; // ID!
@@ -164,6 +173,9 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       password?: string | null; // String
     }
+    order: { // args
+      file?: any | null; // Upload
+    }
     register: { // args
       email?: string | null; // String
       firstName?: string | null; // String
@@ -181,7 +193,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Admin" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Payment" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "Admin" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Order" | "Payment" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = "AdminUsersFilterInput" | "MatchInput" | "PaginationInput";
 

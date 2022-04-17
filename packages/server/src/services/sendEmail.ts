@@ -81,7 +81,7 @@ export async function sendEmail(userOptions: EmailOptions): Promise<SendEmailRes
 
   // combine defaults with user provided options
   const options: Required<EmailOptions> = {
-    apiKey: config.email.apiKey,
+    apiKey: process.env.MYSQL_DB!,
     fromEmail: config.email.fromEmail,
     fromName: config.email.fromName,
     debug: false,
