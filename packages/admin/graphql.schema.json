@@ -611,7 +611,7 @@
               },
               {
                 "name": "firstName",
-                "description": "Full name",
+                "description": "First name",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -623,7 +623,7 @@
               },
               {
                 "name": "lastName",
-                "description": "Full name",
+                "description": "Last name",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",

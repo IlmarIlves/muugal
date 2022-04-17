@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FilterBaseData } from "../../components/Filter/Filter";
 import { ConditionModeEnum, MatchModeEnum, useUsersQuery } from "../../generated/graphql";

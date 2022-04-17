@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FilterBaseData } from "../../components/Filter/Filter";
 import { ConditionModeEnum, MatchModeEnum, useUsersQuery } from "../../generated/graphql";
 import { useUrlParams } from "../../hooks/useUrlParams";
+import { AdminViewParams, ADMIN_VIEW_PATH } from "../../routes";
+import { buildUrl } from "../../services/buildUrl";
 import { getPageCount } from "../../services/getPageCount";
 import { getSkipTake } from "../../services/getSkipTake";
 import { AdminViewProps } from "../AdminView/AdminView";
@@ -29,6 +31,18 @@ gql`
   }
 `;
 
+gql`
+  query UserById($userId: ID!) {
+    admin {
+      user(userId: $userId) {
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
 interface UsersFilterData extends FilterBaseData {
   userId: string;
   email: string;
@@ -40,6 +54,8 @@ interface UsersFilterData extends FilterBaseData {
 
 // TODO: implement pagination "show all"
 export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
+  const navigate = useNavigate();
+
   // parse filter url parameters
   const params = useUrlParams<UsersFilterData>((params) => ({
     userId: params.userId ?? "",
@@ -161,7 +177,18 @@ export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
       <div>
         {users.map((user) => {
           return (
-            <div className={"cell"}>
+            <div
+              className={"cell"}
+              onClick={() =>
+                navigate({
+                  pathname: buildUrl<AdminViewParams>(ADMIN_VIEW_PATH, {
+                    menu: "users",
+                    page: "user",
+                    modifier: user.id,
+                  }),
+                })
+              }
+            >
               <span>{user.id}</span>
               <span>" "</span>
               <span>{user.firstName}</span>

@@ -1,54 +1,69 @@
 import { gql } from "@apollo/client";
 import React, { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FilterBaseData } from "../../components/Filter/Filter";
-import { ConditionModeEnum, MatchModeEnum, useUsersQuery } from "../../generated/graphql";
-import { useUrlParams } from "../../hooks/useUrlParams";
+import { useParams } from "react-router-dom";
+import { useUserByIdQuery, useUsersQuery } from "../../generated/graphql";
+
+import { AdminViewParams, ViewerInfo } from "../../routes";
 import { getSkipTake } from "../../services/getSkipTake";
 import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
 
-// fetch filtered and paginated list of admin users
+// fetch admin user by id
 gql`
-  query Users($filter: AdminUsersFilterInput, $pagination: PaginationInput, $match: MatchInput) {
+  query UserById($userId: ID!) {
     admin {
-      users(filter: $filter, pagination: $pagination, match: $match) {
-        skip
-        take
-        total
-        users {
-          id
-          email
-          firstName
-          lastName
-        }
+      user(userId: $userId) {
+        id
+        firstName
+        lastName
       }
     }
   }
 `;
 
-interface UsersFilterData extends FilterBaseData {
-  userId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  // status: UserStatusEnum[];
-  // role: UserRoleEnum[];
+// type UserByIdQueryUserInfo = NonNullable<UserByIdQueryResult["data"]>["admin"]["user"];
+
+export interface UserDetailsViewProps {
+  viewer: ViewerInfo;
 }
 
-// TODO: implement pagination "show all"
-export const UserDetailsView: React.FC<AdminViewProps> = ({ viewer }) => {
-  const navigate = useNavigate();
+export const UserDetailsView: React.FC<UserDetailsViewProps> = ({ viewer }) => {
+  const params = useParams<AdminViewParams>();
 
-  //   // handle errors
-  //   if (userError) {
-  //     return <ErrorView title="Fetching users failed" error={usersError} />;
-  //   }
+  // load user info
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useUserByIdQuery({
+    variables: {
+      userId: params.id ?? "",
+    },
+  });
+
+  // get user info
+  const user = userData?.admin.user;
+
+  // handle error
+  if (userError) {
+    return <ErrorView title="Loading user info failed" error={userError} />;
+  }
+
+  // handle loading
+  if (userLoading || !user) {
+    return <div>loading</div>;
+  }
 
   // render view
   return (
     <>
-      <div>user details</div>
+      {
+        <div>
+          <span>{user.id}</span>
+          <span>{user.firstName}</span>
+          <span>{user.lastName}</span>
+        </div>
+      }
     </>
   );
 };
