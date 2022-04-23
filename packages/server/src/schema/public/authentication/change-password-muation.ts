@@ -33,7 +33,7 @@ export default mutationField("changePassword", {
   type: "Viewer",
   description: "Changes current user password",
   args: {
-    currentPassword: nullable(stringArg({ description: "Current password" })),
+    currentPassword: stringArg({ description: "Current password" }),
     newPassword: stringArg({ description: "New password" }),
     confirmPassword: stringArg({ description: "Confirmation password" }),
   },

@@ -58,7 +58,7 @@ const start = async () => {
 
 	app.use(cookieParser());
 
-	app.use(graphqlUploadExpress({ maxFiles: 10 }));
+	app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 10 }));
 
 	app.post('/refresh_token', async (req, res) => {
 		const token = req.cookies.jid;
