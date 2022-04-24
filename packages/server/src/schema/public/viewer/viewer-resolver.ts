@@ -11,8 +11,6 @@ export default queryField("viewer", {
 
       // const authorization = context.req.headers["authorization"];
 
-      console.log(context.req.headers);
-
       const token = context.req.cookies.jid;
 
       if(!token) {
