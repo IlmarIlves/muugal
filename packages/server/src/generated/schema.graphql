@@ -12,6 +12,9 @@ type Admin {
     priceInCents: Int
   ): AdminOrder!
 
+  """List of users"""
+  orders: AdminOrders!
+
   """Admin payment by id"""
   payment(
     """Payment identifier"""

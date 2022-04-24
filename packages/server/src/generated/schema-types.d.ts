@@ -141,6 +141,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Admin: { // field return type
     order: NexusGenRootTypes['AdminOrder']; // AdminOrder!
+    orders: NexusGenRootTypes['AdminOrders']; // AdminOrders!
     payment: NexusGenRootTypes['AdminPayment']; // AdminPayment!
     payments: NexusGenRootTypes['AdminPayments']; // AdminPayments!
     user: NexusGenRootTypes['AdminUser']; // AdminUser!

@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
               </li>
             ) : (
               <span className={"login-text"} onClick={() => navigate("/login")}>
-                {viewer?.viewer.firstName}
+                {viewer?.viewer}
               </span>
             )}
 

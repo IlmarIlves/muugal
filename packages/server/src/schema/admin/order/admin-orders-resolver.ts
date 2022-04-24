@@ -7,13 +7,12 @@ import { getPaginationOptions } from "../../../services/getPaginationOptions";
 export default extendType({
   type: "Admin",
   definition(t) {
-    t.field("users", {
+    t.field("orders", {
       type: "AdminOrders",
       description: "List of users",
 
       resolve: async (_parent, args, _context) => {
     
-
         // get pagination options
         const { skip, take } = getPaginationOptions(args.pagination);
 

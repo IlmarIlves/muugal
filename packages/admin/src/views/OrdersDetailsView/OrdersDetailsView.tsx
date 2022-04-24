@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Model } from "../../components/Model/Model";
-import { useOrderByIdQuery } from "../../generated/graphql";
+import { useUserByIdQuery } from "../../generated/graphql";
 import { AdminViewParams } from "../../routes";
 import { dataUrlToFile } from "../../services/dataUrlToFile";
 import { AdminViewProps } from "../AdminView/AdminView";
@@ -15,13 +15,12 @@ gql`
     admin {
       order(orderId: $orderId) {
         id
-        email
-        telephone
-        colors
-        amount
+        # email
+        # telephone
+        # colors
+        # amount
         # data
-        fileUrl
-        mimeType
+        # mimeType
       }
     }
   }
