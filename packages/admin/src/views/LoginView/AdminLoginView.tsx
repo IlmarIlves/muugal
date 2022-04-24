@@ -55,8 +55,6 @@ export const LoginView: React.FC = () => {
     });
 
     if (response.data?.login) {
-      console.log("login viewer query after mutation", data?.viewer.id);
-      console.log("login response user id after mutation", response.data.login.accessToken);
       navigate("/");
     }
   };

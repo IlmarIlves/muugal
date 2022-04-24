@@ -9,19 +9,18 @@ import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
 
 // fetch filtered and paginated list of admin users
+// fetch admin user by id
 gql`
-  query Users($filter: AdminUsersFilterInput, $pagination: PaginationInput, $match: MatchInput) {
+  query PaymentById($paymentId: ID!) {
     admin {
-      users(filter: $filter, pagination: $pagination, match: $match) {
-        skip
-        take
-        total
-        users {
-          id
-          email
-          firstName
-          lastName
-        }
+      payment(paymentId: $paymentId) {
+        id
+        userId
+        stripeSessionId
+        # status
+        amount
+        currencyCode
+        emailUsedForPayment
       }
     }
   }

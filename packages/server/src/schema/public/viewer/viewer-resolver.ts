@@ -5,13 +5,16 @@ import { UserType } from "../user/UserType";
 
 export default queryField("viewer", {
     type: UserType,
+    nullable: true,
     description: "Query viewer",
     resolve: async (_parent, _args, context) => {
+
+      // const authorization = context.req.headers["authorization"];
 
       const token = context.req.cookies.jid;
 
       if(!token) {
-        return context.res.send({ok: false, accessToken: ''})
+        return null;
       }
   
       let payload: any = null ;
@@ -19,7 +22,7 @@ export default queryField("viewer", {
         payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
       } catch (error) {
         console.log(error);
-        return context.res.send({ok: false, accessToken: ''})
+        return null;
       }
   
       const user = await UserEntity.findOne({id: payload.userId})

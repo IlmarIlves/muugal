@@ -13,16 +13,39 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /**
+   * This scalar should never make it into production. It is used as a placeholder for situations
+   * where GraphQL Nexus encounters a missing type. We don't want to error immedately, otherwise
+   * the TypeScript definitions will not be updated.
+   */
+  NEXUS__UNKNOWN__TYPE: any;
   /** File upload */
   Upload: any;
 };
 
 export type Admin = {
   __typename?: 'Admin';
+  /** Admin order by id */
+  order: AdminOrder;
+  /** Admin payment by id */
+  payment: AdminPayment;
+  /** List of users */
+  payments: AdminPayments;
   /** Admin user by id */
   user: AdminUser;
   /** List of users */
   users: AdminUsers;
+};
+
+
+export type AdminOrderArgs = {
+  orderId?: InputMaybe<Scalars['ID']>;
+  priceInCents?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AdminPaymentArgs = {
+  paymentId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -35,6 +58,52 @@ export type AdminUsersArgs = {
   filter?: InputMaybe<AdminUsersFilterInput>;
   match?: InputMaybe<MatchInput>;
   pagination?: InputMaybe<PaginationInput>;
+};
+
+export type AdminOrder = {
+  __typename?: 'AdminOrder';
+  /** User role */
+  additionalInfo: Scalars['String'];
+  /** User role */
+  amount: Scalars['Int'];
+  /** User role */
+  colors: Scalars['String'];
+  data: Scalars['String'];
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  mimeType: Scalars['String'];
+  telephone: Scalars['String'];
+  userId: Scalars['ID'];
+};
+
+export type AdminOrders = {
+  __typename?: 'AdminOrders';
+  /** List of paginated orders */
+  orders: Array<AdminOrder>;
+};
+
+export type AdminPayment = {
+  __typename?: 'AdminPayment';
+  /** Payment amount */
+  amount: Scalars['Int'];
+  /** Payment currencyCode */
+  currencyCode: Scalars['String'];
+  /** Payment currencyCode */
+  emailUsedForPayment: Scalars['String'];
+  /** Payment unique id */
+  id: Scalars['ID'];
+  /** Payment status */
+  status: Scalars['NEXUS__UNKNOWN__TYPE'];
+  /** Payment user unique id */
+  stripeSessionId: Scalars['String'];
+  /** Payment user unique id */
+  userId: Scalars['ID'];
+};
+
+export type AdminPayments = {
+  __typename?: 'AdminPayments';
+  /** List of paginated orders */
+  payments: Array<AdminPayment>;
 };
 
 export type AdminUser = {
@@ -92,27 +161,50 @@ export enum MatchModeEnum {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Reset user password */
+  adminResetUserPassword: AdminUser;
+  /** Changes current user password */
+  changePassword: Viewer;
   /** Creates new Stripe checkout session */
-  createStripeCheckoutSession: Payment;
+  createStripeCheckoutSession: Scalars['NEXUS__UNKNOWN__TYPE'];
   /** Attempts to log user in */
   login: LoginResponse;
   /** Logs out signed-in user if any */
   logout: Scalars['Boolean'];
+  /** Uploads file */
+  order: Order;
   /** Registers new user */
   register: User;
-  /** Uploads file */
-  uploadFile: Viewer;
+};
+
+
+export type MutationAdminResetUserPasswordArgs = {
+  userId?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationChangePasswordArgs = {
+  confirmPassword?: InputMaybe<Scalars['String']>;
+  currentPassword?: InputMaybe<Scalars['String']>;
+  newPassword?: InputMaybe<Scalars['String']>;
 };
 
 
 export type MutationCreateStripeCheckoutSessionArgs = {
-  subscriptionId?: InputMaybe<Scalars['String']>;
+  priceInCents?: InputMaybe<Scalars['Int']>;
+  productName?: InputMaybe<Scalars['String']>;
+  quantity?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type MutationLoginArgs = {
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationOrderArgs = {
+  file?: InputMaybe<Scalars['Upload']>;
 };
 
 
@@ -123,9 +215,20 @@ export type MutationRegisterArgs = {
   password?: InputMaybe<Scalars['String']>;
 };
 
-
-export type MutationUploadFileArgs = {
-  file?: InputMaybe<Scalars['Upload']>;
+export type Order = {
+  __typename?: 'Order';
+  /** User role */
+  additionalInfo: Scalars['String'];
+  /** User role */
+  amount: Scalars['Int'];
+  /** User role */
+  colors: Scalars['String'];
+  data: Scalars['String'];
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  mimeType: Scalars['String'];
+  telephone: Scalars['String'];
+  userId: Scalars['ID'];
 };
 
 export type PaginationInput = {
@@ -135,18 +238,12 @@ export type PaginationInput = {
   take?: InputMaybe<Scalars['Int']>;
 };
 
-export type Payment = {
-  __typename?: 'Payment';
-  /** Payment unique id */
-  id: Scalars['ID'];
-};
-
 export type Query = {
   __typename?: 'Query';
   /** Admin resolvers */
   admin: Admin;
   /** Query viewer */
-  viewer: User;
+  viewer?: Maybe<User>;
 };
 
 export type User = {
@@ -178,7 +275,7 @@ export type Viewer = {
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, email: string, firstName: string, lastName: string } };
+export type ViewerQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', id: string, email: string, firstName: string, lastName: string } | null };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -201,6 +298,13 @@ export type UsersQueryVariables = Exact<{
 
 
 export type UsersQuery = { __typename?: 'Query', admin: { __typename?: 'Admin', users: { __typename?: 'AdminUsers', skip: number, take: number, total: number, users: Array<{ __typename?: 'AdminUser', id: string, email: string, firstName: string, lastName: string }> } } };
+
+export type PaymentByIdQueryVariables = Exact<{
+  paymentId: Scalars['ID'];
+}>;
+
+
+export type PaymentByIdQuery = { __typename?: 'Query', admin: { __typename?: 'Admin', payment: { __typename?: 'AdminPayment', id: string, userId: string, stripeSessionId: string, status: any, amount: number, currencyCode: string, emailUsedForPayment: string } } };
 
 export type UserByIdQueryVariables = Exact<{
   userId: Scalars['ID'];
@@ -358,6 +462,49 @@ export function useUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<User
 export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
+export const PaymentByIdDocument = gql`
+    query PaymentById($paymentId: ID!) {
+  admin {
+    payment(paymentId: $paymentId) {
+      id
+      userId
+      stripeSessionId
+      status
+      amount
+      currencyCode
+      emailUsedForPayment
+    }
+  }
+}
+    `;
+
+/**
+ * __usePaymentByIdQuery__
+ *
+ * To run a query within a React component, call `usePaymentByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePaymentByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePaymentByIdQuery({
+ *   variables: {
+ *      paymentId: // value for 'paymentId'
+ *   },
+ * });
+ */
+export function usePaymentByIdQuery(baseOptions: Apollo.QueryHookOptions<PaymentByIdQuery, PaymentByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PaymentByIdQuery, PaymentByIdQueryVariables>(PaymentByIdDocument, options);
+      }
+export function usePaymentByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PaymentByIdQuery, PaymentByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PaymentByIdQuery, PaymentByIdQueryVariables>(PaymentByIdDocument, options);
+        }
+export type PaymentByIdQueryHookResult = ReturnType<typeof usePaymentByIdQuery>;
+export type PaymentByIdLazyQueryHookResult = ReturnType<typeof usePaymentByIdLazyQuery>;
+export type PaymentByIdQueryResult = Apollo.QueryResult<PaymentByIdQuery, PaymentByIdQueryVariables>;
 export const UserByIdDocument = gql`
     query UserById($userId: ID!) {
   admin {

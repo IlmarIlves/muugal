@@ -4,7 +4,7 @@ import { getUuid } from "./getUuid";
 
 
 export async function uploadFile(readStream: ReadStream, mimetype: string): Promise<{Body: Buffer, Key: string, ContentType: string}> {
-  const recordingBuffer = await getStreamBody(readStream);
+  const fileBuffer = await getStreamBody(readStream);
 
   console.log(mimetype);
 
@@ -19,10 +19,12 @@ export async function uploadFile(readStream: ReadStream, mimetype: string): Prom
   // set upload params
   const params = {
     // Bucket: config.aws.bucket,
-    Body: recordingBuffer,
+    Body: fileBuffer,
     Key: `file/${getUuid()}.stl`,
     ContentType: mimetype,
   };
+
+  console.log(params);
 
   return params;
 

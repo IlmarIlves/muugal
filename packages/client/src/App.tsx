@@ -27,18 +27,6 @@ export interface ProtectedRouteProps extends RouteProps {
 }
 
 export const App: React.FC = () => {
-  const { data, loading, error } = useViewerQuery();
-
-  console.log("app viewer query", data?.viewer.id);
-
-  // if (error) {
-  //   return <div>error</div>;
-  // }
-
-  if (loading) {
-    return <div>loading</div>;
-  }
-
   return (
     <>
       <BrowserRouter>
@@ -46,7 +34,7 @@ export const App: React.FC = () => {
           <Route path="/" element={<LandingPageView />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
-          <Route path="/our-price-offer" element={<OurPriceOfferView viewer={data} />} />
+          <Route path="/our-price-offer" element={<OurPriceOfferView />} />
           <Route path="/order" element={<OrderView />} />
           <Route path="*" element={<NotFoundView />} />
           {/* <Route path="dashboard" element={<PrivateRoute roles={[ROLE.ADMIN]} component={Dashboard} />} />

@@ -12,12 +12,9 @@ export const LandingPageView: React.FC = () => {
     return <div>loading</div>;
   }
 
-  console.log(data?.viewer.firstName);
-  const viewer = data?.viewer;
-
   return (
     <>
-      <Header />
+      <Header viewer={data} />
 
       <MuugalSelection />
 

@@ -2,10 +2,10 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, BaseEntity} from "typ
 import { fieldLength } from "../constants";
 import { UserEntity } from "./UserEntity"
 
-@Entity()
+@Entity({ name: 'order' })
 export class OrderEntity extends BaseEntity{
-    @PrimaryGeneratedColumn()
-    id!: number
+    @PrimaryGeneratedColumn("uuid")
+    readonly id!: string;
 
     @Column({type: "string"})
     userId!: string;
@@ -22,6 +22,9 @@ export class OrderEntity extends BaseEntity{
     @Column({type: "int"})
     amount!: number
 
+    @Column({type: "int", nullable: true})
+    priceInCents!: number
+
     @Column({type: "varchar", nullable: true})
     additionalInfo!: string | null
 
@@ -31,7 +34,7 @@ export class OrderEntity extends BaseEntity{
     data!: Buffer
 
     @Column({type: "varchar"})
-    mimeType!:string
+    mimeType!: string
 
     @ManyToOne(() => UserEntity, (user) => user.file)
     user!: Promise<UserEntity>;

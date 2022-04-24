@@ -1,15 +1,14 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
 import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
+import { Model } from "../../components/Model/Model";
 import { ProgressBar } from "../../components/ProgressBar/ProgressBar";
-import { ViewerQuery } from "../../generated/graphql";
+import { useViewerQuery, ViewerQuery } from "../../generated/graphql";
 import "./ourPriceOffer.scss";
 
-interface OurPriceOfferViewProps {
-  viewer: ViewerQuery | undefined;
-}
+export const OurPriceOfferView: React.FC = ({}) => {
+  const { data, loading, error } = useViewerQuery();
 
-export const OurPriceOfferView: React.FC<OurPriceOfferViewProps> = ({ viewer }) => {
   return (
     <>
       <Header />

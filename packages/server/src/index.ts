@@ -13,14 +13,12 @@ import { graphqlUploadExpress } from 'graphql-upload';
 
 const start = async () => {
 	// create database connection
-	await createConnection().catch((error) => console.log('Error while connecting to the database', error));
 
 	const session = require('express-session');
 
 	// initiate express instance
 	const app = express();
 
-	
 	const cors = require('cors')
 
 	app.use(cors({origin: 'localhost:3000', credentials: true}))
@@ -33,11 +31,12 @@ const start = async () => {
 		user: process.env.DB_USER,
 		password: process.env.DB_PASS,
 		database: process.env.MYSQL_DB,
+		maxQueryExecutionTime: 1000,
+
 	};
 	
 	var sessionStore = new MySQLStore(options);
 
-	app.use(cors());
 
 	app.use(
 		session({
@@ -57,8 +56,19 @@ const start = async () => {
 	const types = await loadTypes([join(__dirname, './schema', '**', '*.ts')]);
 
 	app.use(cookieParser());
+	
+	app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 2 }));
 
-	app.use(graphqlUploadExpress({ maxFiles: 10 }));
+	app.use(function(req, res, next){
+    res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
+        console.log('Request has timed out.');
+            res.send(408);
+        });
+
+    next();
+});
+	
+	app.get("/", (_req, res) => res.send("hello"));
 
 	app.post('/refresh_token', async (req, res) => {
 		const token = req.cookies.jid;
@@ -91,6 +101,8 @@ const start = async () => {
 		return res.send({ok: true, accessToken: createAccessToken(user)})
 	});
 
+	await createConnection().catch((error) => console.log('Error while connecting to the database', error));
+
 	// construct graphql schema
 	const schema: any = makeSchema({
 		types,
@@ -116,7 +128,8 @@ const start = async () => {
 	// start server
 	app.listen({ port }, () => {
 		console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
-	});
+	}).setTimeout(5 * 60 * 1000);
+
 };
 
 start();

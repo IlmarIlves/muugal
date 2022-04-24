@@ -3,6 +3,24 @@
 
 
 type Admin {
+  """Admin order by id"""
+  order(
+    """User identifier"""
+    orderId: ID
+
+    """Order price in cents"""
+    priceInCents: Int
+  ): AdminOrder!
+
+  """Admin payment by id"""
+  payment(
+    """Payment identifier"""
+    paymentId: ID
+  ): AdminPayment!
+
+  """List of users"""
+  payments: AdminPayments!
+
   """Admin user by id"""
   user(
     """User identifier"""
@@ -11,6 +29,53 @@ type Admin {
 
   """List of users"""
   users(filter: AdminUsersFilterInput, match: MatchInput, pagination: PaginationInput): AdminUsers!
+}
+
+type AdminOrder {
+  """User role"""
+  additionalInfo: String!
+
+  """User role"""
+  amount: Int!
+
+  """User role"""
+  colors: String!
+  data: String!
+  email: String!
+  id: ID!
+  mimeType: String!
+  telephone: String!
+  userId: ID!
+}
+
+type AdminOrders {
+  """List of paginated orders"""
+  orders: [AdminOrder!]!
+}
+
+type AdminPayment {
+  """Payment amount"""
+  amount: Int!
+
+  """Payment currencyCode"""
+  currencyCode: String!
+
+  """Payment currencyCode"""
+  emailUsedForPayment: String!
+
+  """Payment unique id"""
+  id: ID!
+
+  """Payment user unique id"""
+  stripeSessionId: String!
+
+  """Payment user unique id"""
+  userId: ID!
+}
+
+type AdminPayments {
+  """List of paginated orders"""
+  payments: [AdminPayment!]!
 }
 
 type AdminUser {
@@ -70,8 +135,35 @@ enum MatchModeEnum {
 }
 
 type Mutation {
+  """Reset user password"""
+  adminResetUserPassword(
+    """User id"""
+    userId: ID
+  ): AdminUser!
+
+  """Changes current user password"""
+  changePassword(
+    """Confirmation password"""
+    confirmPassword: String
+
+    """Current password"""
+    currentPassword: String
+
+    """New password"""
+    newPassword: String
+  ): Viewer!
+
   """Creates new Stripe checkout session"""
-  createStripeCheckoutSession(subscriptionId: String): Payment!
+  createStripeCheckoutSession(
+    """Product price"""
+    priceInCents: Int
+
+    """Product name"""
+    productName: String
+
+    """Product quantity"""
+    quantity: Int
+  ): Payment!
 
   """Attempts to log user in"""
   login(
@@ -105,17 +197,23 @@ type Mutation {
     """Password"""
     password: String
   ): User!
-
-  """Uploads file"""
-  uploadFile(
-    """Upload file"""
-    file: Upload
-  ): Viewer!
 }
 
 type Order {
+  """User role"""
+  additionalInfo: String!
+
+  """User role"""
+  amount: Int!
+
+  """User role"""
+  colors: String!
+  data: String!
+  email: String!
   id: ID!
-  userId: String!
+  mimeType: String!
+  telephone: String!
+  userId: ID!
 }
 
 input PaginationInput {
@@ -127,8 +225,23 @@ input PaginationInput {
 }
 
 type Payment {
+  """Payment amount"""
+  amount: Int!
+
+  """Payment currencyCode"""
+  currencyCode: String!
+
+  """Payment currencyCode"""
+  emailUsedForPayment: String!
+
   """Payment unique id"""
   id: ID!
+
+  """Payment user unique id"""
+  stripeSessionId: String!
+
+  """Payment user unique id"""
+  userId: ID!
 }
 
 type Query {
@@ -136,7 +249,7 @@ type Query {
   admin: Admin!
 
   """Query viewer"""
-  viewer: User!
+  viewer: User
 }
 
 """File upload"""

@@ -174,11 +174,11 @@ export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
   return (
     <>
       <div>Muugal users</div>
-      <div>
+      <div className="users">
         {users.map((user) => {
           return (
             <div
-              className={"cell"}
+              className={"user"}
               onClick={() =>
                 navigate({
                   pathname: buildUrl<AdminViewParams>(ADMIN_VIEW_PATH, {
@@ -190,9 +190,7 @@ export const UserListView: React.FC<AdminViewProps> = ({ viewer }) => {
               }
             >
               <span>{user.id}</span>
-              <span>" "</span>
               <span>{user.firstName}</span>
-              <span>" "</span>
               <span>{user.lastName}</span>
             </div>
           );

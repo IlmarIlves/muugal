@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Viewer, ViewerQueryResult } from "../../generated/graphql";
+import { User, Viewer, ViewerQuery, ViewerQueryResult } from "../../generated/graphql";
 import "./header.scss";
 
 export interface HeaderProps {
-  viewer?: User;
+  viewer?: ViewerQuery | undefined;
 }
 
 export const Header: React.FC<HeaderProps> = ({ viewer }) => {
@@ -33,9 +33,9 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
                 LOG IN
               </li>
             ) : (
-              <li className={"login-text"} onClick={() => navigate("/login")}>
-                {viewer?.firstName}
-              </li>
+              <span className={"login-text"} onClick={() => navigate("/login")}>
+                {viewer?.viewer.firstName}
+              </span>
             )}
 
             <li className={"order-text"} onClick={() => navigate("/order")}>
