@@ -1,7 +1,13 @@
 /*menüüriba*/
 .menu-bar {
   background-color: black;
-  margin-bottom: 50px;
+  
+}
+
+.GreenLine{
+ background-color: #39ff14;
+ padding-top: 5px;
+ 
 }
 
 .header {
@@ -10,49 +16,55 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
-  padding: 10px;
-  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: black;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
+  color: white;
 }
 
-.logo {
-  height: 80px;
-  width: 80px;
-  padding-right: 25px;
-  border-radius: 50%;
-  background-color: green;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/*logo*/
 .company-name {
-  margin-left: 25px;
+  margin-left: 30px;
   cursor: pointer;
 }
+
+.logo{
+  background-image: url("logo2.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  width: 150px;
+  height: 70px;
+}
+
+
 
 .login-text {
-  font-size: 25px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+  color: white;
 }
 
 .order-text {
   margin-left: 50px;
   margin-right: 50px;
-  font-size: 25px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+  color: white;
 }
 
 .price-text {
-  font-size: 25px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+  color: white;
 }
 
 .profile-name {
@@ -63,6 +75,30 @@
   font-family: "Permanent Marker", cursive;
   font-size: 4.5rem;
   flex-grow: 1;
+}
+
+.order-text:hover {
+  color:  #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 1em;
+  text-decoration-thickness: 0.5em;
+}
+
+.login-text:hover {
+  color:  #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 1em;
+  text-decoration-thickness: 0.5em;
+}
+
+.price-text:hover {
+  color:  #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 1em;
+  text-decoration-thickness: 0.5em;
 }
 
 /*Profiil-nav - Profile Page*/
@@ -93,3 +129,311 @@
   cursor: pointer;
   background-color: mediumblue;
 }
+
+
+/*choice of languages*/
+.lang-select {
+  font-size: 0.75rem;
+  padding: 0.5em 2em 0.5em 0.75em;
+  background: #39ff14;
+  color: white; 
+  border: 0;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.lang-custom-select {
+  position: relative;
+  margin-bottom: auto;
+}
+
+.lang-custom-arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  background: #39ff14;
+  height: 100%;
+  width: 2em;
+  pointer-events: none;
+  border-radius: 0px 0px 10px 0px;
+}
+
+.lang-custom-arrow::before,
+.lang-custom-arrow::after {
+  --size: 0.40em;
+
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.lang-custom-arrow::before{
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid white;
+  top: 35%;
+}
+
+.lang-custom-arrow::after{
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid white;
+  top: 65%;
+}
+
+/*Pinapple*/
+.pineapple{
+  background-image: url("pilt1.jpg");
+  padding-top: 20%;
+  padding-left: 3em;
+  padding-bottom: 15%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center ;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2.5s; /* Firefox < 16 */
+   -ms-animation: fadein 2.5s; /* Internet Explorer */
+    -o-animation: fadein 2.5s; /* Opera < 12.1 */
+       animation: fadein 2.5s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+.Find-Print-Repeat{
+  font-size: 4rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: white;
+  text-decoration-color: #39ff14;
+}
+
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  text-align: center;
+  list-style-type: none;
+}
+
+.burgermenu{
+  visibility: hidden;
+}
+
+
+
+
+
+
+@media (max-width: 35em) {  
+  .lang-custom-select {
+    visibility: hidden;
+  }
+
+  .lang-custom-arrow {
+    visibility: hidden;
+  }
+
+  @keyframes bugfix { from {padding:0;} to {padding:0;}}
+  @-webkit-keyframes bugfix { from {padding:0;} to {padding:0;}}
+
+#overlay-button {
+  position: absolute;
+  right: 2em;
+  top: 0.7em;
+  padding: 26px 11px;
+  z-index: 5;
+  cursor: pointer;
+  user-select: none;
+  span {
+      height: 4px;
+      width: 35px;
+      border-radius: 2px;
+      background-color: white;
+      position: relative;
+      display: block;
+      transition: all .2s ease-in-out;
+      &:before {
+        top: -10px;
+        visibility: visible;
+      }
+      &:after {
+        top: 10px;
+      }
+      &:before, &:after {
+          height: 4px;
+          width: 35px;
+          border-radius: 2px;
+          background-color: white;
+          position: absolute;
+          content: "";
+          transition: all .2s ease-in-out;
+      }
+    }
+    &:hover span, &:hover span:before, &:hover span:after {
+      background: white;
+    }
+}
+
+input[type=checkbox] {
+  display: none;
+  
+  &:checked ~ #overlay {
+    visibility: visible;
+  }
+  
+  &:checked ~ #overlay-button {
+    &:hover span, span{
+      background: transparent;
+    }
+    span {
+      &:before {
+        transform: rotate(45deg) translate(7px, 7px);
+        opacity: 1;
+      }
+      &:after {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+    }
+  }
+}
+
+#overlay {
+  height: 90vh;
+  width: 100%;
+  background: black;
+  z-index: 2;
+  visibility: hidden;
+  position: fixed;
+  &.active {
+    visibility: visible;
+  }
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: center;
+    text-align: right;
+    flex-direction: column;
+    height: 100vh;
+    padding-top: 6em;
+    list-style-type: none;
+    gap: 40px;
+    
+    
+    .order-text{
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    
+    .price-text {
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    
+    .order-text:hover {
+      color:  #39ff14;
+      text-decoration: underline;
+      text-decoration-color: #39ff14;
+      text-underline-offset: 0.8em;
+      text-decoration-thickness: 0.4em;
+      
+    }
+    
+    .price-text:hover {
+      color:  #39ff14;
+      text-decoration: underline;
+      text-decoration-color: #39ff14;
+      text-underline-offset: 0.8em;
+      text-decoration-thickness: 0.4em;
+    }
+    }
+  }
+
+
+  /*Pinapple*/
+ .pineapple{
+  background-image: url("pilt1.jpg");
+  padding-top: 0%;
+  padding-left: 3em;
+  padding-bottom: 0%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center ;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2.5s; /* Firefox < 16 */
+   -ms-animation: fadein 2.5s; /* Internet Explorer */
+    -o-animation: fadein 2.5s; /* Opera < 12.1 */
+       animation: fadein 2.5s;
+ }
+
+ @keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+ }
+
+ /* Firefox < 16 */
+ @-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+ }
+
+ /* Safari, Chrome and Opera > 12.1 */
+ @-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+ }
+
+ /* Internet Explorer */
+ @-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+ }
+
+ /* Opera < 12.1 */
+ @-o-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+ }
+
+}
+

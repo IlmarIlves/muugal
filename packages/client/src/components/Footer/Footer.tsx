@@ -14,9 +14,9 @@ export const Footer: React.FC<HeaderProps> = ({ viewer }) => {
     <div className="footer">
       <>
         <div className={"footer"}>
-          <h1 className={"terms"} onClick={() => navigate("/")}>
+          <a className={"terms"} onClick={() => navigate("/")}>
             Terms and conditions
-          </h1>
+          </a>
         </div>
       </>
     </div>

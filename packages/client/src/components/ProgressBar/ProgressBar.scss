@@ -1,0 +1,48 @@
+.ümbris-progressbar{
+    padding-top: 0%;
+    background-color: #D3D3D3;
+  }
+
+  .progressbar {
+    background-color: #D3D3D3;
+    display: grid;
+    grid-auto-flow: column;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+    
+  }
+
+  .progressbar-style {
+    padding: 1rem;
+    background-color: #39ff14;
+    color: black;
+    border-radius: 3px;
+  }
+
+
+ 
+
+  .progressbar-word {
+    background-color: #D3D3D3;
+    display: grid;
+    grid-auto-flow: column;
+    padding-top: 0px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .progressbar-style-word {
+    padding: 1rem;
+    background-color: white;
+    color: black;
+  }
+
+
+  

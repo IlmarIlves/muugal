@@ -68,39 +68,67 @@ export const OrderView: React.FC = ({}) => {
   return (
     <>
       <Header />
-
+      <div className={"ümbris"}>
       <div className={"order-information"}>
+       
+       <div className="three-columns">
+        <h3 className="three-columns-header">Your 3D model</h3>
         <div className="image">
           {/* <FileContainer name={"Order 1"} /> */}
 
           <input type="file" name="file" ref={fileInputRef} onChange={handleFileUpload} />
         </div>
-
+       </div>
+      
+       <div className="three-columns">
+        <h3 className="three-columns-header">Submit your 3D model</h3>
         <div className={"form"}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label>Telefon</label>
-            <input {...register("username")} />
+            
+            <input type="number" className="input" placeholder="Telefon" {...register("username")} />
             {errors.username && <p>{errors.username.message}</p>}
-            <label>Email</label>
-            <input {...register("lastName")} />
+            
+            <input type="Text" className="input" placeholder="Email"{...register("lastName")} />
             {errors.firstName && <p>{errors.firstName.message}</p>}
-            <label>Printeri info(printeri suurus)</label>
-            <input {...register("lastName")} />
+            
+            <input type="Text" className="input" placeholder="Maximum dimensions when printing:"  disabled {...register("lastName")} />
             {errors.firstName && <p>{errors.firstName.message}</p>}
-            <label>Värvid</label>
-            <input {...register("lastName")} />
+            
+            <div className="color">
+             <select {...register("lastName")}  className="color-select">
+              <option className="lang-dd" value="">Värvid</option>
+              <option className="lang-dd" value="">Mingi värv</option>
+             </select>
+             <span className="color-custom-arrow"></span>
+             {errors.firstName && <p>{errors.firstName.message}</p>}
+            </div>
+            
+            <input type="number" className="input" placeholder="Kogus"{...register("lastName")} />
             {errors.firstName && <p>{errors.firstName.message}</p>}
-            <label>Kogus</label>
-            <input {...register("lastName")} />
+            
+            <input type="Text" className="input" placeholder="Lisainfo"{...register("lastName")} />
             {errors.firstName && <p>{errors.firstName.message}</p>}
-            <label>Lisainfo</label>
-            <input {...register("lastName")} />
-            {errors.firstName && <p>{errors.firstName.message}</p>}
-            <input type="submit" />
+            
+            <button className="second-order-btn">GET A PRICE OFFER</button>
           </form>
         </div>
+       </div>
 
-        <div>Send</div>
+       <div className="three-columns">
+        <h3 className="three-columns-header">We get you a price offer</h3>
+        
+        <p className="price-offer-text">Each 3D printing price offer counts</p>
+         <p>• 3D model itself, if its not free</p>
+         <p>• Model preparation for 3D printing</p>
+         <p>• 3D printing and post-processing</p>
+         <p>• Material consumption</p>
+         <p>• Printing time</p>
+         <p>• Shipping cost</p>
+	      <p className="price-offer-text">Price offer confirmation and 3D printing</p>
+	       <p>• Price offer will be sent to your e-mail address in 1 hours</p>
+         <p>• If price offer is appropriate, the 3D model will be printed. Printing usually takes 30 minutes to 2-3 days, depending on the complexity and finishing of the model. It is usually several hours.</p>
+       </div>
+      </div>
       </div>
     </>
   );

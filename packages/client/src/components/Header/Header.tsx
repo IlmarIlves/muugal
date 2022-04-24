@@ -14,36 +14,63 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
     <div className="menu-bar">
       {/* <!--Roheline riba--> */}
       <>
+      <div className="GreenLine">
         <div className={"header"}>
-          <div className={"logo-container"}>
-            {/* <img className={"logo"}  src="img/ouroboros.jpg" /> */}
-            <h1 className={"company-name"} onClick={() => navigate("/")}>
-              Muugal
-            </h1>
-          </div>
-          <div className={"login-container"}>
-            {viewer === null ? (
-              <span className={"login-text"} onClick={() => navigate("/login")}>
-                LOG IN
-              </span>
-            ) : (
-              <span className={"login-text"} onClick={() => navigate("/login")}>
-                {viewer?.firstName}
-              </span>
-            )}
-            <span className={"order-text"} onClick={() => navigate("/order")}>
-              ORDER
+          <div className={"logo-container"}>           
+            <span className={"company-name"} onClick={() => navigate("/")}>
+              <div className="logo"></div>
             </span>
+          </div>     
+          
+          {/* <!--Burgermenu--> */}
+          <input className="burgermenu" type="checkbox" id="overlay-input" />
+          <label htmlFor="overlay-input" id="overlay-button"><span></span></label>
+
+          <div id="overlay">
+           <ul className={"login-container"}>
+            {viewer === null ? (
+              <li className={"login-text"} onClick={() => navigate("/login")}>
+                LOG IN
+              </li>
+            ) : (
+              <li className={"login-text"} onClick={() => navigate("/login")}>
+                {viewer?.firstName}
+              </li>
+            )}
+
+            <li className={"order-text"} onClick={() => navigate("/order")}>
+              ORDER
+            </li>
+            
             {viewer !== null ? (
-              <span className={"price-text"} onClick={() => navigate("/our-price-offer")}>
+              <li className={"price-text"} onClick={() => navigate("/our-price-offer")}>
                 OUR PRICE OFFER
-              </span>
+              </li>
             ) : null}
+           </ul>
           </div>
+          
+          
+          {/*<!--choice of languages-->*/}
+          <div className="lang-custom-select">
+           <select className="lang-select">
+             <option className="lang" value="">Eesti</option>
+             <option className="lang" value="">English</option>
+           </select>
+           <span className="lang-custom-arrow"></span>
+          </div>
+
         </div>
+      </div>
+
+      <div className="pineapple" >
+        <span className="Find-Print-Repeat">
+          FIND PRINT REPEAT
+        </span>
+      </div>
         {/* <!--Log Out mobla versioon--> */}
       </>
-
+     
       {/* <!--Profiil--> */}
       {/* <>
         <img className="ouroboros" src="img/ouroboros.jpg" />
@@ -68,3 +95,5 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
     </div>
   );
 };
+
+

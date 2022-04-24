@@ -13,22 +13,25 @@ export const OurPriceOfferView: React.FC<OurPriceOfferViewProps> = ({ viewer }) 
   return (
     <>
       <Header />
-
-      <div className={"price-offer"}>
+      <div className={"ümbris-priceoffer"}>
+      <div className={"our-priceoffer"}>
+       
+       <div className="priceoffer-three-columns">
         <div className="image">
           <FileContainer name={"Order 1"} />
         </div>
+       </div>
 
+       <div className="priceoffer-three-columns">
         <div className={"information"}>
-          <span>Kogus</span>
-          <span>1 tk</span>
-          <span>Valmistamise aeg</span>
-          <span>1 päev</span>
+         <input type="Text" className="input" placeholder="Kogus:"  disabled/>
+         <input type="Text" className="input" placeholder="Valmimisaeg:"  disabled/>
+         <input type="Text" className="input" placeholder="Hinnapakkumine:"  disabled/>
         </div>
-
-        <div>
-          <span>Hinnapakkumine</span>
-        </div>
+        <button className="second-btn">ORDER</button>
+       </div>
+       
+      </div>
       </div>
 
       <ProgressBar />

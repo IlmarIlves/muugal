@@ -1,3 +1,195 @@
 .muugal-selection {
   display: flex;
 }
+
+.suround-muugal-selection{
+  padding-left: 1%;
+  margin-top: 50px;
+}
+
+.header-muugal-selection{
+  font-size: 0.80em;
+  font-weight: bold;
+  color: #39ff14;
+
+  background-image: url("ouroboros.jpg");
+  background-repeat: no-repeat;
+  background-size: 4em;
+  background-position: left;
+  width: 25%;
+  height: 4.5em;
+
+  display: flex;
+  align-items: center;
+}
+
+.h2-header-muugal-selection{
+  padding-left: 25%;
+}
+
+/*order card*/
+.order{
+ background-color: #e2e2e2;
+ padding: 7%;
+}
+
+.order-card{
+  background-color: white;
+  padding: 5%;
+  border-radius: 0.5em;
+}
+
+.order-card-header{
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 0.5em;
+  text-decoration-thickness: 0.25em;
+  padding-bottom: 5%;
+}
+
+.link{
+  text-decoration: none;
+  color: #39ff14;
+}
+
+.link:hover {
+  color:  #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 0.26em;
+  text-decoration-thickness: 0.15em;
+}
+
+.link-3{
+  word-spacing: 8em;
+}
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid #39ff14;
+  color: #39ff14;
+  background-color: white;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.btn:hover {
+  border: 2px solid #39ff14;
+  color: white;
+  background-color: #39ff14;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.order-btn{
+  border: 2px solid #39ff14;
+  color: white;
+  background-color: #39ff14;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.kauge{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.order-btn:hover{
+  border: 2px solid #39ff14;
+  color: #39ff14;
+  background-color: white;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+
+
+@media (max-width: 35em) {  
+  
+  .suround-muugal-selection{
+    padding-left: 0.5em;
+    margin-top: 25px;
+  }
+  
+  .header-muugal-selection{
+    font-size: 0.60em;
+    font-weight: bold;
+    color: #39ff14;
+  
+    background-image: url("ouroboros.jpg");
+    background-repeat: no-repeat;
+    background-size: 2em;
+    background-position: left;
+    width: 61%;
+    height: 4.5em;
+  
+    display: flex;
+    align-items: center;
+  }
+  
+  .h2-header-muugal-selection{
+    padding-left: 2em;
+  }
+
+
+  .muugal-selection {
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+
+  .order{
+    background-color: #e2e2e2;
+    padding: 3%;
+   }
+   
+   .order-card{
+     background-color: white;
+     padding: 2%;
+     border-radius: 0.5em;
+   }
+   
+   .order-card-header{
+     font-size: 1em;
+     font-weight: bold;
+     text-decoration: underline;
+     text-decoration-color: #39ff14;
+     text-underline-offset: 0.5em;
+     text-decoration-thickness: 0.25em;
+     padding-bottom: 5%;
+   }
+
+   .link-3{
+    word-spacing: 3em;
+  }
+}
+
