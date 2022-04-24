@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./mainMenu.scss";
 
 export interface MainMenuItemInfo {
   title: string;
@@ -20,14 +21,8 @@ export const MainMenu: React.FC<MainMenuProps> = ({
   activeItemIndex,
   /* viewerScopes, className, */ ...rest
 }) => (
-  <div>
+  <div className="items">
     {items.map((item, index) => {
-      // if (!hasAnyScopes(item.authorizedScopes, viewerScopes)) {
-      //   return null;
-      // }
-
-      console.log(item);
-
       return <MainMenuItem key={index} item={item} active={index === activeItemIndex} />;
     })}
   </div>
@@ -38,4 +33,8 @@ export interface MainMenuItemProps {
   active: boolean;
 }
 
-export const MainMenuItem: React.FC<MainMenuItemProps> = ({ item, active }) => <Link to={item.url}>{item.title}</Link>;
+export const MainMenuItem: React.FC<MainMenuItemProps> = ({ item, active }) => (
+  <div>
+    <Link to={item.url}>{item.title}</Link>
+  </div>
+);

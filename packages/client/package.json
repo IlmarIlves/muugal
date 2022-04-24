@@ -22,6 +22,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "react-stl-viewer": "^2.0.3",
+    "react-stripe-checkout": "^2.6.3",
     "stl-viewer": "^0.12.0",
     "three": "^0.139.2",
     "typescript": "^4.5.4",

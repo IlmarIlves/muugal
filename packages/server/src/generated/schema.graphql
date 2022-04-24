@@ -3,6 +3,15 @@
 
 
 type Admin {
+  """Admin payment by id"""
+  payment(
+    """Payment identifier"""
+    paymentId: ID
+  ): AdminPayment!
+
+  """List of users"""
+  payments: AdminUsers!
+
   """Admin user by id"""
   user(
     """User identifier"""
@@ -11,6 +20,34 @@ type Admin {
 
   """List of users"""
   users(filter: AdminUsersFilterInput, match: MatchInput, pagination: PaginationInput): AdminUsers!
+}
+
+type AdminPayment {
+  """Payment amount"""
+  amount: Int!
+
+  """Payment currencyCode"""
+  currencyCode: String!
+
+  """Payment currencyCode"""
+  emailUsedForPayment: String!
+
+  """Payment unique id"""
+  id: ID!
+
+  """Payment status"""
+  status: NEXUS__UNKNOWN__TYPE!
+
+  """Payment user unique id"""
+  stripeSessionId: String!
+
+  """Payment user unique id"""
+  userId: ID!
+}
+
+type AdminPayments {
+  """List of paginated payments"""
+  adminPayments: [AdminPayment!]!
 }
 
 type AdminUser {
@@ -98,7 +135,7 @@ type Mutation {
 
     """Product quantity"""
     quantity: Int
-  ): Payment!
+  ): NEXUS__UNKNOWN__TYPE!
 
   """Attempts to log user in"""
   login(
@@ -134,6 +171,15 @@ type Mutation {
   ): User!
 }
 
+"""
+
+    This scalar should never make it into production. It is used as a placeholder for situations
+    where GraphQL Nexus encounters a missing type. We don't want to error immedately, otherwise
+    the TypeScript definitions will not be updated.
+  
+"""
+scalar NEXUS__UNKNOWN__TYPE
+
 type Order {
   userId: String!
 }
@@ -144,11 +190,6 @@ input PaginationInput {
 
   """Number of items to take"""
   take: Int
-}
-
-type Payment {
-  """Payment unique id"""
-  id: ID!
 }
 
 type Query {
