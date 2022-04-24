@@ -70,8 +70,35 @@ enum MatchModeEnum {
 }
 
 type Mutation {
+  """Reset user password"""
+  adminResetUserPassword(
+    """User id"""
+    userId: ID
+  ): AdminUser!
+
+  """Changes current user password"""
+  changePassword(
+    """Confirmation password"""
+    confirmPassword: String
+
+    """Current password"""
+    currentPassword: String
+
+    """New password"""
+    newPassword: String
+  ): Viewer!
+
   """Creates new Stripe checkout session"""
-  createStripeCheckoutSession(subscriptionId: String): Payment!
+  createStripeCheckoutSession(
+    """Product price"""
+    priceInCents: Int
+
+    """Product name"""
+    productName: String
+
+    """Product quantity"""
+    quantity: Int
+  ): Payment!
 
   """Attempts to log user in"""
   login(
@@ -105,16 +132,9 @@ type Mutation {
     """Password"""
     password: String
   ): User!
-
-  """Uploads file"""
-  uploadFile(
-    """Upload file"""
-    file: Upload
-  ): Viewer!
 }
 
 type Order {
-  id: ID!
   userId: String!
 }
 
@@ -136,7 +156,7 @@ type Query {
   admin: Admin!
 
   """Query viewer"""
-  viewer: User!
+  viewer: User
 }
 
 """File upload"""

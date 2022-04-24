@@ -1,9 +1,8 @@
 import { objectType } from "nexus";
 
-export const UserType = objectType({
+export const OrderType = objectType({
 	name: 'Order',
 	definition(t) {
-		t.id('id');
 		t.string('userId');
 	},
 });

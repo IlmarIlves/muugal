@@ -12,15 +12,6 @@ export enum PaymentStatus {
   RENEW_SUCCEEDED = "RENEW_SUCCEEDED",
 }
 
-export enum PaymentMethod {
-  // just keeping them just in case
-  STRIPE = "STRIPE",
-  PAYPAL = "PAYPAL",
-  // app specific payment methods
-  APPSTORE = "APPSTORE",
-  GOOGLEPLAY = "GOOGLEPLAY",
-}
-
 @Entity({ name: "payment" })
 export class PaymentEntity extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
@@ -29,17 +20,11 @@ export class PaymentEntity extends BaseEntity {
   @Column({ type: "varchar", length: fieldLength.uuid })
   userId!: string;
 
-  @Column({ type: "varchar", length: fieldLength.uuid, nullable: true })
-  subscriptionId!: string | null;
-
   @Column({ type: "varchar", nullable: true })
   stripeSessionId!: string | null;
 
   @Column({ type: "enum", enum: PaymentStatus, default: PaymentStatus.NOT_PAID })
   status!: PaymentStatus;
-
-  @Column({ type: "enum", enum: PaymentMethod })
-  method!: PaymentMethod;
 
   @Column({ type: "float" })
   amount!: number;

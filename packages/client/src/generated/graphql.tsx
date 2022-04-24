@@ -92,6 +92,10 @@ export enum MatchModeEnum {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Reset user password */
+  adminResetUserPassword: AdminUser;
+  /** Changes current user password */
+  changePassword: Viewer;
   /** Creates new Stripe checkout session */
   createStripeCheckoutSession: Payment;
   /** Attempts to log user in */
@@ -102,8 +106,18 @@ export type Mutation = {
   order: Order;
   /** Registers new user */
   register: User;
-  /** Uploads file */
-  uploadFile: Viewer;
+};
+
+
+export type MutationAdminResetUserPasswordArgs = {
+  userId?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationChangePasswordArgs = {
+  confirmPassword?: InputMaybe<Scalars['String']>;
+  currentPassword?: InputMaybe<Scalars['String']>;
+  newPassword?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -128,11 +142,6 @@ export type MutationRegisterArgs = {
   firstName?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
-};
-
-
-export type MutationUploadFileArgs = {
-  file?: InputMaybe<Scalars['Upload']>;
 };
 
 export type Order = {
@@ -211,7 +220,7 @@ export type OrderMutationVariables = Exact<{
 }>;
 
 
-export type OrderMutation = { __typename?: 'Mutation', order: { __typename?: 'Order', id: string } };
+export type OrderMutation = { __typename?: 'Mutation', order: { __typename?: 'Order', userId: string } };
 
 
 export const ViewerDocument = gql`
@@ -317,7 +326,7 @@ export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, L
 export const OrderDocument = gql`
     mutation Order($file: Upload!) {
   order(file: $file) {
-    id
+    userId
   }
 }
     `;

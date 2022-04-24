@@ -11,7 +11,7 @@ import "./orderView.scss";
 gql`
   mutation Order($file: Upload!) {
     order(file: $file) {
-      id
+      userId
     }
   }
 `;
@@ -56,13 +56,6 @@ export const OrderView: React.FC = ({}) => {
         file,
       },
     });
-  };
-
-  const style = {
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
   };
 
   return (

@@ -66,7 +66,6 @@ export interface NexusGenRootTypes {
   }
   Mutation: {};
   Order: { // root type
-    id: string; // ID!
     userId: string; // String!
   }
   Payment: { // root type
@@ -124,15 +123,15 @@ export interface NexusGenFieldTypes {
     accessToken: string; // String!
   }
   Mutation: { // field return type
+    adminResetUserPassword: NexusGenRootTypes['AdminUser']; // AdminUser!
+    changePassword: NexusGenRootTypes['Viewer']; // Viewer!
     createStripeCheckoutSession: NexusGenRootTypes['Payment']; // Payment!
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
     order: NexusGenRootTypes['Order']; // Order!
     register: NexusGenRootTypes['User']; // User!
-    uploadFile: NexusGenRootTypes['Viewer']; // Viewer!
   }
   Order: { // field return type
-    id: string; // ID!
     userId: string; // String!
   }
   Payment: { // field return type
@@ -140,7 +139,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     admin: NexusGenRootTypes['Admin']; // Admin!
-    viewer: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
     email: string; // String!
@@ -166,8 +165,18 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    adminResetUserPassword: { // args
+      userId?: string | null; // ID
+    }
+    changePassword: { // args
+      confirmPassword?: string | null; // String
+      currentPassword?: string | null; // String
+      newPassword?: string | null; // String
+    }
     createStripeCheckoutSession: { // args
-      subscriptionId?: string | null; // String
+      priceInCents?: number | null; // Int
+      productName?: string | null; // String
+      quantity?: number | null; // Int
     }
     login: { // args
       email?: string | null; // String
@@ -181,9 +190,6 @@ export interface NexusGenArgTypes {
       firstName?: string | null; // String
       lastName?: string | null; // String
       password?: string | null; // String
-    }
-    uploadFile: { // args
-      file?: any | null; // Upload
     }
   }
 }

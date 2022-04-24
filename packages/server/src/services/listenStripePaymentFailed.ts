@@ -1,7 +1,7 @@
 import { raw } from "body-parser";
 import { Router } from "express";
 import Stripe from "stripe";
-import { PaymentEntity, PaymentMethod, PaymentStatus } from "../entities/PaymentEntity";
+import { PaymentEntity,  PaymentStatus } from "../entities/PaymentEntity";
 import { UserEntity } from "../entities/UserEntity";
 import { constructStripeEvent } from "./constructStripeEvent";
 
@@ -32,11 +32,6 @@ export function listenStripePaymentFailed() {
 
     // event.data.object returns as a Stripe invoice
     const invoice = event.data.object as Stripe.Invoice;
-
-    // if billing reason is not upgrading already existing subscription then ignore..
-    if (invoice.billing_reason !== "subscription_cycle") {
-      return res.status(200).send("OK");
-    }
 
     // just in case do not allow query customers by stripeCustomerId with null value
     if (!invoice.customer) {
@@ -71,7 +66,6 @@ export function listenStripePaymentFailed() {
 
     payment.userId = user.id;
     payment.status = PaymentStatus.RENEW_FAILED;
-    payment.method = PaymentMethod.STRIPE;
     payment.amount = invoice.amount_due;
     payment.emailUsedForPayment = invoice.customer_email;
 

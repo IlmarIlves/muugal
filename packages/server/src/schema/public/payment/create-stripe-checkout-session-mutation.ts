@@ -1,27 +1,53 @@
-import { mutationField, stringArg } from "@nexus/schema";
-import { config } from "../../../config";
-import { PaymentEntity, PaymentMethod, PaymentStatus } from "../../../entities/PaymentEntity";
-
+import { mutationField,intArg, stringArg  } from "@nexus/schema";
+import { verify } from "jsonwebtoken";
+import { PaymentEntity, PaymentStatus } from "../../../entities/PaymentEntity";
+import { UserEntity } from "../../../entities/UserEntity";
 import { stripe } from "../../../services/setupStripe";
 
 export default mutationField("createStripeCheckoutSession", {
   type: "Payment",
   description: "Creates new Stripe checkout session",
-  args: { subscriptionId: stringArg() },
+  args: {
+    productName: stringArg({description: "Product name"}),
+    priceInCents: intArg({ description: "Product price" }),
+    quantity: intArg({ description: "Product quantity" }),
+  },
   resolve: async (_parent, args, context) => {
-    const { viewer } = context;
+    const token = context.req.cookies.jid;
 
-    // if (!viewer) {
-    //   throw new UnauthorizedError();
-    // }
+    if(!token) {
+      return null;
+    }
 
+    let payload: any = null ;
+    try {
+      payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+
+    const user = await UserEntity.findOne({id: payload.userId})
+
+    if(!user) {
+      throw new Error("No user found, this should not happen");
+    }
+ 
     // create stripe session
     const stripeSession = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      customer: viewer.stripeCustomerId ?? undefined,
       mode: "payment",
-      success_url: config.stripe.successUrl,
-      cancel_url: config.stripe.cancelUrl,
+      customer: user.stripeCustomerId ?? undefined,     
+      success_url: "localhost:3000/register",
+      cancel_url: "localhost:3000/",
+      line_items: [
+        {price_data: 
+          {product_data: {name: args.productName}, 
+          currency: "usd", 
+          unit_amount: args.priceInCents}, 
+          quantity: args.quantity,
+        }
+        ]
     });
 
     if (!stripeSession) {
@@ -35,10 +61,9 @@ export default mutationField("createStripeCheckoutSession", {
     // create payment entry
     const payment = new PaymentEntity();
 
-    payment.user = Promise.resolve(viewer);
+    payment.user = Promise.resolve(user);
     payment.stripeSessionId = stripeSession.id;
-    payment.amount = stripeSession.amount_total;
-    payment.method = PaymentMethod.STRIPE;
+    payment.amount = args.priceInCents;
     payment.status = PaymentStatus.STARTED;
 
     await payment.save();
