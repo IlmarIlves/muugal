@@ -12,20 +12,6 @@ import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
 import "./userListView.scss";
 
-gql`
-  query Orders {
-    admin {
-      orders {
-          id
-          email
-          firstName
-          lastName
-        }
-      }
-    }
-  }
-`;
-
 // fetch filtered and paginated list of admin users
 gql`
   query Users($filter: AdminUsersFilterInput, $pagination: PaginationInput, $match: MatchInput) {

@@ -1,54 +1,65 @@
 import { gql } from "@apollo/client";
-import React, { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FilterBaseData } from "../../components/Filter/Filter";
-import { ConditionModeEnum, MatchModeEnum, useUsersQuery } from "../../generated/graphql";
-import { useUrlParams } from "../../hooks/useUrlParams";
-import { getSkipTake } from "../../services/getSkipTake";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Model } from "../../components/Model/Model";
+import { useOrderByIdQuery } from "../../generated/graphql";
+import { AdminViewParams } from "../../routes";
+import { dataUrlToFile } from "../../services/dataUrlToFile";
 import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
+import "./orderDetailsView.scss";
 
 // fetch filtered and paginated list of admin users
 gql`
-  query Users($filter: AdminUsersFilterInput, $pagination: PaginationInput, $match: MatchInput) {
+  query OrderById($orderId: ID!) {
     admin {
-      users(filter: $filter, pagination: $pagination, match: $match) {
-        skip
-        take
-        total
-        users {
-          id
-          email
-          firstName
-          lastName
-        }
+      order(orderId: $orderId) {
+        id
+        email
+        telephone
+        colors
+        amount
+        # data
+        fileUrl
+        mimeType
       }
     }
   }
 `;
 
-interface UsersFilterData extends FilterBaseData {
-  userId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  // status: UserStatusEnum[];
-  // role: UserRoleEnum[];
-}
-
 // TODO: implement pagination "show all"
 export const OrdersDetailsView: React.FC<AdminViewProps> = ({ viewer }) => {
-  const navigate = useNavigate();
+  const params = useParams<AdminViewParams>();
 
-  //   // handle errors
-  //   if (userError) {
-  //     return <ErrorView title="Fetching users failed" error={usersError} />;
-  //   }
+  // load user info
+  const {
+    data: orderData,
+    loading: orderLoading,
+    error: orderError,
+  } = useOrderByIdQuery({
+    variables: {
+      orderId: params.id ?? "",
+    },
+  });
+
+  // handle errors
+  if (orderError) {
+    return <ErrorView title="Fetching users failed" error={orderError} />;
+  }
+
+  const order = orderData?.admin.order;
+
+  var buffer = Buffer.from(order!.fileUrl, "base64");
+
+  const file = dataUrlToFile(order!.fileUrl, "rabbit.stl");
+
+  console.log(file);
 
   // render view
   return (
     <>
-      <div>user details</div>
+      <div>Order details</div>
+      <div className={"model"}>{/* <Model url={order!.data} mimeType={order!.mimeType} /> */}</div>
     </>
   );
 };

@@ -36,12 +36,7 @@ export default mutationField("order", {
 
     const file = await args.file;
 
-    console.log('before uploadFile')
-    
     const upload = await uploadFile(file.createReadStream(), file.mimetype);
-
-    console.log('before entity')
-    
 
     const order = new OrderEntity();
 
@@ -59,16 +54,7 @@ export default mutationField("order", {
       console.log(error);
     }
     
-
-    console.log("order1", order);
-
-      
-      await order.save();
-
-    console.log("order3", order);
-
-  
-    console.log(await OrderEntity.find());
+    await order.save();
 
     return order;
   },

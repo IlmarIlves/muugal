@@ -17,7 +17,7 @@ gql`
         id
         userId
         stripeSessionId
-        status
+        # status
         amount
         currencyCode
         emailUsedForPayment
