@@ -22,6 +22,9 @@ export class OrderEntity extends BaseEntity{
     @Column({type: "int"})
     amount!: number
 
+    @Column({type: "int", nullable: true})
+    priceInCents!: number
+
     @Column({type: "varchar", nullable: true})
     additionalInfo!: string | null
 

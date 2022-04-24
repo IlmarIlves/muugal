@@ -1,9 +1,5 @@
-import { extendType, inputObjectType } from "@nexus/schema";
-import { JSONSchema4 } from "json-schema";
-import { validate } from "../../../../lib/validate/validate";
+import { extendType} from "@nexus/schema";
 import { OrderEntity } from "../../../entities/OrderEntity";
-import { UserEntity, UserRole } from "../../../entities/UserEntity";
-import { getFilterWhere } from "../../../services/getFilterWhere";
 import { getPaginationOptions } from "../../../services/getPaginationOptions";
 
 

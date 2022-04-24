@@ -3,6 +3,15 @@
 
 
 type Admin {
+  """Admin order by id"""
+  order(
+    """User identifier"""
+    orderId: ID
+
+    """Order price in cents"""
+    priceInCents: Int
+  ): AdminOrder!
+
   """Admin payment by id"""
   payment(
     """Payment identifier"""
@@ -10,7 +19,7 @@ type Admin {
   ): AdminPayment!
 
   """List of users"""
-  payments: AdminUsers!
+  payments: AdminPayments!
 
   """Admin user by id"""
   user(
@@ -20,6 +29,28 @@ type Admin {
 
   """List of users"""
   users(filter: AdminUsersFilterInput, match: MatchInput, pagination: PaginationInput): AdminUsers!
+}
+
+type AdminOrder {
+  """User role"""
+  additionalInfo: String!
+
+  """User role"""
+  amount: Int!
+
+  """User role"""
+  colors: String!
+  data: String!
+  email: String!
+  id: ID!
+  mimeType: String!
+  telephone: String!
+  userId: ID!
+}
+
+type AdminOrders {
+  """List of paginated orders"""
+  orders: [AdminOrder!]!
 }
 
 type AdminPayment {
@@ -46,8 +77,8 @@ type AdminPayment {
 }
 
 type AdminPayments {
-  """List of paginated payments"""
-  adminPayments: [AdminPayment!]!
+  """List of paginated orders"""
+  payments: [AdminPayment!]!
 }
 
 type AdminUser {
@@ -181,7 +212,20 @@ type Mutation {
 scalar NEXUS__UNKNOWN__TYPE
 
 type Order {
-  userId: String!
+  """User role"""
+  additionalInfo: String!
+
+  """User role"""
+  amount: Int!
+
+  """User role"""
+  colors: String!
+  data: String!
+  email: String!
+  id: ID!
+  mimeType: String!
+  telephone: String!
+  userId: ID!
 }
 
 input PaginationInput {

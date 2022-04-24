@@ -9,6 +9,6 @@ export default objectType({
     t.field("status", { type: "PaymentStatus", description: "Payment status" });
     t.int("amount", {  description: "Payment amount" });
     t.string("currencyCode", {  description: "Payment currencyCode" });
-    t.string("emailUsedForPayment", {  description: "Payment currencyCode", });
+    t.string("emailUsedForPayment", {  description: "Payment currencyCode" });
   },
 });
