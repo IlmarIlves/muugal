@@ -31,7 +31,8 @@ const start = async () => {
 		user: process.env.DB_USER,
 		password: process.env.DB_PASS,
 		database: process.env.MYSQL_DB,
-		maxQueryExecutionTime: 50000,
+		maxQueryExecutionTime: 1000,
+
 	};
 	
 	var sessionStore = new MySQLStore(options);
@@ -55,8 +56,17 @@ const start = async () => {
 	const types = await loadTypes([join(__dirname, './schema', '**', '*.ts')]);
 
 	app.use(cookieParser());
-
+	
 	app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 2 }));
+
+	app.use(function(req, res, next){
+    res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
+        console.log('Request has timed out.');
+            res.send(408);
+        });
+
+    next();
+});
 	
 	app.get("/", (_req, res) => res.send("hello"));
 

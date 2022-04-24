@@ -8,7 +8,7 @@ module.exports = {
    username: process.env.DB_USER,
    password: process.env.DB_PASS,
    database: process.env.MYSQL_DB,
-		maxQueryExecutionTime: 50000,
+		maxQueryExecutionTime: 1000,
    synchronize: true,
    logging: false,
    seeds: ["seeders/**/*{.ts,.js}"],

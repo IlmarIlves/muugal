@@ -1,7 +1,7 @@
 import { objectType } from "@nexus/schema";
 
 export default objectType({
-  name: "AdminPayment",
+  name: "Payment",
   definition(t) {
     t.id("id", { description: "Payment unique id" });
     t.id("userId", { description: "Payment user unique id" });

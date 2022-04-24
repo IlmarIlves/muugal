@@ -66,7 +66,6 @@ export interface NexusGenRootTypes {
     currencyCode: string; // String!
     emailUsedForPayment: string; // String!
     id: string; // ID!
-    status: any; // NEXUS__UNKNOWN__TYPE!
     stripeSessionId: string; // String!
     userId: string; // ID!
   }
@@ -100,6 +99,14 @@ export interface NexusGenRootTypes {
     id: string; // ID!
     mimeType: string; // String!
     telephone: string; // String!
+    userId: string; // ID!
+  }
+  Payment: { // root type
+    amount: number; // Int!
+    currencyCode: string; // String!
+    emailUsedForPayment: string; // String!
+    id: string; // ID!
+    stripeSessionId: string; // String!
     userId: string; // ID!
   }
   Query: {};
@@ -158,7 +165,6 @@ export interface NexusGenFieldTypes {
     currencyCode: string; // String!
     emailUsedForPayment: string; // String!
     id: string; // ID!
-    status: any; // NEXUS__UNKNOWN__TYPE!
     stripeSessionId: string; // String!
     userId: string; // ID!
   }
@@ -185,7 +191,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     adminResetUserPassword: NexusGenRootTypes['AdminUser']; // AdminUser!
     changePassword: NexusGenRootTypes['Viewer']; // Viewer!
-    createStripeCheckoutSession: any; // NEXUS__UNKNOWN__TYPE!
+    createStripeCheckoutSession: NexusGenRootTypes['Payment']; // Payment!
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
     order: NexusGenRootTypes['Order']; // Order!
@@ -200,6 +206,14 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     mimeType: string; // String!
     telephone: string; // String!
+    userId: string; // ID!
+  }
+  Payment: { // field return type
+    amount: number; // Int!
+    currencyCode: string; // String!
+    emailUsedForPayment: string; // String!
+    id: string; // ID!
+    stripeSessionId: string; // String!
     userId: string; // ID!
   }
   Query: { // field return type
@@ -271,7 +285,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Admin" | "AdminOrder" | "AdminOrders" | "AdminPayment" | "AdminPayments" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Order" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "Admin" | "AdminOrder" | "AdminOrders" | "AdminPayment" | "AdminPayments" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Order" | "Payment" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = "AdminUsersFilterInput" | "MatchInput" | "PaginationInput";
 
