@@ -1,0 +1,116 @@
+
+  
+.userpage-menu{
+      padding-top: 0.25em;
+      padding-bottom: 0px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      background-color: white;
+}
+  
+.userpage-menu-list{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    list-style-type: none;
+    gap: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0px;
+}
+  
+.userpage-menu-text:hover {
+    color:  #39ff14;
+    cursor: pointer;
+}
+
+.userinfo-background{
+    background-color: #e2e2e2;
+    padding-left: 8em;
+    padding-right: 8em;
+    padding-top: 1em;
+}
+
+.userinfo{
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 6px;
+    padding: 1em;
+}
+
+.userinfo-header{
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #39ff14;
+    text-underline-offset: 0.5em;
+    text-decoration-thickness: 0.25em;
+    padding-bottom: 2.5%;
+}
+
+.NewOrder{
+    border-radius: 6px;
+    padding: 1em;
+}
+
+.NewOrder-3DFail{
+    background-color: blue;
+    border-radius: 6px;
+    width: 200px;
+    height: 200px;
+    color: white;
+}
+
+
+.userinfo-list{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    list-style-type: none;
+    gap: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0px;
+}
+  
+  .userinfo-info{
+      font-weight: bold;
+  }
+  
+  .userinfo-btn{
+      margin-left: auto;
+  }
+
+  .order-special{
+    list-style-type: none;
+    padding-bottom: 0.0em;
+    margin-bottom: 0px;
+}
+
+.offer-time{
+    padding: 4px 4px;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+.userinfo-btn-style{
+    border: 2px solid #39ff14;
+    color: white;
+    background-color: #39ff14;
+    padding: 4px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+  .userinfo-btn-style:hover{
+    border: 2px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 4px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+.taimer{
+    color: red;
+}

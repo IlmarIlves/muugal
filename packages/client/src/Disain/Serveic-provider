@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="ServiceProvider.css" rel="stylesheet"/>
+    
+    
+    
+    <title>Service Provider View</title>
+    
+  </head>
+  <body>     	
+    
+
+
+    <div class="userpage-menu">
+     <ul class="userpage-menu-list">
+         <li class="userpage-menu-text">
+            Profile
+         </li>
+         <li>
+            |
+         </li>
+         <li class="userpage-menu-text">
+            Active Orders
+        </li>
+        <li>
+            |
+         </li>
+        <li class="userpage-menu-text">           
+            Portfolio
+        </li>
+        <li>
+            |
+         </li>
+        <li class="userpage-menu-text">
+            Instructions
+        </li>
+     </ul>
+    </div>
+    
+    <div class="userinfo-background">
+    <div class="userinfo">
+      <h2 class="userinfo-header">Kasutajateave</h2>
+      
+         <div>
+          <ul class="userinfo-list">
+           <li>
+             <p>Kasutajanimi</p> 
+           </li>
+           <li>
+             <p class="userinfo-info">Kasutaja</p>
+           </li>
+           <li class="userinfo-btn">
+             <button class="userinfo-btn-style">Muuda</button>
+           </li>
+          </ul>
+         </div>
+        
+         <div>
+            <ul class="userinfo-list">
+                <li>
+                  <p>Email</p> 
+                </li>
+                <li>
+                  <p class="userinfo-info">näide@gmail.com</p>
+                </li>
+                <li class="userinfo-btn">
+                  <button class="userinfo-btn-style">Muuda</button>
+                </li>
+               </ul>
+         </div>
+        
+         <div>
+            <ul class="userinfo-list">
+                <li>
+                  <p>Telefon</p> 
+                </li>
+                <li>
+                  <p class="userinfo-info">54541010</p>
+                </li>
+                <li class="userinfo-btn">
+                  <button class="userinfo-btn-style">Muuda</button>
+                </li>
+               </ul>
+         </div>
+        
+         <div>
+            <ul class="userinfo-list">
+                <li>
+                  <p>Pangakonto</p> 
+                </li>
+                <li>
+                  <p class="userinfo-info">EE0138178947113</p>
+                </li>
+                <li class="userinfo-btn">
+                  <button class="userinfo-btn-style">Muuda</button>
+                </li>
+               </ul>
+         </div> 
+        
+          <div>
+            <ul class="userinfo-list">
+                <li>
+                  <p>Salasõna</p> 
+                </li>
+                <li>
+                  <p class="userinfo-info">abjbkjka</p>
+                </li>
+                <li class="userinfo-btn">
+                  <button class="userinfo-btn-style">Muuda</button>
+                </li>
+               </ul>
+          </div>
+          <div>
+            <button class="userinfo-btn-style">Kustuta konto</button>
+          </div>   
+        
+    </div>
+    </div>
+
+    <div class="userinfo-background">
+        <div class="userinfo">
+          <h2 class="userinfo-header">Printeriteave</h2>
+          
+             <div>
+              <ul class="userinfo-list">
+               <li>
+                 <p>Suurus</p> 
+               </li>
+               <li>
+                 <p class="userinfo-info">4000mm³</p>
+               </li>
+               <li class="userinfo-btn">
+                <div className="userinfo-custom-select">
+                    <select className="userinfo-select">
+                      <option className="userinfo" value="">Muuda</option>
+                      <option className="userinfo" value="">Lisa</option>
+                    </select>
+                    <span className="userinfo-custom-arrow"></span>
+                </div>
+               </li>
+              </ul>
+             </div>
+            
+             <div>
+                <ul class="userinfo-list">
+                    <li>
+                      <p>Värvid</p> 
+                    </li>
+                    <li>
+                      <span class="dropdown">
+                      <span type="button" class="printerinfo-color">#EF3340</span>
+                      <div class="dropdown-content">
+                        <a href="#">Kustuta</a>
+                      </div>
+                      </span>
+                    </li>
+                    <li class="userinfo-btn">
+                      <input type="text" placeholder="Pantone viide" class="color-search">
+                    </li>
+                    <li >
+                      <button class="userinfo-btn-style">Lisa</button>
+                    </li>
+                   </ul>
+             </div>
+            
+        </div>
+        </div>
+ </body>
+</html>
