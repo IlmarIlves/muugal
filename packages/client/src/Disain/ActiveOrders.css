@@ -114,3 +114,13 @@
 .taimer{
     color: red;
 }
+
+.btn-image {
+    border: 2px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 5px 13px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+}

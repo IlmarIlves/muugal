@@ -206,6 +206,7 @@
                   <input type="text" id="lname" class="offer-time"><br>
                </li>
                <li>
+                <button class="btn-image">Image</button>
                 <button class="userinfo-btn-style">Tellimus Valmis</button>
                </li>
             </ul>

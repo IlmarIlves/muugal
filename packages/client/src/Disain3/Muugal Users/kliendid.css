@@ -1,0 +1,45 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #e2e2e2;
+}
+
+.userpage-menu-list{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    list-style-type: none;
+    gap: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0px;
+}
+  
+
+.userinfo-info{
+    font-weight: bold;
+}
+  
+
+.order-special{
+    list-style-type: none;
+    padding-bottom: 0.0em;
+    margin-bottom: 0px;
+}
+
+.Orderhistory{
+    display: flex;
+    flex-direction: row;
+}
+
+.NewOrder-3DFail{
+    background-color: blue;
+    border-radius: 6px;
+    width: 200px;
+    height: 200px;
+    color: white;
+}
+
+.pangakonto{
+    display: flex;
+    flex-direction: row;
+}

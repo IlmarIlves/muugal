@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="kliendid.css" rel="stylesheet"/>
+    
+    
+    
+    <title>Muugal users kliendid</title>
+    
+</head>
+<body>
+    <ul class="userpage-menu-list">
+     <li>
+      <div>
+       <ul class="order-special">
+        <li>
+          <p>Email</p> 
+        </li>
+        <li>
+           <p class="userinfo-info" >Võlts gmail</p>
+        </li>     
+       </ul>
+      </div>
+
+      <div>
+       <ul class="order-special">
+        <li>
+         <p>Eesnimi</p> 
+        </li>
+        <li>
+         <p class="userinfo-info">Meelis</p>
+        </li>     
+       </ul>
+      </div>
+
+      <div>
+        <ul class="order-special">
+         <li>
+          <p>Perekonnanimi</p> 
+         </li>
+         <li>
+          <p class="userinfo-info">Mets</p>
+         </li>     
+        </ul>
+      </div>
+
+      <div>
+       <ul class="order-special">
+        <li>
+          <p>Telefon</p> 
+        </li>
+        <li>
+          <p class="userinfo-info">00000000</p>
+        </li>     
+        </ul>
+       </div>
+
+       <div>
+        <ul class="order-special">
+         <li>
+           <p>Pakiautomaat</p> 
+         </li>
+         <li>
+           <p class="userinfo-info">Itella pakiautomaat</p>
+         </li>     
+         </ul>
+        </div>
+
+        <div>
+            <ul class="order-special">
+             <li>
+               <p>Salasõna</p> 
+             </li>
+             <li>
+               <p class="userinfo-info">12345</p>
+             </li>     
+             </ul>
+        </div>
+
+        <div>
+            <ul class="order-special">
+             <li>
+               <p>Tellimuste ajalugu</p> 
+             </li>
+             <li>
+              <div class="Orderhistory">
+               <span>
+                <ul class="userpage-menu-list">
+                 <li>
+                  <div class="NewOrder-3DFail">
+                   3D fail, ja print settings
+                  </div>
+                 </li>
+                 <li>
+
+                  <div>
+                   <ul class="userinfo-list">
+                    <li>
+                     <p>Värv</p> 
+                    </li>
+                    <li>
+                     <p class="userinfo-info">#EF3340</p>
+                    </li>                       
+                   </ul>
+                  </div>
+                              
+                  <div>
+                   <ul class="userinfo-list">
+                     <li>
+                       <p>Kogus</p> 
+                     </li>
+                     <li>
+                       <p class="userinfo-info">2</p>
+                     </li>                                   
+                   </ul>
+                  </div>
+                              
+                  <div>
+                   <ul class="order-special">
+                    <li>
+                     <p>Lisainfo:</p> 
+                    </li>
+                    <li>
+                     <p>Mingi erisoov</p>
+                    </li>                       
+                   </ul>
+                  </div>
+                 </li>
+                </ul>
+               </span>
+
+
+               <span>
+                <ul class="userpage-menu-list">
+                 <li>
+                  <div class="NewOrder-3DFail">
+                    3D fail, ja print settings
+                  </div>
+                 </li>
+                 <li>
+                  <div>
+                   <ul class="userinfo-list">
+                    <li>
+                     <p>Värv</p> 
+                    </li>
+                    <li>
+                     <p class="userinfo-info">#EF3340</p>
+                    </li>          
+                   </ul>
+                  </div>
+                          
+                  <div>
+                   <ul class="userinfo-list">
+                    <li>
+                     <p>Kogus</p> 
+                    </li>
+                    <li>
+                     <p class="userinfo-info">2</p>
+                    </li>
+                   </ul>
+                  </div>
+                          
+                  <div>
+                   <ul class="order-special">
+                    <li>
+                     <p>Lisainfo:</p> 
+                    </li>
+                    <li>
+                     <p>Mingi erisoov</p>
+                    </li>
+                   </ul>
+                  </div>
+                 </li>
+                </ul>
+               </span>
+              </div>
+             </li>     
+             </ul>
+        </div>
+
+  </li>
+ </ul>
+</body>
+</html>

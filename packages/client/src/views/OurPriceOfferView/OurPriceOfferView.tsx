@@ -12,8 +12,8 @@ export const OurPriceOfferView: React.FC = ({}) => {
   return (
     <>
       <Header />
-      <div className={"ümbris-priceoffer"}>
-      <div className={"our-priceoffer"}>
+      <div className="ümbris-priceoffer">
+      <div className="our-priceoffer">
        
        <div className="priceoffer-three-columns">
         <div className="image">
@@ -23,11 +23,44 @@ export const OurPriceOfferView: React.FC = ({}) => {
 
        <div className="priceoffer-three-columns">
         <div className={"information"}>
-         <input type="Text" className="input" placeholder="Kogus:"  disabled/>
-         <input type="Text" className="input" placeholder="Valmimisaeg:"  disabled/>
-         <input type="Text" className="input" placeholder="Hinnapakkumine:"  disabled/>
+         <ul class="orderinfo-list">
+          <li>
+           <div>
+            <ul class="spc-orderinfo-list">
+             <li>
+              <p>Kogus:</p> 
+             </li>
+             <li>
+              <p class="bold-order-info">2</p>
+             </li>               
+            </ul>
+           </div>
+                      
+           <div>
+            <ul class="spc-orderinfo-list">
+             <li>
+              <p>Valmimisaeg:</p> 
+             </li>
+             <li>
+              <p class="bold-order-info">2 päeva</p>
+             </li>                
+            </ul>
+           </div>
+                      
+           <div>
+            <ul class="spc-orderinfo-list">
+             <li>
+              <p>Hinnapakkumine:</p> 
+             </li>
+             <li>
+              <p class="bold-order-info">20eurot</p>
+             </li>     
+            </ul>
+           </div>
+          </li>
+         </ul>
         </div>
-        <button className="second-btn">ORDER</button>
+        <button className="bold-order-info">ORDER</button>
        </div>
        
       </div>

@@ -52,3 +52,33 @@
   height: 400px;
   width: 400px;
 }
+
+
+.orderinfo-list{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  list-style-type: none;
+  gap: 0.5em;
+  padding-bottom: 0.25em;
+  margin-bottom: 0px;
+}
+
+.spc-orderinfo-list{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  list-style-type: none;
+  gap: 0.5em;
+  padding-bottom: 0.25em;
+  margin-bottom: 0px;
+}
+
+.bold-order-info{
+  font-weight: bold;
+}
+
+
+@media (max-width: 35em) { 
+
+}
