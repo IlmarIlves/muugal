@@ -1,0 +1,330 @@
+html, body { /*Lisa*/
+    height: 100%;
+    margin: 0;
+    background-color: #e2e2e2;
+  }
+  
+  .userpage-menu{ /*Uuendus*/
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25em;
+    padding-bottom: 0.15em;
+    padding-top: 0.15em;
+    padding-left: 1em;  
+  }
+  
+  .userpage-menu-list{ /*Kustuta*/
+  }
+  
+  .userpage-menu-text:hover {
+    color:  #39ff14;
+    cursor: pointer;
+  }
+  
+  .printerinfo-color{
+    background-color: #EF3340;
+    color: white;
+    border-radius: 6px;
+    padding: 2px;
+  }
+  
+  .userinfo-background{
+      background-color: #e2e2e2;
+      padding-left: 8em;
+      padding-right: 8em;
+      padding-top: 1em;
+  }
+  
+  .userinfo{
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      border-radius: 6px;
+      padding: 1em;
+  }
+  
+  .userinfo-header{
+      font-size: 1.2em;
+      font-weight: bold;
+      text-decoration: underline;
+      text-decoration-color: #39ff14;
+      text-underline-offset: 0.5em;
+      text-decoration-thickness: 0.25em;
+      padding-bottom: 2.5%;
+  }
+  
+  .userinfo-list{ 
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    list-style-type: none;
+    gap: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0px;
+  }
+  
+  .userinfo-info{
+      font-weight: bold;
+  }
+  
+  .userinfo-btn{ /*Uuendus*/
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .userinfo-btn-style{
+    border: 2px solid #39ff14;
+    color: white;
+    background-color: #39ff14;
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  
+  .userinfo-btn-style:hover{
+    border: 2px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .userinfo-select { /*Kustuta*/
+  }
+  
+  .userinfo-custom-select { /*Kustuta*/
+  }
+  
+  .userinfo-custom-arrow { /*Kustuta*/
+   
+  }
+  
+  .userinfo-custom-arrow::before, /*Kustuta*/
+  .userinfo-custom-arrow::after { /*Kustuta*/
+   
+  }
+  
+  .userinfo-custom-arrow::before{ /*Kustuta*/
+  
+  }
+  
+  .userinfo-custom-arrow::after{ /*Kustuta*/
+  
+  }
+  
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 2px;
+    text-decoration: none;
+    display: block;
+    border-radius: 6px;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .color-search{
+    padding: 6px 15px;
+    border-radius: 8px 0px 0px 8px;
+    border-right: 0px;
+    border-color: #39ff14;
+    font-size: 1em;
+  }
+  
+  .add-btn-style{ /*Lisa*/
+    border: 2px solid #39ff14;
+    color: white;
+    background-color: #39ff14;
+    padding: 6px 15px;
+    border-radius: 0px 8px 8px 0px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  
+  .add-btn-style:hover{ /*Lisa*/
+    border: 2px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 6px 15px;
+    border-radius: 0px 8px 8px 0px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  
+  
+  
+  @media (max-width: 35em) { /*Lisa*/
+    .userpage-menu{
+      padding-top: 0.15em;
+      padding-bottom: 0px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      gap: 0.25em;
+      padding-bottom: 0.15em;
+      font-size: 0.92em;
+    }
+  
+    .userpage-menu-text:hover {
+        color:  #39ff14;
+        cursor: pointer;
+    }
+  
+    .userinfo-background{
+      background-color: #e2e2e2;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 0.5em;
+    }
+  
+    .userinfo{
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      border-radius: 6px;
+      padding: 0.5em;
+    }
+  
+    .userinfo-header{
+      font-size: 1em;
+      font-weight: bold;
+      text-decoration: underline;
+      text-decoration-color: #39ff14;
+      text-underline-offset: 0.25em;
+      text-decoration-thickness: 0.2em;
+      padding-bottom: 1%;
+    } 
+  
+    .text{
+      font-size: 0.6em;
+    }
+  
+    .userinfo-info{
+      font-weight: bold;
+      font-size: 0.6em;
+    }
+  
+    .userinfo-btn-style{
+      border: 1px solid #39ff14;
+      color: white;
+      background-color: #39ff14;
+      padding: 2px 4px;
+      border-radius: 8px;
+      font-size: 0.6em;
+      font-weight: bold;
+      width: 9em;
+      text-align: center;
+    }
+  
+    .userinfo-btn-style:hover{
+      border: 1px solid #39ff14;
+      color: #39ff14;
+      background-color: white;
+      padding: 2px 4px;
+      border-radius: 8px;
+      font-size: 0.6em;
+      font-weight: bold;
+      cursor: pointer;
+      width: 9em;
+      text-align: center;
+    }
+  
+    .printerinfo-color{
+      background-color: #EF3340;
+      color: white;
+      border-radius: 6px;
+      padding: 1px;
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: auto;
+      font-weight: bold;
+      font-size: 0.6em;
+    }
+  
+    .dropdown-content a {
+      color: black;
+      padding: 1px;
+      text-decoration: none;
+      display: block;
+      border-radius: 6px;
+      font-size: 0.6em;
+    }
+    
+    .color-search{
+      padding: 2px 4px;
+      border-radius: 8px 8px 0px 0px;
+      border-width: thin;
+      font-size: 0.6em;
+      width: 4em;
+      width: 9em;
+    }
+  
+    .userinfo-btn{ 
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .add-btn-style{
+      border: 1px solid #39ff14;
+      color: white;
+      background-color: #39ff14;
+      padding: 2px 4px;
+      border-radius: 0px 0px 8px 8px;
+      font-size: 0.6em;
+      font-weight: bold;
+      width: 9em;
+      text-align: center;
+    }
+  
+    .add-btn-style:hover{
+      border: 1px solid #39ff14;
+      color: #39ff14;
+      background-color: white;
+      padding: 2px 4px;
+      border-radius: 0px 0px 8px 8px;
+      font-size: 0.6em;
+      font-weight: bold;
+      cursor: pointer;
+      width: 9em;
+      text-align: center;
+    }
+  
+    .wrap{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1px;
+    }
+  
+  }

@@ -1,0 +1,471 @@
+.kustuta-ära-header{
+    padding: 50px;
+    background-color: black;
+}
+  
+.signal{
+ color: red;
+}
+
+.printerinfo-color{
+  background-color: #EF3340;
+  color: white;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.userpage-menu{ /*Uuendus*/ 
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25em;
+    padding-bottom: 0.15em;
+    padding-top: 0.15em;
+    padding-left: 1em;  
+}
+  
+.userpage-menu-list{ /*Kustuta ära*/ 
+}
+  
+.userpage-menu-text:hover {
+    color:  #39ff14;
+    cursor: pointer;
+}
+
+.userinfo-background{
+    background-color: #e2e2e2;
+    padding-left: 8em;
+    padding-right: 8em;
+    padding-top: 1em;
+}
+
+.userinfo{
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 6px;
+    padding: 1em;
+}
+
+.userinfo-header{
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #39ff14;
+    text-underline-offset: 0.5em;
+    text-decoration-thickness: 0.25em;
+    padding-bottom: 2.5%;
+}
+
+.NewOrder{ /*Uuendus*/ 
+    border-radius: 6px;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.NewOrder-3DFail{ /*Uuendus*/ 
+    background-color: blue;
+    border-radius: 6px;
+    width: 200px;
+    height: 200px;
+    color: white;
+    text-align: center;
+}
+
+.color-amount-extra{ /*Lisa*/ 
+  padding-left: 1em;
+  padding-right: 0.5em;
+}
+
+.colors-ampunt-extra-make{ /*Lisa*/ 
+  padding-left: 1em;
+  padding-right: 0.5em;
+}
+
+.userpage-menu-list{
+  list-style: none;
+}
+
+.offer{ /*Lisa*/ 
+    padding-left: 1em;
+    padding-right: 0.5em;
+}
+
+.userinfo-list{ /*Kustuta ära*/ 
+}
+  
+  .userinfo-info{
+      font-weight: bold;
+  }
+  
+  .userinfo-btn{
+      margin-left: auto;
+  }
+
+  .order-special{
+    list-style-type: none;
+    padding-bottom: 0.0em;
+    margin-bottom: 0px;
+}
+
+.offer-time{ /*Uuendus*/ 
+    padding: 4px 4px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+}
+
+.userinfo-btn-style{
+    border: 2px solid #39ff14;
+    color: white;
+    background-color: #39ff14;
+    padding: 4px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+  .userinfo-btn-style:hover{
+    border: 2px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 4px 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+.taimer{
+    color: red;
+}
+
+.btn-image {
+    border: 2px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 5px 13px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.MyOrder{ /*Uuendus*/
+  border-radius: 6px;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+.MyOrder-3DFail{ /*Lisa*/
+  background-color: blue;
+  border-radius: 6px;
+  width: 200px;
+  height: 200px;
+  color: white;
+  text-align: center;
+}
+
+.notActive-Main{ /*Lisa*/
+  color: red;
+  font-size: 2em;
+}
+
+.notActive-Additional{ /*Lisa*/
+  color: red;
+  font-size: 1em;
+}
+
+.DD{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+@media (max-width: 35em) { /*Lisa*/
+  .userpage-menu{
+    padding-top: 0.15em;
+    padding-bottom: 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25em;
+    padding-bottom: 0.15em;
+    font-size: 0.92em;
+  }
+    
+  .userpage-menu-text:hover {
+      color:  #39ff14;
+      cursor: pointer;
+  }
+
+  .userinfo-background{
+    background-color: #e2e2e2;
+    padding-left: 0em;
+    padding-right: 0em;
+    padding-top: 0.5em;
+  }
+
+  .userinfo{
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 6px;
+    padding: 0.5em;
+  }
+
+  .userinfo-header{
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #39ff14;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 0.2em;
+    padding-bottom: 1%;
+  }
+
+  .NewOrder{
+    border-radius: 6px;
+    padding: 0.5em;
+    display: grid;
+    grid-template-areas:
+    'one four four'
+    'two two three';
+  }
+
+  .NewOrder-3DFail:nth-child(1){
+    grid-area: one;
+    background-color: blue;
+    border-radius: 6px;
+    width: 75px;
+    height: 75px;
+    color: white;
+    font-size: 0.6em;
+  }
+
+  .color-amount-extra:nth-child(2){
+    grid-area: two;
+    padding-top: 1em;
+    padding-left: 0em;
+    padding-right: 0em;
+    font-size: 0.6em;
+  }
+
+  .color-amount-extra{
+    display: grid;
+    grid-template-areas:
+    'üks kaks' 
+    'kolm neli'
+    'viis viis'
+    'kuus kuus'
+    'kuus kuus';
+  }
+
+  .üks:nth-child(1){
+    grid-area: üks;
+  }
+
+  .userinfo-info:nth-child(2){
+    grid-area: kaks;
+  }
+
+  .kolm:nth-child(3){
+    grid-area: kolm;
+  }
+
+  .userinfo-info:nth-child(4){
+    grid-area: neli;
+  }
+
+  .viis:nth-child(5){
+    grid-area: viis;
+  }
+
+  .kuus:nth-child(6){
+    grid-area: kuus;
+  }
+
+
+  .offer:nth-child(3){
+    grid-area: three;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .offer-time{ 
+    padding: 2px 2px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    margin-bottom: 0.25em;
+    width: 9em;
+    border-width: thin;
+  } 
+
+  .userinfo-btn-style{
+    border: 1px solid #39ff14;
+    color: white;
+    background-color: #39ff14;
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    font-weight: bold;
+    width: 9em;
+    text-align: center;
+  }
+
+  .userinfo-btn-style:hover{
+    border: 1px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    font-weight: bold;
+    cursor: pointer;
+    width: 9em;
+    text-align: center;
+  }
+
+  .taimer:nth-child(4){
+    grid-area: four;
+    color: red;
+    padding-right: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    font-size: 1.5em;
+  }
+
+
+
+
+  .MyOrder{ 
+    border-radius: 6px;
+    padding: 0.5em;
+    display: grid;
+    grid-template-areas:
+    'AA BB BB BB'
+    'CC CC CC CC'
+    'DD DD DD DD'
+    'EE EE EE EE';
+  }
+  
+  .MyOrder-3DFail:nth-child(1){
+    grid-area: AA;
+    background-color: blue;
+    border-radius: 6px;
+    width: 75px;
+    height: 75px;
+    color: white;
+    font-size: 0.6em;
+  }
+
+  
+
+  .colors-ampunt-extra-make:nth-child(2){ 
+    grid-area: BB;
+    padding-top: 1em;
+    padding-left: 0em;
+    padding-right: 0em;
+    font-size: 0.6em;
+  }
+
+  .colors-ampunt-extra-make{
+    display: grid;
+    grid-template-areas:
+    'üks kaks' 
+    'kolm neli'
+    'viis viis'
+    'kuus kuus'
+    'kuus kuus';
+  }
+
+  .userinfo-info{
+    font-weight: bold;
+    font-size: 0.6em;
+  }
+
+  .word{
+    font-size: 0.6em;
+  }
+
+  .colors-ampunt-extra-make:nth-child(3){ 
+    grid-area: CC;
+    padding-left: 0em;
+    padding-right: 0.5em;
+  }
+
+  .DD:nth-child(4){ 
+    grid-area: DD;
+  }
+
+  .EE:nth-child(5){ 
+    grid-area: EE;
+  }
+
+  .btn-image {
+    border: 1px solid #39ff14;
+    color: #39ff14;
+    background-color: white;
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    font-weight: bold;
+    width: 9em;
+    text-align: center;
+  }
+
+  .btn-image:hover {
+    border: 1px solid #39ff14;
+    color: white;
+    background-color: #39ff14;;
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    font-weight: bold;
+    width: 9em;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .signal{
+    color: red;
+    font-size: 0.6em;
+  }
+
+  .printerinfo-color{
+    background-color: #EF3340;
+    color: white;
+    border-radius: 6px;
+    padding: 1px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .notActive-Main{ 
+    color: red;
+    font-size: 1em;
+  }
+  
+  .notActive-Additional{ 
+    color: red;
+    font-size: 0.6em;
+  }  
+   
+}
+
+
+
+
+  
+  
