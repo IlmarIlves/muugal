@@ -41,7 +41,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ConditionModeEnum: "AND" | "OR"
   MatchModeEnum: "CONTAINS" | "EXACT" | "STARTS_WITH"
-  UserRoleEnum: "ADMIN" | "USER"
+  UserRoleEnum: "ADMIN" | "BUYER" | "OFFERER" | "USER"
   UserStatusEnum: "ACTIVE" | "DEACTIVATED" | "DISABLED"
 }
 

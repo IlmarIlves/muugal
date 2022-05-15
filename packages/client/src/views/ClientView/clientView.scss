@@ -1,0 +1,128 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.printerinfo-color {
+  background-color: #ef3340;
+  color: white;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.clientinfo-background {
+  background-color: #e2e2e2;
+  padding-left: 8em;
+  padding-right: 8em;
+  padding-top: 1em;
+  height: 100%;
+}
+
+.userinfo {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 6px;
+  padding: 1em;
+}
+
+.userinfo-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 0.5em;
+  text-decoration-thickness: 0.25em;
+  padding-bottom: 2.5%;
+}
+
+.userinfo-list {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  list-style-type: none;
+  gap: 0.5em;
+  padding-bottom: 0.25em;
+  margin-bottom: 0px;
+}
+
+.userinfo-info {
+  font-weight: bold;
+}
+
+.userinfo-btn {
+  margin-left: auto;
+}
+
+.userinfo-btn-style {
+  border: 2px solid #39ff14;
+  color: white;
+  background-color: #39ff14;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.userinfo-btn-style:hover {
+  border: 2px solid #39ff14;
+  color: #39ff14;
+  background-color: white;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.userinfo-select {
+  font-size: 0.75rem;
+  padding: 0.5em 2em 0.5em 0.75em;
+  background: #39ff14;
+  color: white;
+  border: 0;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.userinfo-custom-select {
+  position: relative;
+  margin-bottom: auto;
+}
+
+.userinfo-custom-arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  background: #39ff14;
+  height: 100%;
+  width: 2em;
+  pointer-events: none;
+  border-radius: 0px 0px 10px 0px;
+}
+
+.userinfo-custom-arrow::before,
+.userinfo-custom-arrow::after {
+  --size: 0.4em;
+
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.userinfo-custom-arrow::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid white;
+  top: 35%;
+}
+
+.userinfo-custom-arrow::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid white;
+  top: 65%;
+}

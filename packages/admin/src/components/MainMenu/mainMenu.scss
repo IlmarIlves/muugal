@@ -1,4 +1,111 @@
-.items {
-  padding-top: 20px;
-  padding-bottom: 20px;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #e2e2e2;
+}
+
+/*menüüriba*/
+.menu-bar {
+  background-color: black;
+}
+
+.GreenLine {
+  background-color: #39ff14;
+  padding-top: 5px;
+}
+
+.header {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: black;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+/*logo*/
+.company-name {
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.logo {
+  background-image: url("logo2.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  width: 150px;
+  height: 70px;
+}
+
+.login-text {
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+.order-text {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+.price-text {
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+.order-text:hover {
+  color: #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 1em;
+  text-decoration-thickness: 0.5em;
+}
+
+.login-text:hover {
+  color: #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 1em;
+  text-decoration-thickness: 0.5em;
+}
+
+.price-text:hover {
+  color: #39ff14;
+  text-decoration: underline;
+  text-decoration-color: #39ff14;
+  text-underline-offset: 1em;
+  text-decoration-thickness: 0.5em;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  text-align: center;
+  list-style-type: none;
+}
+
+.admin {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  padding-left: 2em;
 }

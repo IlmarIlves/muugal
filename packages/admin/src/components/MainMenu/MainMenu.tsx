@@ -34,7 +34,18 @@ export interface MainMenuItemProps {
 }
 
 export const MainMenuItem: React.FC<MainMenuItemProps> = ({ item, active }) => (
-  <div>
-    <Link to={item.url}>{item.title}</Link>
+  <div className="menu-bar">
+    <div className="GreenLine">
+      <div className="header">
+        <div className="logo-container">
+          <span className="company-name">
+            <div className="logo"></div>
+          </span>
+          <div className="admin">ADMIN</div>
+        </div>
+
+        <Link to={item.url}>{item.title}</Link>
+      </div>
+    </div>
   </div>
 );

@@ -10,6 +10,8 @@ import { OrderView } from "./views/OrderView/OrderView";
 import { gql } from "@apollo/client";
 import { useViewerQuery } from "./generated/graphql";
 import { RegisterView } from "./views/RegisterView/RegisterView";
+import { ClientView } from "./views/ClientView/ClientView";
+import { ActiveOrderView } from "./views/ActiveOrderView/ActiveOrderView";
 
 gql`
   query Viewer {
@@ -33,6 +35,8 @@ export const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<LandingPageView />} />
           <Route path="/login" element={<LoginView />} />
+          <Route path="/client" element={<ClientView />} />
+          <Route path="/active-order" element={<ActiveOrderView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/our-price-offer" element={<OurPriceOfferView />} />
           <Route path="/order" element={<OrderView />} />

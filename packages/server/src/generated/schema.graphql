@@ -270,6 +270,8 @@ type User {
 
 enum UserRoleEnum {
   ADMIN
+  BUYER
+  OFFERER
   USER
 }
 

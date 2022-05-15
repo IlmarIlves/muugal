@@ -14,7 +14,7 @@ export function getUserRegisterEmailContents(info: GetUserRegisterEmailParameter
     htmlMessage: html`
       <p><strong>Hello ${info.name}!</strong></p>
       <br />
-      <p>You have registered</p>
+      <p>You have registered </p>
       <br />
     `,
   };

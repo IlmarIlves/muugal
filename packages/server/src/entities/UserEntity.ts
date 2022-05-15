@@ -17,6 +17,8 @@ export interface RegisterUserInfo {
 export enum UserRole {
     USER = "USER",
     ADMIN = "ADMIN",
+    BUYER = "BUYER",
+    OFFERER = "OFFERER",
 }
 
 export enum UserStatus {
