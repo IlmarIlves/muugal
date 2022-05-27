@@ -1,0 +1,33 @@
+.userpage-menu {
+    padding-top: 0.25em;
+    padding-bottom: 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: white;
+  }
+  
+  .userpage-menu-list {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    list-style-type: none;
+    gap: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0px;
+  }
+  
+  .portfolio-list {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    list-style-type: none;
+    justify-content: space-between;
+    gap: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0px;
+    justify-content: space-between;
+  }
+  
+  .userpage-menu-text:hover {
+    color: #39ff14;
+    cursor: pointer;
+  }

@@ -1,19 +1,10 @@
 import React from "react";
+import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import "./instructionsView.scss";
 
 export const InstructionsView: React.FC = () => (
   <>
-    <div className="userpage-menu">
-      <ul className="userpage-menu-list">
-        <li className="userpage-menu-text">Profile</li>
-        <li>|</li>
-        <li className="userpage-menu-text">Active Orders</li>
-        <li>|</li>
-        <li className="userpage-menu-text">Portfolio</li>
-        <li>|</li>
-        <li className="userpage-menu-text">Instructions</li>
-      </ul>
-    </div>
+   <ProfileHeader />
 
     <div className="portfolio-background">
       <div className="userinfo">

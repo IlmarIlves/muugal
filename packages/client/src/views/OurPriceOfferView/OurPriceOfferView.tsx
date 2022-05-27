@@ -23,37 +23,37 @@ export const OurPriceOfferView: React.FC = ({}) => {
 
        <div className="priceoffer-three-columns">
         <div className={"information"}>
-         <ul class="orderinfo-list">
+         <ul className="orderinfo-list">
           <li>
            <div>
-            <ul class="spc-orderinfo-list">
+            <ul className="spc-orderinfo-list">
              <li>
               <p>Kogus:</p> 
              </li>
              <li>
-              <p class="bold-order-info">2</p>
+              <p className="bold-order-info">2</p>
              </li>               
             </ul>
            </div>
                       
            <div>
-            <ul class="spc-orderinfo-list">
+            <ul className="spc-orderinfo-list">
              <li>
               <p>Valmimisaeg:</p> 
              </li>
              <li>
-              <p class="bold-order-info">2 päeva</p>
+              <p className="bold-order-info">2 päeva</p>
              </li>                
             </ul>
            </div>
                       
            <div>
-            <ul class="spc-orderinfo-list">
+            <ul className="spc-orderinfo-list">
              <li>
               <p>Hinnapakkumine:</p> 
              </li>
              <li>
-              <p class="bold-order-info">20eurot</p>
+              <p className="bold-order-info">20eurot</p>
              </li>     
             </ul>
            </div>

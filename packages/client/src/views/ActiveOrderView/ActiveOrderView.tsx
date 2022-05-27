@@ -1,19 +1,15 @@
 import React from "react";
+import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import "./activeOrderView.scss";
 
-export const ActiveOrderView: React.FC = () => (
+export const ActiveOrderView: React.FC = () => {
+
+
+
+
+  return(
   <>
-    <div className="userpage-menu">
-      <ul className="userpage-menu-list">
-        <li className="userpage-menu-text">Profile</li>
-        <li>|</li>
-        <li className="userpage-menu-text">Active Orders</li>
-        <li>|</li>
-        <li className="userpage-menu-text">Portfolio</li>
-        <li>|</li>
-        <li className="userpage-menu-text">Instructions</li>
-      </ul>
-    </div>
+   <ProfileHeader />
 
     <div className="userinfo-background">
       <div className="userinfo">
@@ -210,5 +206,5 @@ export const ActiveOrderView: React.FC = () => (
         </div>
       </div>
     </div>
-  </>
-);
+  </>)
+};
