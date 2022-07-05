@@ -5,12 +5,14 @@ import { Header } from "../../components/Header/Header";
 import { useLoginMutation } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
 import "./registerView.scss";
+import { validateSamePassword } from "../../validators/validateSamePassword";
 
 interface RegisterFormValues {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  passwordConfirm: string;
 }
 
 gql`
@@ -30,7 +32,7 @@ gql`
 export const RegisterView: React.FC = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState } = useForm<RegisterFormValues>();
+  const { register, handleSubmit, formState, watch } = useForm<RegisterFormValues>();
 
   const [login, loginResult] = useLoginMutation({
     // refetchQueries: ["Viewer"],
@@ -38,7 +40,7 @@ export const RegisterView: React.FC = () => {
   });
 
   // login user on submit
-  const onSubmit: SubmitHandler<RegisterFormValues> = async ({ firstName, lastName, email, password }) => {
+  const onSubmit: SubmitHandler<RegisterFormValues> = async ({ email, password }) => {
     const response = await login({
       variables: { email, password },
     });
@@ -47,6 +49,8 @@ export const RegisterView: React.FC = () => {
       navigate("/");
     }
   };
+
+  const otherPassword = watch("password");
 
   return (
     <>
@@ -66,7 +70,11 @@ export const RegisterView: React.FC = () => {
           <input className={"input"} type={"password"} {...register("password")} />
           {/* {errors.password && <p>{errors.password.message}</p>} */}
           <label>Confirm password</label>
-          <input className={"input"} type={"password"} {...register("password")} />
+          <input
+            className={"input"}
+            type={"password"}
+            {...register("passwordConfirm", { validate: validateSamePassword(otherPassword) })}
+          />
           {/* {errors.password && <p>{errors.password.message}</p>} */}
           <input className={"submit"} type="submit" value="Register" />
         </form>

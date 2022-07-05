@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Viewer, ViewerQuery, ViewerQueryResult } from "../../generated/graphql";
+import { ViewerQuery } from "../../generated/graphql";
 import "./header.scss";
 
 export interface HeaderProps {
@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
 
             <div id="overlay">
               <ul className={"login-container"}>
-                {viewer?.viewer === null ? (
+                {viewer?.viewer == null ? (
                   <li className={"login-text"} onClick={() => navigate("/login")}>
                     LOG IN
                   </li>

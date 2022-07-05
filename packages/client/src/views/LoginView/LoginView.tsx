@@ -5,6 +5,9 @@ import { Header } from "../../components/Header/Header";
 import { useLoginMutation, useViewerQuery } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
 import "./loginView.scss";
+import { getFieldErrors } from "../../services/getFieldErrors";
+import { isSystemError } from "../../services/isSystemError";
+import { ErrorView } from "../ErrorView/ErrorView";
 
 interface LoginFormValues {
   email: string;
@@ -28,12 +31,20 @@ gql`
 export const LoginView: React.FC = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState } = useForm<LoginFormValues>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>();
 
   const [login, loginResult] = useLoginMutation({
     // refetchQueries: ["Viewer"],
     // awaitRefetchQueries: true,
   });
+
+  const fieldErrors = getFieldErrors(loginResult.error, errors);
+
+  console.log(fieldErrors);
 
   // login user on submit
   const onSubmit: SubmitHandler<LoginFormValues> = async ({ email, password }) => {
@@ -46,6 +57,11 @@ export const LoginView: React.FC = () => {
     }
   };
 
+  // handle system error
+  if (isSystemError(loginResult.error)) {
+    return <ErrorView title="Login failed" error={loginResult.error} />;
+  }
+
   return (
     <>
       <Header />
@@ -53,10 +69,10 @@ export const LoginView: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={"form"}>
           <label>Add Username</label>
           <input className={"input"} type={"email"} {...register("email")} />
-          {/* {errors.email && <p>{errors.email.message}</p>} */}
+          {fieldErrors.email && <div>{fieldErrors.email && fieldErrors.email.message}</div>}
           <label>Password</label>
           <input className={"input"} type={"password"} {...register("password")} />
-          {/* {errors.password && <p>{errors.password.message}</p>} */}
+          {fieldErrors.password && <div>{fieldErrors.password && fieldErrors.password.message}</div>}
           <input className={"submit"} type="submit" value="Log in" />
           <div className={"register"}>
             <span onClick={() => navigate("/register")}>Sign up now</span>

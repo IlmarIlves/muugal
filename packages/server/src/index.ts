@@ -21,7 +21,7 @@ const start = async () => {
 
 	const cors = require('cors')
 
-	app.use(cors({origin: 'localhost:3000', credentials: true}))
+	app.use(cors({origin: 'http://localhost:3000', credentials: true}))
 	
 	var MySQLStore = require('express-mysql-session')(session);
 
@@ -57,7 +57,7 @@ const start = async () => {
 
 	app.use(cookieParser());
 	
-	app.use(graphqlUploadExpress({ maxFileSize: 1000000000, maxFiles: 2 }));
+	app.use(graphqlUploadExpress({ maxFileSize: 50000, maxFiles: 2 }));
 
 	app.use(function(req, res, next){
     res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads
