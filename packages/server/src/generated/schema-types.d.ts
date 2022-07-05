@@ -41,6 +41,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ConditionModeEnum: "AND" | "OR"
   MatchModeEnum: "CONTAINS" | "EXACT" | "STARTS_WITH"
+  OrderProgressStatusEnum: "PAID" | "PAYMENT" | "RECEIVED" | "SENT"
   UserRoleEnum: "ADMIN" | "BUYER" | "OFFERER" | "USER"
   UserStatusEnum: "ACTIVE" | "DEACTIVATED" | "DISABLED"
 }
@@ -134,6 +135,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   PaginationInput: NexusGenInputs['PaginationInput'];
   ConditionModeEnum: NexusGenEnums['ConditionModeEnum'];
   MatchModeEnum: NexusGenEnums['MatchModeEnum'];
+  OrderProgressStatusEnum: NexusGenEnums['OrderProgressStatusEnum'];
   UserRoleEnum: NexusGenEnums['UserRoleEnum'];
   UserStatusEnum: NexusGenEnums['UserStatusEnum'];
 }
@@ -197,6 +199,7 @@ export interface NexusGenFieldTypes {
     logout: boolean; // Boolean!
     order: NexusGenRootTypes['Order']; // Order!
     register: NexusGenRootTypes['User']; // User!
+    updateOrderStatus: NexusGenRootTypes['User']; // User!
   }
   Order: { // field return type
     additionalInfo: string; // String!
@@ -278,6 +281,12 @@ export interface NexusGenArgTypes {
       lastName?: string | null; // String
       password?: string | null; // String
     }
+    updateOrderStatus: { // args
+      email?: string | null; // String
+      firstName?: string | null; // String
+      lastName?: string | null; // String
+      userId?: string | null; // ID
+    }
   }
 }
 
@@ -290,7 +299,7 @@ export type NexusGenObjectNames = "Admin" | "AdminOrder" | "AdminOrders" | "Admi
 
 export type NexusGenInputNames = "AdminUsersFilterInput" | "MatchInput" | "PaginationInput";
 
-export type NexusGenEnumNames = "ConditionModeEnum" | "MatchModeEnum" | "UserRoleEnum" | "UserStatusEnum";
+export type NexusGenEnumNames = "ConditionModeEnum" | "MatchModeEnum" | "OrderProgressStatusEnum" | "UserRoleEnum" | "UserStatusEnum";
 
 export type NexusGenInterfaceNames = never;
 

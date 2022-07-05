@@ -2,6 +2,14 @@ import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, BaseEntity} from "typ
 import { fieldLength } from "../constants";
 import { UserEntity } from "./UserEntity"
 
+export enum OrderProgressStatus {
+    PAYMENT = "PAYMENT",
+    PAID = "PAID",
+    SENT = "SENT",
+    RECEIVED = "RECEIVED",
+  }
+
+
 @Entity({ name: 'order' })
 export class OrderEntity extends BaseEntity{
     @PrimaryGeneratedColumn("uuid")
