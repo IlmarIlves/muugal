@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Index, OneToMany, CreateDateColumn, UpdateDateColumn} from "typeorm";
 import { generateRandomString } from "../services/generateRandomString";
 import { getKeyedHash } from "../services/getKeyedHash";
 import { fieldLength } from "../../lib/validate/constants";
@@ -75,6 +75,12 @@ export class UserEntity extends BaseEntity {
 
     @OneToMany(() => OrderEntity, file => file.user)
     file!: Promise<OrderEntity[]>;
+
+    @CreateDateColumn()
+    createdDate!: Date;
+  
+    @UpdateDateColumn()
+    updatedDate!: Date;
 
     static async register(info: RegisterUserInfo): Promise<UserEntity> {
         const passwordSalt = generateRandomString(fieldLength.hash);

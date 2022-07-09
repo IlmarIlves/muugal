@@ -27,25 +27,13 @@ export default mutationField("updateOrderStatus", {
         );
     }
 
-    if (email !== undefined && email !== null) {
-      user.email = email;
-    }
-
-    if (firstName !== undefined && firstName !== null) {
-      user.firstName = firstName;
-    }
-
-    if (lastName !== undefined && lastName !== null) {
-      user.lastName = lastName;
-    }
-
-    if (telephone !== undefined && telephone !== null) {
-      user.telephone = telephone;
-    }
-
-    if (packageMachineLocation !== undefined && packageMachineLocation !== null) {
-      user.packageMachineLocation = packageMachineLocation;
-    }
+  
+    user.email = email;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.telephone = telephone;
+    user.packageMachineLocation = packageMachineLocation;
+    
 
     await user.save();
 

@@ -203,6 +203,7 @@ export interface NexusGenFieldTypes {
     logout: boolean; // Boolean!
     order: NexusGenRootTypes['Order']; // Order!
     register: NexusGenRootTypes['User']; // User!
+    updateOrderPrice: NexusGenRootTypes['Order']; // Order!
     updateOrderStatus: NexusGenRootTypes['User']; // User!
   }
   Order: { // field return type
@@ -288,6 +289,12 @@ export interface NexusGenArgTypes {
       firstName?: string | null; // String
       lastName?: string | null; // String
       password?: string | null; // String
+    }
+    updateOrderPrice: { // args
+      finishedInDays?: number | null; // Int
+      lastOffererUserId?: number | null; // Int
+      orderId?: string | null; // ID
+      priceInCents?: number | null; // Int
     }
     updateOrderStatus: { // args
       email?: string | null; // String

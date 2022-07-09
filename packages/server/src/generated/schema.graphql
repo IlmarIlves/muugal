@@ -202,6 +202,21 @@ type Mutation {
   ): User!
 
   """Updates user status"""
+  updateOrderPrice(
+    """Order finished in days"""
+    finishedInDays: Int
+
+    """Order price"""
+    lastOffererUserId: Int
+
+    """Order identifier"""
+    orderId: ID
+
+    """Order price"""
+    priceInCents: Int
+  ): Order!
+
+  """Updates user status"""
   updateOrderStatus(
     """User email"""
     email: String

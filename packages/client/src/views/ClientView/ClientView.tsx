@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../../components/Header/Header";
+import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import { useViewerQuery } from "../../generated/graphql";
 import "./clientView.scss";
 
@@ -16,12 +18,14 @@ export const ClientView: React.FC = () => {
 
   const viewer = data?.viewer;
 
-  if(viewer === null) {
+  if (viewer === null) {
     navigate("/");
   }
 
   return (
     <>
+      <Header isImageShown={false} />
+      <ProfileHeader />
       <div className="clientinfo-background">
         <div className="userinfo">
           <h2 className="userinfo-header">Kasutajateave</h2>

@@ -1,10 +1,13 @@
 import React from "react";
+import { Header } from "../../components/Header/Header";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import "./portfolioView.scss";
 
 export const PortFolioView: React.FC = () => (
   <>
- <ProfileHeader />
+    <Header isImageShown={false} />
+
+    <ProfileHeader />
 
     <div className="portfolio-background">
       <div className="userinfo">

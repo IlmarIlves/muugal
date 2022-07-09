@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { fieldLength } from "../constants";
 import { UserEntity } from "./UserEntity";
 
@@ -38,7 +38,7 @@ export class PaymentEntity extends BaseEntity {
   @CreateDateColumn()
   createdDate!: Date;
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedDate!: Date;
 
   @ManyToOne(() => UserEntity, (user) => user.payments)

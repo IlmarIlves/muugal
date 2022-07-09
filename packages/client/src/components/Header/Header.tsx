@@ -5,9 +5,10 @@ import "./header.scss";
 
 export interface HeaderProps {
   viewer?: ViewerQuery | undefined;
+  isImageShown?: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC<HeaderProps> = ({ isImageShown = true }) => {
   const { data, loading, error } = useViewerQuery();
 
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export const Header: React.FC<HeaderProps> = () => {
                   </li>
                 ) : (
                   <span className={"login-text"} onClick={() => navigate("/client")}>
-                    {viewer?.viewer.firstName}
+                    {viewer?.viewer?.firstName}
                   </span>
                 )}
 
@@ -73,9 +74,11 @@ export const Header: React.FC<HeaderProps> = () => {
           </div>
         </div>
 
-        <div className="pineapple">
-          <span className="Find-Print-Repeat">FIND PRINT REPEAT</span>
-        </div>
+        {isImageShown ? (
+          <div className="pineapple">
+            <span className="Find-Print-Repeat">FIND PRINT REPEAT</span>
+          </div>
+        ) : null}
         {/* <!--Log Out mobla versioon--> */}
       </>
 
