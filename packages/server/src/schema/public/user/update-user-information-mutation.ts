@@ -10,10 +10,12 @@ export default mutationField("updateOrderStatus", {
     email: stringArg({ description: "User email" }),
     firstName: stringArg({ description: "User email" }),
     lastName: stringArg({ description: "User email" }),
+    telephone: stringArg({ description: "User telephone" }),
+    packageMachineLocation: stringArg({ description: "User package machine location" }),
   },
   resolve: async (_parent, args, { viewer }) => {
  
-    const { userId, email, firstName, lastName } = args;
+    const { userId, email, firstName, lastName, telephone, packageMachineLocation } = args;
 
     // find order
     const user = await UserEntity.findOne({ where: { id: userId } });
@@ -35,6 +37,14 @@ export default mutationField("updateOrderStatus", {
 
     if (lastName !== undefined && lastName !== null) {
       user.lastName = lastName;
+    }
+
+    if (telephone !== undefined && telephone !== null) {
+      user.telephone = telephone;
+    }
+
+    if (packageMachineLocation !== undefined && packageMachineLocation !== null) {
+      user.packageMachineLocation = packageMachineLocation;
     }
 
     await user.save();

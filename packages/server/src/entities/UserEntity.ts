@@ -48,6 +48,13 @@ export class UserEntity extends BaseEntity {
     @Column({ type: "varchar", length: fieldLength.medium })
     lastName!: string;
 
+    @Index()
+    @Column({type: "varchar"})
+    telephone!: string
+
+    @Column({type: "varchar"})
+    packageMachineLocation!: string;
+
     @Column({ type: "varchar", length: fieldLength.hash, nullable: true })
     passwordSalt!: string | null;
   

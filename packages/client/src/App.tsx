@@ -19,6 +19,7 @@ gql`
       id
       firstName
       lastName
+      email
     }
   }
 `;

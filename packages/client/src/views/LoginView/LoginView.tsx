@@ -29,6 +29,8 @@ gql`
 `;
 
 export const LoginView: React.FC = () => {
+  const { data, loading, error } = useViewerQuery();
+
   const navigate = useNavigate();
 
   const {
@@ -38,13 +40,11 @@ export const LoginView: React.FC = () => {
   } = useForm<LoginFormValues>();
 
   const [login, loginResult] = useLoginMutation({
-    // refetchQueries: ["Viewer"],
-    // awaitRefetchQueries: true,
+    refetchQueries: ["viewer"],
+    awaitRefetchQueries: true,
   });
 
   const fieldErrors = getFieldErrors(loginResult.error, errors);
-
-  console.log(fieldErrors);
 
   // login user on submit
   const onSubmit: SubmitHandler<LoginFormValues> = async ({ email, password }) => {
@@ -53,7 +53,9 @@ export const LoginView: React.FC = () => {
     });
 
     if (response.data?.login) {
+      console.log(response.data?.login);
       navigate("/");
+      window.location.reload();
     }
   };
 

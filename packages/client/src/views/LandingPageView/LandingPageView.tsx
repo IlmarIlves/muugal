@@ -12,6 +12,10 @@ export const LandingPageView: React.FC = () => {
     return <div>loading</div>;
   }
 
+  if (error) {
+    return <div>error</div>;
+  }
+
   return (
     <>
       <Header viewer={data} />

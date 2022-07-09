@@ -1,14 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ViewerQuery } from "../../generated/graphql";
+import { useViewerQuery, ViewerQuery } from "../../generated/graphql";
 import "./header.scss";
 
 export interface HeaderProps {
   viewer?: ViewerQuery | undefined;
 }
 
-export const Header: React.FC<HeaderProps> = ({ viewer }) => {
+export const Header: React.FC<HeaderProps> = () => {
+  const { data, loading, error } = useViewerQuery();
+
   const navigate = useNavigate();
+
+  const viewer = data;
 
   return (
     <div className="menu-bar">
@@ -30,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
 
             <div id="overlay">
               <ul className={"login-container"}>
-                {viewer?.viewer == null ? (
+                {viewer?.viewer === null ? (
                   <li className={"login-text"} onClick={() => navigate("/login")}>
                     LOG IN
                   </li>
@@ -40,11 +44,13 @@ export const Header: React.FC<HeaderProps> = ({ viewer }) => {
                   </span>
                 )}
 
-                <li className={"order-text"} onClick={() => navigate("/order")}>
-                  ORDER
-                </li>
+                {viewer?.viewer !== null ? (
+                  <li className={"order-text"} onClick={() => navigate("/order")}>
+                    ORDER
+                  </li>
+                ) : null}
 
-                {viewer !== null ? (
+                {viewer?.viewer !== null ? (
                   <li className={"price-text"} onClick={() => navigate("/our-price-offer")}>
                     OUR PRICE OFFER
                   </li>
