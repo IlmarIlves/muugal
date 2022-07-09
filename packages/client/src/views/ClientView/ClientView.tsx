@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useViewerQuery } from "../../generated/graphql";
 import "./clientView.scss";
 
 export const ClientView: React.FC = () => {
+  const navigate = useNavigate();
+
+  // const firstName = useState(viewer?.firstName);
+  // const lastName = useState(viewer?.lastName);
+  // const email = useState(viewer?.email);
+  // const telephone = useState(viewer?.telephone);
+  // const packageMachineLocation = useState(viewer?.packageMachineLocation);
+
   const { data, loading, error } = useViewerQuery();
 
   const viewer = data?.viewer;
+
+  if(viewer === null) {
+    navigate("/");
+  }
 
   return (
     <>

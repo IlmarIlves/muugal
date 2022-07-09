@@ -29,7 +29,7 @@ gql`
 `;
 
 // TODO: implement pagination "show all"
-export const OrdersListView: React.FC<AdminViewProps> = ({ viewer }) => {
+export const OrdersListView: React.FC<AdminViewProps> = () => {
   const navigate = useNavigate();
 
   // parse filter url parameters
