@@ -35,7 +35,7 @@ export const ClientView: React.FC = () => {
                 <p>Email</p>
               </li>
               <li>
-                <p className="userinfo-info">{viewer?.id}</p>
+                <p className="userinfo-info">{viewer?.email}</p>
               </li>
               <li className="userinfo-btn">
                 <button className="userinfo-btn-style">Muuda</button>
@@ -49,7 +49,7 @@ export const ClientView: React.FC = () => {
                 <p>Telefon</p>
               </li>
               <li>
-                <p className="userinfo-info">54541010</p>
+                <p className="userinfo-info">{viewer?.telephone}</p>
               </li>
               <li className="userinfo-btn">
                 <button className="userinfo-btn-style">Muuda</button>
@@ -63,7 +63,7 @@ export const ClientView: React.FC = () => {
                 <p>Itella pakiautomaat</p>
               </li>
               <li>
-                <p className="userinfo-info">Ahtme Maxima</p>
+                <p className="userinfo-info">{viewer?.packageMachineLocation}</p>
               </li>
               <li className="userinfo-btn">
                 <button className="userinfo-btn-style">Muuda</button>
@@ -76,9 +76,9 @@ export const ClientView: React.FC = () => {
               <li>
                 <p>Salasõna</p>
               </li>
-              <li>
+              {/* <li>
                 <p className="userinfo-info">abjbkjka</p>
-              </li>
+              </li> */}
               <li className="userinfo-btn">
                 <button className="userinfo-btn-style">Muuda</button>
               </li>

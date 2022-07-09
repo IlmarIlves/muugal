@@ -212,6 +212,12 @@ type Mutation {
     """User email"""
     lastName: String
 
+    """User package machine location"""
+    packageMachineLocation: String
+
+    """User telephone"""
+    telephone: String
+
     """User identifier"""
     userId: ID
   ): User!
@@ -285,6 +291,8 @@ type User {
   firstName: String!
   id: ID!
   lastName: String!
+  packageMachineLocation: String!
+  telephone: String!
 
   """User status"""
   userStatus: UserStatusEnum!
@@ -305,4 +313,6 @@ enum UserStatusEnum {
 
 type Viewer {
   accessToken: String!
+  firstName: String!
+  lastName: String!
 }

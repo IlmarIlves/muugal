@@ -20,6 +20,8 @@ gql`
       firstName
       lastName
       email
+      telephone
+      packageMachineLocation
     }
   }
 `;

@@ -116,10 +116,14 @@ export interface NexusGenRootTypes {
     firstName: string; // String!
     id: string; // ID!
     lastName: string; // String!
+    packageMachineLocation: string; // String!
+    telephone: string; // String!
     userStatus: NexusGenEnums['UserStatusEnum']; // UserStatusEnum!
   }
   Viewer: { // root type
     accessToken: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
   }
   String: string;
   Int: number;
@@ -229,10 +233,14 @@ export interface NexusGenFieldTypes {
     firstName: string; // String!
     id: string; // ID!
     lastName: string; // String!
+    packageMachineLocation: string; // String!
+    telephone: string; // String!
     userStatus: NexusGenEnums['UserStatusEnum']; // UserStatusEnum!
   }
   Viewer: { // field return type
     accessToken: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
   }
 }
 
@@ -285,6 +293,8 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       firstName?: string | null; // String
       lastName?: string | null; // String
+      packageMachineLocation?: string | null; // String
+      telephone?: string | null; // String
       userId?: string | null; // ID
     }
   }

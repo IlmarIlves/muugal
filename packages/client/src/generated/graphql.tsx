@@ -19,10 +19,29 @@ export type Scalars = {
 
 export type Admin = {
   __typename?: 'Admin';
+  /** Admin order by id */
+  order: AdminOrder;
+  /** List of users */
+  orders: AdminOrders;
+  /** Admin payment by id */
+  payment: AdminPayment;
+  /** List of users */
+  payments: AdminPayments;
   /** Admin user by id */
   user: AdminUser;
   /** List of users */
   users: AdminUsers;
+};
+
+
+export type AdminOrderArgs = {
+  orderId?: InputMaybe<Scalars['ID']>;
+  priceInCents?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type AdminPaymentArgs = {
+  paymentId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -35,6 +54,50 @@ export type AdminUsersArgs = {
   filter?: InputMaybe<AdminUsersFilterInput>;
   match?: InputMaybe<MatchInput>;
   pagination?: InputMaybe<PaginationInput>;
+};
+
+export type AdminOrder = {
+  __typename?: 'AdminOrder';
+  /** User role */
+  additionalInfo: Scalars['String'];
+  /** User role */
+  amount: Scalars['Int'];
+  /** User role */
+  colors: Scalars['String'];
+  data: Scalars['String'];
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  mimeType: Scalars['String'];
+  telephone: Scalars['String'];
+  userId: Scalars['ID'];
+};
+
+export type AdminOrders = {
+  __typename?: 'AdminOrders';
+  /** List of paginated orders */
+  orders: Array<AdminOrder>;
+};
+
+export type AdminPayment = {
+  __typename?: 'AdminPayment';
+  /** Payment amount */
+  amount: Scalars['Int'];
+  /** Payment currencyCode */
+  currencyCode: Scalars['String'];
+  /** Payment currencyCode */
+  emailUsedForPayment: Scalars['String'];
+  /** Payment unique id */
+  id: Scalars['ID'];
+  /** Payment user unique id */
+  stripeSessionId: Scalars['String'];
+  /** Payment user unique id */
+  userId: Scalars['ID'];
+};
+
+export type AdminPayments = {
+  __typename?: 'AdminPayments';
+  /** List of paginated orders */
+  payments: Array<AdminPayment>;
 };
 
 export type AdminUser = {
@@ -106,6 +169,8 @@ export type Mutation = {
   order: Order;
   /** Registers new user */
   register: User;
+  /** Updates user status */
+  updateOrderStatus: User;
 };
 
 
@@ -122,7 +187,9 @@ export type MutationChangePasswordArgs = {
 
 
 export type MutationCreateStripeCheckoutSessionArgs = {
-  subscriptionId?: InputMaybe<Scalars['String']>;
+  priceInCents?: InputMaybe<Scalars['Int']>;
+  productName?: InputMaybe<Scalars['String']>;
+  quantity?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -144,11 +211,38 @@ export type MutationRegisterArgs = {
   password?: InputMaybe<Scalars['String']>;
 };
 
+
+export type MutationUpdateOrderStatusArgs = {
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  packageMachineLocation?: InputMaybe<Scalars['String']>;
+  telephone?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['ID']>;
+};
+
 export type Order = {
   __typename?: 'Order';
+  /** User role */
+  additionalInfo: Scalars['String'];
+  /** User role */
+  amount: Scalars['Int'];
+  /** User role */
+  colors: Scalars['String'];
+  data: Scalars['String'];
+  email: Scalars['String'];
   id: Scalars['ID'];
-  userId: Scalars['String'];
+  mimeType: Scalars['String'];
+  telephone: Scalars['String'];
+  userId: Scalars['ID'];
 };
+
+export enum OrderProgressStatusEnum {
+  Paid = 'PAID',
+  Payment = 'PAYMENT',
+  Received = 'RECEIVED',
+  Sent = 'SENT'
+}
 
 export type PaginationInput = {
   /** Number of items to skip */
@@ -159,8 +253,18 @@ export type PaginationInput = {
 
 export type Payment = {
   __typename?: 'Payment';
+  /** Payment amount */
+  amount: Scalars['Int'];
+  /** Payment currencyCode */
+  currencyCode: Scalars['String'];
+  /** Payment currencyCode */
+  emailUsedForPayment: Scalars['String'];
   /** Payment unique id */
   id: Scalars['ID'];
+  /** Payment user unique id */
+  stripeSessionId: Scalars['String'];
+  /** Payment user unique id */
+  userId: Scalars['ID'];
 };
 
 export type Query = {
@@ -168,7 +272,7 @@ export type Query = {
   /** Admin resolvers */
   admin: Admin;
   /** Query viewer */
-  viewer: User;
+  viewer?: Maybe<User>;
 };
 
 export type User = {
@@ -177,12 +281,16 @@ export type User = {
   firstName: Scalars['String'];
   id: Scalars['ID'];
   lastName: Scalars['String'];
+  packageMachineLocation: Scalars['String'];
+  telephone: Scalars['String'];
   /** User status */
   userStatus: UserStatusEnum;
 };
 
 export enum UserRoleEnum {
   Admin = 'ADMIN',
+  Buyer = 'BUYER',
+  Offerer = 'OFFERER',
   User = 'USER'
 }
 
@@ -195,12 +303,14 @@ export enum UserStatusEnum {
 export type Viewer = {
   __typename?: 'Viewer';
   accessToken: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
 };
 
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, firstName: string, lastName: string } };
+export type ViewerQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', id: string, firstName: string, lastName: string, email: string, telephone: string, packageMachineLocation: string } | null };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -229,6 +339,9 @@ export const ViewerDocument = gql`
     id
     firstName
     lastName
+    email
+    telephone
+    packageMachineLocation
   }
 }
     `;
