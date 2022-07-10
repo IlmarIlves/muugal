@@ -27,16 +27,13 @@ export default mutationField("updateOrderStatus", {
         );
     }
 
-  
     user.email = email;
     user.firstName = firstName;
     user.lastName = lastName;
     user.telephone = telephone;
     user.packageMachineLocation = packageMachineLocation;
     
-
     await user.save();
-
 
     return user;
   },

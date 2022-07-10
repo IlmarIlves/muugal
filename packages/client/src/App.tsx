@@ -12,6 +12,7 @@ import { ClientView } from "./views/ClientView/ClientView";
 import { ActiveOrderView } from "./views/ActiveOrderView/ActiveOrderView";
 import { PortFolioView } from "./views/PortfolioView/PortfolioView";
 import { InstructionsView } from "./views/InstructionsView/InstructionsView";
+import { TermsAndConditionsView } from "./views/TermsAndConditionsView/TermsAndConditionsView";
 
 gql`
   query Viewer {
@@ -45,6 +46,7 @@ export const App: React.FC = () => {
           <Route path="/order" element={<OrderView />} />
           <Route path="/portfolio" element={<PortFolioView />} />
           <Route path="/instructions" element={<InstructionsView />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditionsView />} />
           <Route path="*" element={<NotFoundView />} />
           {/* <Route path="dashboard" element={<PrivateRoute roles={[ROLE.ADMIN]} component={Dashboard} />} />
           <Route path="users" element={<PrivateRoute roles={[ROLE.ADMIN, ROLE.USER]} component={Users} />} /> */}

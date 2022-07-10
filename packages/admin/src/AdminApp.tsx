@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, RouteProps, Routes } from "react-router";
-import { BrowserRouter, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, useNavigate } from "react-router-dom";
 import { AdminView } from "./views/AdminView/AdminView";
 import { LoginView } from "./views/LoginView/AdminLoginView";
 import { useViewerQuery } from "./generated/graphql";
@@ -33,6 +33,10 @@ export const AdminApp: React.FC = () => {
   // get viewer info and check whether the user is logged in
   const viewer = data?.viewer;
   const isLoggedIn = viewer !== null;
+
+  // if (viewer == null) {
+  //   navigate("/login");
+  // }
 
   // decide path to redirect to from root path based on whether the user is logged in
   const indexPath = isLoggedIn ? buildUrl<AdminViewParams>(ADMIN_VIEW_PATH) : buildUrl(LOGIN_VIEW_PATH);

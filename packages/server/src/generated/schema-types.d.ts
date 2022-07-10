@@ -199,10 +199,11 @@ export interface NexusGenFieldTypes {
     adminResetUserPassword: NexusGenRootTypes['AdminUser']; // AdminUser!
     changePassword: NexusGenRootTypes['Viewer']; // Viewer!
     createStripeCheckoutSession: NexusGenRootTypes['Payment']; // Payment!
+    delete: boolean; // Boolean!
     login: NexusGenRootTypes['LoginResponse']; // LoginResponse!
     logout: boolean; // Boolean!
     order: NexusGenRootTypes['Order']; // Order!
-    register: NexusGenRootTypes['User']; // User!
+    registerUser: NexusGenRootTypes['User']; // User!
     updateOrderPrice: NexusGenRootTypes['Order']; // Order!
     updateOrderStatus: NexusGenRootTypes['User']; // User!
   }
@@ -284,11 +285,16 @@ export interface NexusGenArgTypes {
     order: { // args
       file?: any | null; // Upload
     }
-    register: { // args
+    registerUser: { // args
       email?: string | null; // String
       firstName?: string | null; // String
+      isUserBuyer?: boolean | null; // Boolean
+      isUserOfferer?: boolean | null; // Boolean
       lastName?: string | null; // String
+      packageMachineLocation?: string | null; // String
       password?: string | null; // String
+      telephone?: string | null; // String
+      userRole?: NexusGenEnums['UserRoleEnum'] | null; // UserRoleEnum
     }
     updateOrderPrice: { // args
       finishedInDays?: number | null; // Int

@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #e2e2e2;
+}
+
+.TermsAndConditions{
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 6em;
+    padding-right: 6em;
+}
+
+@media (max-width: 35em) { 
+    .TermsAndConditions{
+        padding-top: 2em;
+        padding-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+}

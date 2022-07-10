@@ -1,11 +1,9 @@
 import { gql } from "@apollo/client";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { useUserByIdQuery, useUsersQuery } from "../../generated/graphql";
+import { useUserByIdQuery } from "../../generated/graphql";
 
 import { AdminViewParams, ViewerInfo } from "../../routes";
-import { getSkipTake } from "../../services/getSkipTake";
-import { AdminViewProps } from "../AdminView/AdminView";
 import { ErrorView } from "../ErrorView/ErrorView";
 
 // fetch admin user by id

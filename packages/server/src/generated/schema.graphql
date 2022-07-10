@@ -168,6 +168,9 @@ type Mutation {
     quantity: Int
   ): Payment!
 
+  """Logs out signed-in user if any"""
+  delete: Boolean!
+
   """Attempts to log user in"""
   login(
     """Email address"""
@@ -187,18 +190,33 @@ type Mutation {
   ): Order!
 
   """Registers new user"""
-  register(
+  registerUser(
     """Email address"""
     email: String
 
     """First name"""
     firstName: String
 
+    """Is user Buyer"""
+    isUserBuyer: Boolean
+
+    """Is user Offerer"""
+    isUserOfferer: Boolean
+
     """Last name"""
     lastName: String
 
+    """Package machine location"""
+    packageMachineLocation: String
+
     """Password"""
     password: String
+
+    """Telephone"""
+    telephone: String
+
+    """New user status"""
+    userRole: UserRoleEnum
   ): User!
 
   """Updates user status"""

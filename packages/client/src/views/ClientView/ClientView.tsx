@@ -1,9 +1,16 @@
+import { gql } from "@apollo/client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
 import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
-import { useViewerQuery } from "../../generated/graphql";
+import { useLogoutMutation, useViewerQuery } from "../../generated/graphql";
 import "./clientView.scss";
+
+gql`
+  mutation DeleteUser {
+    delete
+  }
+`;
 
 export const ClientView: React.FC = () => {
   const navigate = useNavigate();
@@ -16,11 +23,24 @@ export const ClientView: React.FC = () => {
 
   const { data, loading, error } = useViewerQuery();
 
+  const [logout, logoutResult] = useLogoutMutation();
+
+  // const [logout, logoutResult] = useLogoutMutation();
+
   const viewer = data?.viewer;
 
   if (viewer === null) {
     navigate("/");
   }
+
+  // login user on submit
+  const onSubmit = async () => {
+    const response = await logout();
+
+    if (response.data?.logout) {
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -29,6 +49,12 @@ export const ClientView: React.FC = () => {
       <div className="clientinfo-background">
         <div className="userinfo">
           <h2 className="userinfo-header">Kasutajateave</h2>
+
+          <div>
+            <button className="userinfo-btn-style" onClick={() => logout()}>
+              Logi välja
+            </button>
+          </div>
 
           <div>
             <ul className="userinfo-list">

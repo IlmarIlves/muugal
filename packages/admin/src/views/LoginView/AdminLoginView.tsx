@@ -70,9 +70,6 @@ export const LoginView: React.FC = () => {
           <input className={"input"} type={"password"} {...register("password")} />
           {/* {errors.password && <p>{errors.password.message}</p>} */}
           <input className={"submit"} type="submit" value="Log in" />
-          <div className={"register"}>
-            <span onClick={() => navigate("/register")}>Sign up now</span>
-          </div>
         </form>
       </div>
     </>

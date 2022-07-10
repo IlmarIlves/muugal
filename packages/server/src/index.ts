@@ -37,7 +37,6 @@ const start = async () => {
 	
 	var sessionStore = new MySQLStore(options);
 
-
 	app.use(
 		session({
 		name: 'muugal_session',

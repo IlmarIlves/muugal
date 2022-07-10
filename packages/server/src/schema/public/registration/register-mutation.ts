@@ -1,8 +1,8 @@
-import {  mutationField,  stringArg } from "@nexus/schema";
+import {  arg, booleanArg, mutationField,  stringArg } from "@nexus/schema";
 import { JSONSchema4 } from "json-schema";
 import { validate } from "../../../../lib/validate/validate";
 import { fieldLength } from "../../../constants";
-import { UserEntity, UserRole } from "../../../entities/UserEntity";
+import { UserEntity } from "../../../entities/UserEntity";
 import { getKeyedHash } from "../../../services/getKeyedHash";
 import { sendUserReigisterEmail } from "../../../services/sendUserRegisteredEmail";
 
@@ -10,12 +10,6 @@ const schema: JSONSchema4 = {
   $async: true,
   type: "object",
   properties: {
-    name: {
-      title: "Name",
-      type: "string",
-      minLength: 1,
-      maxLength: fieldLength.medium,
-    },
     email: {
       title: "Email",
       type: "string",
@@ -29,28 +23,61 @@ const schema: JSONSchema4 = {
         },
       ],
     },
+    firstName: {
+      title: "First name",
+      type: "string",
+      minLength: 1,
+      maxLength: fieldLength.medium,
+    },
+    lastName: {
+      title: "Last name",
+      type: "string",
+      minLength: 1,
+      maxLength: fieldLength.medium,
+    },
+    telephone: {
+      title: "Telephone",
+      type: "string",
+    },
+    packageMachineLocation: {
+      title: "Package machine location",
+      type: "string",
+    },
     password: {
       title: "Password",
       type: "string",
       // format: "strong-password",
       minLength: 8,
     },
+    isUserBuyer: {
+      title: "Is user buyer",
+      type: "boolean",
+    },
+    isUserOfferer: {
+      title: "Is user offerer",
+      type: "boolean",
+    },
   },
-  required: ["firstName", "lastName", "email", "password"],
+  required: ["firstName", "lastName", "telephone", "packageMachineLocation", "email", "password", "isUserOfferer", "isUserBuyer"],
 };
 
-export default mutationField("register", {
+export default mutationField("registerUser", {
   type: "User",
   description: "Registers new user",
   args: {
+    userRole: arg({ type: "UserRoleEnum", description: "New user status" }),
     firstName: stringArg({ description: "First name" }),
     lastName: stringArg({ description: "Last name" }),
     email: stringArg({ description: "Email address" }),
+    telephone: stringArg({ description: "Telephone" }),
+    packageMachineLocation: stringArg({ description: "Package machine location" }),
     password: stringArg({ description: "Password" }),
+    isUserOfferer: booleanArg({ description: "Is user Offerer" }),
+    isUserBuyer: booleanArg({ description: "Is user Buyer" }),
   },
   resolve: async (_parent, args, _context) => {
     // extract arguments
-    const { firstName, lastName, email, password } = args;
+    const { userRole, email, firstName, lastName, telephone, packageMachineLocation, password, isUserOfferer, isUserBuyer } = args;
 
     // validate arguments
     await validate(args, schema);
@@ -60,8 +87,12 @@ export default mutationField("register", {
       firstName,
       lastName,
       email,
+      telephone,
+      packageMachineLocation,
       password,
-      userRole: UserRole.USER,
+      userRole: userRole,
+      isUserBuyer: isUserBuyer,
+      isUserOfferer: isUserOfferer,
     });
 
 
@@ -69,6 +100,7 @@ export default mutationField("register", {
     if (!user.passwordSalt || !user.passwordHash) {
       throw new Error("Created user does not have password set, this should not happen");
     }
+
 
     // calculate salted password hash
     const passwordHash = getKeyedHash(password, user.passwordSalt);

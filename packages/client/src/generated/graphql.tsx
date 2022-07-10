@@ -161,6 +161,8 @@ export type Mutation = {
   changePassword: Viewer;
   /** Creates new Stripe checkout session */
   createStripeCheckoutSession: Payment;
+  /** Deletes logged in user profile */
+  delete: Scalars['Boolean'];
   /** Attempts to log user in */
   login: LoginResponse;
   /** Logs out signed-in user if any */
@@ -168,7 +170,9 @@ export type Mutation = {
   /** Uploads file */
   order: Order;
   /** Registers new user */
-  register: User;
+  registerUser: User;
+  /** Updates user status */
+  updateOrderPrice: Order;
   /** Updates user status */
   updateOrderStatus: User;
 };
@@ -204,11 +208,24 @@ export type MutationOrderArgs = {
 };
 
 
-export type MutationRegisterArgs = {
+export type MutationRegisterUserArgs = {
   email?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
+  isUserBuyer?: InputMaybe<Scalars['Boolean']>;
+  isUserOfferer?: InputMaybe<Scalars['Boolean']>;
   lastName?: InputMaybe<Scalars['String']>;
+  packageMachineLocation?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
+  telephone?: InputMaybe<Scalars['String']>;
+  userRole?: InputMaybe<UserRoleEnum>;
+};
+
+
+export type MutationUpdateOrderPriceArgs = {
+  finishedInDays?: InputMaybe<Scalars['Int']>;
+  lastOffererUserId?: InputMaybe<Scalars['Int']>;
+  orderId?: InputMaybe<Scalars['ID']>;
+  priceInCents?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -312,6 +329,11 @@ export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ViewerQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', id: string, firstName: string, lastName: string, email: string, telephone: string, packageMachineLocation: string } | null };
 
+export type DeleteUserMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DeleteUserMutation = { __typename?: 'Mutation', delete: boolean };
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -331,6 +353,21 @@ export type OrderMutationVariables = Exact<{
 
 
 export type OrderMutation = { __typename?: 'Mutation', order: { __typename?: 'Order', userId: string } };
+
+export type RegisterUserMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  telephone: Scalars['String'];
+  packageMachineLocation: Scalars['String'];
+  userRole: UserRoleEnum;
+  isUserBuyer: Scalars['Boolean'];
+  isUserOfferer: Scalars['Boolean'];
+}>;
+
+
+export type RegisterUserMutation = { __typename?: 'Mutation', registerUser: { __typename?: 'User', id: string, email: string, firstName: string, lastName: string } };
 
 
 export const ViewerDocument = gql`
@@ -372,6 +409,36 @@ export function useViewerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Vie
 export type ViewerQueryHookResult = ReturnType<typeof useViewerQuery>;
 export type ViewerLazyQueryHookResult = ReturnType<typeof useViewerLazyQuery>;
 export type ViewerQueryResult = Apollo.QueryResult<ViewerQuery, ViewerQueryVariables>;
+export const DeleteUserDocument = gql`
+    mutation DeleteUser {
+  delete
+}
+    `;
+export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
+
+/**
+ * __useDeleteUserMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserMutation, DeleteUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument, options);
+      }
+export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
+export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
+export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -469,3 +536,57 @@ export function useOrderMutation(baseOptions?: Apollo.MutationHookOptions<OrderM
 export type OrderMutationHookResult = ReturnType<typeof useOrderMutation>;
 export type OrderMutationResult = Apollo.MutationResult<OrderMutation>;
 export type OrderMutationOptions = Apollo.BaseMutationOptions<OrderMutation, OrderMutationVariables>;
+export const RegisterUserDocument = gql`
+    mutation RegisterUser($email: String!, $password: String!, $firstName: String!, $lastName: String!, $telephone: String!, $packageMachineLocation: String!, $userRole: UserRoleEnum!, $isUserBuyer: Boolean!, $isUserOfferer: Boolean!) {
+  registerUser(
+    email: $email
+    password: $password
+    firstName: $firstName
+    lastName: $lastName
+    telephone: $telephone
+    packageMachineLocation: $packageMachineLocation
+    userRole: $userRole
+    isUserBuyer: $isUserBuyer
+    isUserOfferer: $isUserOfferer
+  ) {
+    id
+    email
+    firstName
+    lastName
+  }
+}
+    `;
+export type RegisterUserMutationFn = Apollo.MutationFunction<RegisterUserMutation, RegisterUserMutationVariables>;
+
+/**
+ * __useRegisterUserMutation__
+ *
+ * To run a mutation, you first call `useRegisterUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerUserMutation, { data, loading, error }] = useRegisterUserMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *      firstName: // value for 'firstName'
+ *      lastName: // value for 'lastName'
+ *      telephone: // value for 'telephone'
+ *      packageMachineLocation: // value for 'packageMachineLocation'
+ *      userRole: // value for 'userRole'
+ *      isUserBuyer: // value for 'isUserBuyer'
+ *      isUserOfferer: // value for 'isUserOfferer'
+ *   },
+ * });
+ */
+export function useRegisterUserMutation(baseOptions?: Apollo.MutationHookOptions<RegisterUserMutation, RegisterUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterUserMutation, RegisterUserMutationVariables>(RegisterUserDocument, options);
+      }
+export type RegisterUserMutationHookResult = ReturnType<typeof useRegisterUserMutation>;
+export type RegisterUserMutationResult = Apollo.MutationResult<RegisterUserMutation>;
+export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<RegisterUserMutation, RegisterUserMutationVariables>;

@@ -10,8 +10,12 @@ export interface RegisterUserInfo {
     firstName: string;
     lastName: string;
     email: string;
+    telephone: string;
+    packageMachineLocation: string;
     password: string;
     userRole: UserRole;
+    isUserBuyer: boolean;
+    isUserOfferer: boolean;
   }
 
 export enum UserRole {
@@ -64,6 +68,12 @@ export class UserEntity extends BaseEntity {
     @Column({type: "enum", enum: UserRole, default: UserRole.USER})
     userRole!: UserRole;
 
+    @Column({ type: "boolean", default: false })
+    isUserBuyer!: boolean;
+
+    @Column({ type: "boolean", default: false })
+    isUserOfferer!: boolean;
+
     @Column({ type: "int", default: 0 })
     tokenVersion!: number;
 
@@ -82,22 +92,31 @@ export class UserEntity extends BaseEntity {
     @UpdateDateColumn()
     updatedDate!: Date;
 
-    static async register(info: RegisterUserInfo): Promise<UserEntity> {
-        const passwordSalt = generateRandomString(fieldLength.hash);
-        const passwordHash = getKeyedHash(info.password, passwordSalt);
-    
-        const user = await UserEntity.create({
-          email: info.email,
-          firstName: info.firstName,
-          lastName: info.lastName,
-          passwordSalt,
-          passwordHash,
-          userRole: info.userRole,
-      // userRole: info.userRole,
-        }).save(); 
  
-     return user;
-   }      
+
+   static async register(info: RegisterUserInfo): Promise<UserEntity> {
+    const passwordSalt = generateRandomString(fieldLength.hash);
+    const passwordHash = getKeyedHash(info.password, passwordSalt);
+
+    const user = await UserEntity.create({
+      email: info.email,
+      firstName: info.firstName,
+      lastName: info.lastName,
+      telephone: info.lastName,
+      packageMachineLocation: info.packageMachineLocation,
+      passwordSalt,
+      passwordHash,
+      userRole: info.userRole,
+      isUserBuyer: info.isUserBuyer,
+      isUserOfferer: info.isUserOfferer,
+    }).save(); 
+
+  return user;
+  }    
+
+  static async deleteUser() {
+    await this.delete(this);
+  }      
 }
 
 
