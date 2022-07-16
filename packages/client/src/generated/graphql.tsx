@@ -161,7 +161,7 @@ export type Mutation = {
   changePassword: Viewer;
   /** Creates new Stripe checkout session */
   createStripeCheckoutSession: Payment;
-  /** Deletes logged in user profile */
+  /** Logs out signed-in user if any */
   delete: Scalars['Boolean'];
   /** Attempts to log user in */
   login: LoginResponse;
@@ -204,7 +204,12 @@ export type MutationLoginArgs = {
 
 
 export type MutationOrderArgs = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
+  amount?: InputMaybe<Scalars['Int']>;
+  colors?: InputMaybe<OrderColorsEnum>;
+  email?: InputMaybe<Scalars['String']>;
   file?: InputMaybe<Scalars['Upload']>;
+  telephone?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -244,15 +249,22 @@ export type Order = {
   additionalInfo: Scalars['String'];
   /** User role */
   amount: Scalars['Int'];
-  /** User role */
-  colors: Scalars['String'];
-  data: Scalars['String'];
+  /** Order available colors */
+  colors: OrderColorsEnum;
   email: Scalars['String'];
+  fileUrl: Scalars['String'];
+  finishedInDays: Scalars['String'];
   id: Scalars['ID'];
-  mimeType: Scalars['String'];
+  lastOffererUserId: Scalars['String'];
+  priceInCents: Scalars['String'];
   telephone: Scalars['String'];
   userId: Scalars['ID'];
 };
+
+export enum OrderColorsEnum {
+  Black = 'BLACK',
+  White = 'WHITE'
+}
 
 export enum OrderProgressStatusEnum {
   Paid = 'PAID',
@@ -288,8 +300,15 @@ export type Query = {
   __typename?: 'Query';
   /** Admin resolvers */
   admin: Admin;
+  /** List of orders */
+  orders: Array<Order>;
   /** Query viewer */
   viewer?: Maybe<User>;
+};
+
+
+export type QueryOrdersArgs = {
+  userId?: InputMaybe<Scalars['ID']>;
 };
 
 export type User = {
@@ -349,10 +368,22 @@ export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 
 export type OrderMutationVariables = Exact<{
   file: Scalars['Upload'];
+  email: Scalars['String'];
+  colors: OrderColorsEnum;
+  amount: Scalars['Int'];
+  additionalInfo: Scalars['String'];
+  telephone: Scalars['String'];
 }>;
 
 
 export type OrderMutation = { __typename?: 'Mutation', order: { __typename?: 'Order', userId: string } };
+
+export type OrdersQueryVariables = Exact<{
+  userId: Scalars['ID'];
+}>;
+
+
+export type OrdersQuery = { __typename?: 'Query', orders: Array<{ __typename?: 'Order', id: string, userId: string, email: string, telephone: string, colors: OrderColorsEnum, amount: number, priceInCents: string, finishedInDays: string, additionalInfo: string, lastOffererUserId: string, fileUrl: string }> };
 
 export type RegisterUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -504,8 +535,15 @@ export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const OrderDocument = gql`
-    mutation Order($file: Upload!) {
-  order(file: $file) {
+    mutation Order($file: Upload!, $email: String!, $colors: OrderColorsEnum!, $amount: Int!, $additionalInfo: String!, $telephone: String!) {
+  order(
+    file: $file
+    email: $email
+    colors: $colors
+    amount: $amount
+    additionalInfo: $additionalInfo
+    telephone: $telephone
+  ) {
     userId
   }
 }
@@ -526,6 +564,11 @@ export type OrderMutationFn = Apollo.MutationFunction<OrderMutation, OrderMutati
  * const [orderMutation, { data, loading, error }] = useOrderMutation({
  *   variables: {
  *      file: // value for 'file'
+ *      email: // value for 'email'
+ *      colors: // value for 'colors'
+ *      amount: // value for 'amount'
+ *      additionalInfo: // value for 'additionalInfo'
+ *      telephone: // value for 'telephone'
  *   },
  * });
  */
@@ -536,6 +579,51 @@ export function useOrderMutation(baseOptions?: Apollo.MutationHookOptions<OrderM
 export type OrderMutationHookResult = ReturnType<typeof useOrderMutation>;
 export type OrderMutationResult = Apollo.MutationResult<OrderMutation>;
 export type OrderMutationOptions = Apollo.BaseMutationOptions<OrderMutation, OrderMutationVariables>;
+export const OrdersDocument = gql`
+    query Orders($userId: ID!) {
+  orders(userId: $userId) {
+    id
+    userId
+    email
+    telephone
+    colors
+    amount
+    priceInCents
+    finishedInDays
+    additionalInfo
+    lastOffererUserId
+    fileUrl
+  }
+}
+    `;
+
+/**
+ * __useOrdersQuery__
+ *
+ * To run a query within a React component, call `useOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrdersQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useOrdersQuery(baseOptions: Apollo.QueryHookOptions<OrdersQuery, OrdersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OrdersQuery, OrdersQueryVariables>(OrdersDocument, options);
+      }
+export function useOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrdersQuery, OrdersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OrdersQuery, OrdersQueryVariables>(OrdersDocument, options);
+        }
+export type OrdersQueryHookResult = ReturnType<typeof useOrdersQuery>;
+export type OrdersLazyQueryHookResult = ReturnType<typeof useOrdersLazyQuery>;
+export type OrdersQueryResult = Apollo.QueryResult<OrdersQuery, OrdersQueryVariables>;
 export const RegisterUserDocument = gql`
     mutation RegisterUser($email: String!, $password: String!, $firstName: String!, $lastName: String!, $telephone: String!, $packageMachineLocation: String!, $userRole: UserRoleEnum!, $isUserBuyer: Boolean!, $isUserOfferer: Boolean!) {
   registerUser(

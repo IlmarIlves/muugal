@@ -185,8 +185,23 @@ type Mutation {
 
   """Uploads file"""
   order(
+    """Additional information"""
+    additionalInfo: String
+
+    """Amount"""
+    amount: Int
+
+    """Order available colors"""
+    colors: OrderColorsEnum
+
+    """Email"""
+    email: String
+
     """Upload file"""
     file: Upload
+
+    """Telephone"""
+    telephone: String
   ): Order!
 
   """Registers new user"""
@@ -263,14 +278,21 @@ type Order {
   """User role"""
   amount: Int!
 
-  """User role"""
-  colors: String!
-  data: String!
+  """Order available colors"""
+  colors: OrderColorsEnum!
   email: String!
+  fileUrl: String!
+  finishedInDays: String!
   id: ID!
-  mimeType: String!
+  lastOffererUserId: String!
+  priceInCents: String!
   telephone: String!
   userId: ID!
+}
+
+enum OrderColorsEnum {
+  BLACK
+  WHITE
 }
 
 enum OrderProgressStatusEnum {
@@ -311,6 +333,12 @@ type Payment {
 type Query {
   """Admin resolvers"""
   admin: Admin!
+
+  """List of orders"""
+  orders(
+    """User id"""
+    userId: ID
+  ): [Order!]!
 
   """Query viewer"""
   viewer: User

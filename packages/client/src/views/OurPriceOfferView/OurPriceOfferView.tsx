@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "../../components/Header/Header";
-import { FileContainer } from "../../components/ItemContainer.tsx/ItemContainer";
+import { FileContainer } from "../../components/ItemContainer/ItemContainer";
 import { ProgressBar } from "../../components/ProgressBar/ProgressBar";
 import "./ourPriceOffer.scss";
 
@@ -14,7 +14,10 @@ export const OurPriceOfferView: React.FC = () => {
         <div className="our-priceoffer">
           <div className="priceoffer-three-columns">
             <div className="image">
-              <FileContainer name={"Order 1"} />
+              <FileContainer
+                name={"Order 1"}
+                url={"https://muugal-aws-bucket.s3.amazonaws.com/files/0e2d1a55-67d0-4405-9d0e-095786cf275c.stl"}
+              />
             </div>
           </div>
 

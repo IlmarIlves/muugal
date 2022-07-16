@@ -1,4 +1,3 @@
-import { config } from "../config";
 import { Mandrill } from "mandrill-api";
 
 
@@ -70,7 +69,7 @@ const successStatuses = [EmailStatus.SENT, EmailStatus.QUEUED, EmailStatus.SCHED
 
 export async function sendEmail(userOptions: EmailOptions): Promise<SendEmailResult> {
   // reject the email if not enabled
-  if (!config.email.enabled) {
+  if (!process.env.IS_MANDRILL_ENABLED) {
     return {
       success: false,
       error: "Sending email is not enabled in the settings",
@@ -81,9 +80,9 @@ export async function sendEmail(userOptions: EmailOptions): Promise<SendEmailRes
 
   // combine defaults with user provided options
   const options: Required<EmailOptions> = {
-    apiKey: process.env.MYSQL_DB!,
-    fromEmail: config.email.fromEmail,
-    fromName: config.email.fromName,
+    apiKey: process.env.MANDRILL_KEY!,
+    fromEmail: process.env.MANDRILL_FROM_EMAIL!,
+    fromName: process.env.MANDRILL_FROM_NAME!,
     debug: false,
     images: [],
     attachments: [],
@@ -91,7 +90,7 @@ export async function sendEmail(userOptions: EmailOptions): Promise<SendEmailRes
   };
 
   // don't attempt to send email if missing api key
-  if (config.email.apiKey.length === 0) {
+  if (process.env.MANDRILL_KEY!.length === 0) {
     // no need to include options for safety reason error itself should be self-explanatory
     console.log("sending email requested but the API key has not been set");
 

@@ -20,7 +20,7 @@ export const LandingPageView: React.FC = () => {
     <>
       <Header viewer={data} />
 
-      <MuugalSelection />
+      <MuugalSelection isUserLoggedIn={data?.viewer !== null} />
 
       <Footer />
 

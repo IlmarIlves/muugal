@@ -1,33 +1,9 @@
-import { arg, intArg, mutationField, stringArg } from "@nexus/schema";
-import { JSONSchema4 } from "json-schema";
+import { arg, mutationField, } from "@nexus/schema";
 import { verify } from "jsonwebtoken";
 import { OrderEntity } from "../../../entities/OrderEntity";
 import { UserEntity } from "../../../entities/UserEntity";
 import { Upload } from "../../../scalars/UploadScalar";
 import { uploadFile } from "../../../services/uploadFile";
-
-const schema: JSONSchema4 = {
-  $async: true,
-  type: "object",
-  properties: {
-    telephone: {
-      title: "Orderer telephone",
-      type: "string",
-    },
-    email: {
-      title: "Orderer email",
-      type: "string",
-    },
-    amount: {
-      title: "Orderer email",
-      type: "number",
-    },
-    additionalInfo: {
-      title: "Orderer email",
-      type: "string",
-    },
-  },
-};
 
 
 export default mutationField("order", {
@@ -35,11 +11,6 @@ export default mutationField("order", {
   description: "Uploads file",
   args: {
     file: arg({ type: Upload, description: "Upload file" }),
-    telephone: stringArg({ description: "Telephone" }),
-    email: stringArg({ description: "Email" }),
-    colors: arg({type: "OrderColorsEnum", description: "Order available colors" }),
-    amount: intArg({ description: "Amount" }),
-    additionalInfo: stringArg({ description: "Additional information" }),
   },
   resolve: async (_parent, args, context) => {
     const token = context.req.cookies.jid;
@@ -65,18 +36,16 @@ export default mutationField("order", {
 
     const file = await args.file;
 
-    
+    const upload = await uploadFile(file.createReadStream(), file.mimetype);
+
     const order = new OrderEntity();
-    
+
     order.userId = user.id;
     order.email = args.email;
     order.telephone = args.telephone;
     order.colors = args.colors;
     order.amount = args.amount;
     order.additionalInfo = args.additionalInfo;
-
-    const upload = await uploadFile(file.createReadStream(), file.mimetype);
-    
     order.fileUrl = upload;
 
     

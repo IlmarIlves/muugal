@@ -172,7 +172,7 @@ export const ActiveOrderView: React.FC = () => {
         </div>
       </div>
 
-      <div className="userinfo-background">
+      {/* <div className="userinfo-background">
         <div className="userinfo">
           <h2 className="userinfo-header">See Kuu Täidetud Tellimused</h2>
           <div className="NewOrder">
@@ -204,7 +204,7 @@ export const ActiveOrderView: React.FC = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

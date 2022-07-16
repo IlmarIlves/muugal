@@ -7,10 +7,12 @@ export const OrderType = objectType({
 		t.id('userId');
 		t.string('email');
 		t.string('telephone');
-		t.string('colors', { description: "User role"});
+		t.field('colors', { type: "OrderColorsEnum", description: "Order available colors"});
 		t.int('amount', { description: "User role"});
 		t.string('additionalInfo', { description: "User role"});
-		t.string('data');
-		t.string('mimeType');
+		t.string('priceInCents');
+		t.string('finishedInDays');
+		t.string('lastOffererUserId');
+		t.string('fileUrl');
 	},
 });

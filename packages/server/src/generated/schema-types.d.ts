@@ -41,6 +41,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ConditionModeEnum: "AND" | "OR"
   MatchModeEnum: "CONTAINS" | "EXACT" | "STARTS_WITH"
+  OrderColorsEnum: "BLACK" | "WHITE"
   OrderProgressStatusEnum: "PAID" | "PAYMENT" | "RECEIVED" | "SENT"
   UserRoleEnum: "ADMIN" | "BUYER" | "OFFERER" | "USER"
   UserStatusEnum: "ACTIVE" | "DEACTIVATED" | "DISABLED"
@@ -94,11 +95,13 @@ export interface NexusGenRootTypes {
   Order: { // root type
     additionalInfo: string; // String!
     amount: number; // Int!
-    colors: string; // String!
-    data: string; // String!
+    colors: NexusGenEnums['OrderColorsEnum']; // OrderColorsEnum!
     email: string; // String!
+    fileUrl: string; // String!
+    finishedInDays: string; // String!
     id: string; // ID!
-    mimeType: string; // String!
+    lastOffererUserId: string; // String!
+    priceInCents: string; // String!
     telephone: string; // String!
     userId: string; // ID!
   }
@@ -139,6 +142,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   PaginationInput: NexusGenInputs['PaginationInput'];
   ConditionModeEnum: NexusGenEnums['ConditionModeEnum'];
   MatchModeEnum: NexusGenEnums['MatchModeEnum'];
+  OrderColorsEnum: NexusGenEnums['OrderColorsEnum'];
   OrderProgressStatusEnum: NexusGenEnums['OrderProgressStatusEnum'];
   UserRoleEnum: NexusGenEnums['UserRoleEnum'];
   UserStatusEnum: NexusGenEnums['UserStatusEnum'];
@@ -210,11 +214,13 @@ export interface NexusGenFieldTypes {
   Order: { // field return type
     additionalInfo: string; // String!
     amount: number; // Int!
-    colors: string; // String!
-    data: string; // String!
+    colors: NexusGenEnums['OrderColorsEnum']; // OrderColorsEnum!
     email: string; // String!
+    fileUrl: string; // String!
+    finishedInDays: string; // String!
     id: string; // ID!
-    mimeType: string; // String!
+    lastOffererUserId: string; // String!
+    priceInCents: string; // String!
     telephone: string; // String!
     userId: string; // ID!
   }
@@ -228,6 +234,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     admin: NexusGenRootTypes['Admin']; // Admin!
+    orders: NexusGenRootTypes['Order'][]; // [Order!]!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -283,7 +290,12 @@ export interface NexusGenArgTypes {
       password?: string | null; // String
     }
     order: { // args
+      additionalInfo?: string | null; // String
+      amount?: number | null; // Int
+      colors?: NexusGenEnums['OrderColorsEnum'] | null; // OrderColorsEnum
+      email?: string | null; // String
       file?: any | null; // Upload
+      telephone?: string | null; // String
     }
     registerUser: { // args
       email?: string | null; // String
@@ -311,6 +323,11 @@ export interface NexusGenArgTypes {
       userId?: string | null; // ID
     }
   }
+  Query: {
+    orders: { // args
+      userId?: string | null; // ID
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -322,7 +339,7 @@ export type NexusGenObjectNames = "Admin" | "AdminOrder" | "AdminOrders" | "Admi
 
 export type NexusGenInputNames = "AdminUsersFilterInput" | "MatchInput" | "PaginationInput";
 
-export type NexusGenEnumNames = "ConditionModeEnum" | "MatchModeEnum" | "OrderProgressStatusEnum" | "UserRoleEnum" | "UserStatusEnum";
+export type NexusGenEnumNames = "ConditionModeEnum" | "MatchModeEnum" | "OrderColorsEnum" | "OrderProgressStatusEnum" | "UserRoleEnum" | "UserStatusEnum";
 
 export type NexusGenInterfaceNames = never;
 

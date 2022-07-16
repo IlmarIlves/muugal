@@ -56,7 +56,7 @@ const start = async () => {
 
 	app.use(cookieParser());
 	
-	app.use(graphqlUploadExpress({ maxFileSize: 50000, maxFiles: 2 }));
+	app.use(graphqlUploadExpress({ maxFileSize: 50000000, maxFiles: 2 })); // max file upload size is 50 000 kb
 
 	app.use(function(req, res, next){
     res.setTimeout(480000, function(){ // 4 minute timeout adjust for larger uploads

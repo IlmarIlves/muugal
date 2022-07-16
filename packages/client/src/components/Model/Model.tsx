@@ -1,8 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { StlViewer } from "react-stl-viewer";
-
-const url = "https://storage.googleapis.com/ucloud-v3/ccab50f18fb14c91ccca300a.stl";
+interface ModelProps {
+  url: string;
+}
 
 const style = {
   top: 0,
@@ -11,6 +11,6 @@ const style = {
   height: "400px",
 };
 
-export const Model = () => {
+export const Model: React.FC<ModelProps> = ({ url }) => {
   return <StlViewer style={style} orbitControls shadows url={url} />;
 };

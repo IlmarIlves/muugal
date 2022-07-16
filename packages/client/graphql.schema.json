@@ -1078,7 +1078,7 @@
           },
           {
             "name": "delete",
-            "description": "Deletes logged in user profile",
+            "description": "Logs out signed-in user if any",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1154,11 +1154,71 @@
             "description": "Uploads file",
             "args": [
               {
+                "name": "additionalInfo",
+                "description": "Additional information",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "amount",
+                "description": "Amount",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "colors",
+                "description": "Order available colors",
+                "type": {
+                  "kind": "ENUM",
+                  "name": "OrderColorsEnum",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "email",
+                "description": "Email",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "file",
                 "description": "Upload file",
                 "type": {
                   "kind": "SCALAR",
                   "name": "Upload",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "telephone",
+                "description": "Telephone",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -1502,14 +1562,14 @@
           },
           {
             "name": "colors",
-            "description": "User role",
+            "description": "Order available colors",
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "ENUM",
+                "name": "OrderColorsEnum",
                 "ofType": null
               }
             },
@@ -1517,7 +1577,7 @@
             "deprecationReason": null
           },
           {
-            "name": "data",
+            "name": "email",
             "description": null,
             "args": [],
             "type": {
@@ -1533,7 +1593,23 @@
             "deprecationReason": null
           },
           {
-            "name": "email",
+            "name": "fileUrl",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "finishedInDays",
             "description": null,
             "args": [],
             "type": {
@@ -1565,7 +1641,23 @@
             "deprecationReason": null
           },
           {
-            "name": "mimeType",
+            "name": "lastOffererUserId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "priceInCents",
             "description": null,
             "args": [],
             "type": {
@@ -1616,6 +1708,29 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "OrderColorsEnum",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "BLACK",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WHITE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -1811,6 +1926,43 @@
                 "kind": "OBJECT",
                 "name": "Admin",
                 "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "orders",
+            "description": "List of orders",
+            "args": [
+              {
+                "name": "userId",
+                "description": "User id",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Order",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
