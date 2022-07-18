@@ -10,9 +10,9 @@ export const OrderType = objectType({
 		t.field('colors', { type: "OrderColorsEnum", description: "Order available colors"});
 		t.int('amount', { description: "User role"});
 		t.string('additionalInfo', { description: "User role"});
-		t.string('priceInCents');
-		t.string('finishedInDays');
-		t.string('lastOffererUserId');
+		t.string('priceInCents', {nullable: true});
+		t.string('finishedInDays', {nullable: true});
+		t.string('lastOffererUserId', {nullable: true});
 		t.string('fileUrl');
 	},
 });

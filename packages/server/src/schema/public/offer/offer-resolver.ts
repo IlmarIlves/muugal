@@ -1,6 +1,5 @@
 import { extendType, idArg } from "@nexus/schema";
 import { OffersEntity } from "../../../entities/OffersEntity";
-import { OrderEntity } from "../../../entities/OrderEntity";
 
 export default extendType({
   type: "Query",

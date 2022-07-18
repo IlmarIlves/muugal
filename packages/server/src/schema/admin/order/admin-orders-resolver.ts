@@ -7,7 +7,7 @@ import { getPaginationOptions } from "../../../services/getPaginationOptions";
 export default extendType({
   type: "Admin",
   definition(t) {
-    t.field("orders", {
+    t.field("adminOrders", {
       type: "AdminOrders",
       description: "List of users",
 

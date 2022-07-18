@@ -13,6 +13,7 @@ import { ActiveOrderView } from "./views/ActiveOrderView/ActiveOrderView";
 import { PortFolioView } from "./views/PortfolioView/PortfolioView";
 import { InstructionsView } from "./views/InstructionsView/InstructionsView";
 import { TermsAndConditionsView } from "./views/TermsAndConditionsView/TermsAndConditionsView";
+import { ChangePasswordView } from "./views/ChangePasswordView/ChangePasswordView";
 
 gql`
   query Viewer {
@@ -23,6 +24,24 @@ gql`
       email
       telephone
       packageMachineLocation
+    }
+  }
+`;
+
+gql`
+  query Orders {
+    orders {
+      id
+      userId
+      email
+      telephone
+      colors
+      amount
+      priceInCents
+      finishedInDays
+      additionalInfo
+      lastOffererUserId
+      fileUrl
     }
   }
 `;
@@ -45,6 +64,7 @@ export const App: React.FC = () => {
           <Route path="/our-price-offer" element={<OurPriceOfferView />} />
           <Route path="/order" element={<OrderView />} />
           <Route path="/portfolio" element={<PortFolioView />} />
+          <Route path="/change-password" element={<ChangePasswordView />} />
           <Route path="/instructions" element={<InstructionsView />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditionsView />} />
           <Route path="*" element={<NotFoundView />} />

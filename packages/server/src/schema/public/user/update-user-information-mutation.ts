@@ -2,7 +2,7 @@ import { mutationField, idArg, stringArg } from "@nexus/schema";
 import { UserEntity } from "../../../entities/UserEntity";
 
 
-export default mutationField("updateOrderStatus", {
+export default mutationField("updateUserInformation", {
   type: 'User',
   description: "Updates user status",
   args: {

@@ -7,13 +7,13 @@ export default mutationField("updateOrderPrice", {
   description: "Updates user status",
   args: {
     orderId: idArg({ description: "Order identifier" }),
-    lastOffererUserId: intArg({ description: "Order price" }),
+    offererUserId: intArg({ description: "Order price" }),
     priceInCents: intArg({ description: "Order price" }),
     finishedInDays: intArg({ description: "Order finished in days" }),
   },
   resolve: async (_parent, args) => {
  
-    const { orderId, priceInCents, finishedInDays, lastOffererUserId } = args;
+    const { orderId, priceInCents, finishedInDays, offererUserId } = args;
 
     // find order
     const order = await OrderEntity.findOne({ where: { id: orderId } });
@@ -25,7 +25,7 @@ export default mutationField("updateOrderPrice", {
         );
     }
 
-    order.lastOffererUserId = lastOffererUserId;
+    order.offererUserId = offererUserId;
     order.priceInCents = priceInCents;
     order.finishedInDays = finishedInDays;
 

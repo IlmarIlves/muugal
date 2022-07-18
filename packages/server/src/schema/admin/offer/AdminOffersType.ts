@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
 
 export const OfferType = objectType({
-	name: 'AdminOffer',
+	name: 'AdminOffers',
 	definition(t) {
 		t.id('id');
 	},

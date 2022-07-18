@@ -4,7 +4,7 @@ import { OrderEntity } from "../../../entities/OrderEntity";
 export default extendType({
   type: "Admin",
   definition(t) {
-    t.field("order", {
+    t.field("adminOrderById", {
       type: "AdminOrder",
       description: "Admin order by id",
       args: {

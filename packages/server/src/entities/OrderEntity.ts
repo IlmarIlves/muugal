@@ -39,8 +39,8 @@ export class OrderEntity extends BaseEntity{
     @Column({type: "int", nullable: true})
     priceInCents!: number | null;
 
-    @Column({type: "int"})
-    finishedInDays!: number
+    @Column({type: "int", nullable: true})
+    finishedInDays!: number | null
 
     @Column({type: "varchar", nullable: true})
     additionalInfo!: string | null

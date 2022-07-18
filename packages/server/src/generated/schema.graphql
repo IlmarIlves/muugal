@@ -4,7 +4,16 @@
 
 type Admin {
   """Admin order by id"""
-  order(
+  adminOrderById(
+    """User identifier"""
+    orderId: ID
+  ): AdminOrder!
+
+  """List of users"""
+  adminOrders: AdminOrders!
+
+  """Admin order by id"""
+  adminUpdateOrderPrice(
     """User identifier"""
     orderId: ID
 
@@ -12,8 +21,8 @@ type Admin {
     priceInCents: Int
   ): AdminOrder!
 
-  """List of users"""
-  orders: AdminOrders!
+  """List of offers"""
+  offers: AdminOffers!
 
   """Admin payment by id"""
   payment(
@@ -32,6 +41,10 @@ type Admin {
 
   """List of users"""
   users(filter: AdminUsersFilterInput, match: MatchInput, pagination: PaginationInput): AdminUsers!
+}
+
+type AdminOffers {
+  id: ID!
 }
 
 type AdminOrder {
@@ -53,7 +66,7 @@ type AdminOrder {
 
 type AdminOrders {
   """List of paginated orders"""
-  orders: [AdminOrder!]!
+  adminOrders: [AdminOrder!]!
 }
 
 type AdminPayment {
@@ -138,6 +151,18 @@ enum MatchModeEnum {
 }
 
 type Mutation {
+  """Adds offer to order"""
+  addOffer(
+    """Finished in days"""
+    finishedInDays: String
+
+    """Price in cents"""
+    priceInCents: Int
+
+    """User id"""
+    userId: ID
+  ): Offer!
+
   """Reset user password"""
   adminResetUserPassword(
     """User id"""
@@ -183,7 +208,7 @@ type Mutation {
   """Logs out signed-in user if any"""
   logout: Boolean!
 
-  """Uploads file"""
+  """Creates order"""
   order(
     """Additional information"""
     additionalInfo: String
@@ -240,7 +265,7 @@ type Mutation {
     finishedInDays: Int
 
     """Order price"""
-    lastOffererUserId: Int
+    offererUserId: Int
 
     """Order identifier"""
     orderId: ID
@@ -251,6 +276,15 @@ type Mutation {
 
   """Updates user status"""
   updateOrderStatus(
+    """Order identifier"""
+    orderId: ID
+
+    """New user status"""
+    status: OrderProgressStatusEnum
+  ): Order!
+
+  """Updates user status"""
+  updateUserInformation(
     """User email"""
     email: String
 
@@ -269,6 +303,16 @@ type Mutation {
     """User identifier"""
     userId: ID
   ): User!
+
+  """Uploads file"""
+  uploadFile(
+    """Upload file"""
+    file: Upload
+  ): Order!
+}
+
+type Offer {
+  id: ID!
 }
 
 type Order {
@@ -282,10 +326,10 @@ type Order {
   colors: OrderColorsEnum!
   email: String!
   fileUrl: String!
-  finishedInDays: String!
+  finishedInDays: String
   id: ID!
-  lastOffererUserId: String!
-  priceInCents: String!
+  lastOffererUserId: String
+  priceInCents: String
   telephone: String!
   userId: ID!
 }
@@ -331,14 +375,23 @@ type Payment {
 }
 
 type Query {
+  """List of orders"""
+  activeOrder(
+    """User id"""
+    userId: ID
+  ): [Order!]!
+
   """Admin resolvers"""
   admin: Admin!
 
   """List of orders"""
-  orders(
+  offers(
     """User id"""
     userId: ID
-  ): [Order!]!
+  ): [Offer!]!
+
+  """List of orders"""
+  orders: [Order!]!
 
   """Query viewer"""
   viewer: User

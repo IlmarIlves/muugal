@@ -6,7 +6,7 @@ import { Upload } from "../../../scalars/UploadScalar";
 import { uploadFile } from "../../../services/uploadFile";
 
 
-export default mutationField("order", {
+export default mutationField("uploadFile", {
   type: "Order",
   description: "Uploads file",
   args: {

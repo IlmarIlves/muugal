@@ -1,38 +1,37 @@
 import { arg, intArg, mutationField, stringArg } from "@nexus/schema";
-import { JSONSchema4 } from "json-schema";
 import { verify } from "jsonwebtoken";
 import { OrderEntity } from "../../../entities/OrderEntity";
 import { UserEntity } from "../../../entities/UserEntity";
 import { Upload } from "../../../scalars/UploadScalar";
 import { uploadFile } from "../../../services/uploadFile";
 
-const schema: JSONSchema4 = {
-  $async: true,
-  type: "object",
-  properties: {
-    telephone: {
-      title: "Orderer telephone",
-      type: "string",
-    },
-    email: {
-      title: "Orderer email",
-      type: "string",
-    },
-    amount: {
-      title: "Orderer email",
-      type: "number",
-    },
-    additionalInfo: {
-      title: "Orderer email",
-      type: "string",
-    },
-  },
-};
+// const schema: JSONSchema4 = {
+//   $async: true,
+//   type: "object",
+//   properties: {
+//     telephone: {
+//       title: "Orderer telephone",
+//       type: "string",
+//     },
+//     email: {
+//       title: "Orderer email",
+//       type: "string",
+//     },
+//     amount: {
+//       title: "Orderer email",
+//       type: "number",
+//     },
+//     additionalInfo: {
+//       title: "Orderer email",
+//       type: "string",
+//     },
+//   },
+// };
 
 
 export default mutationField("order", {
   type: "Order",
-  description: "Uploads file",
+  description: "Creates order",
   args: {
     file: arg({ type: Upload, description: "Upload file" }),
     telephone: stringArg({ description: "Telephone" }),
@@ -42,6 +41,8 @@ export default mutationField("order", {
     additionalInfo: stringArg({ description: "Additional information" }),
   },
   resolve: async (_parent, args, context) => {
+    // await validate(args, schema);
+
     const token = context.req.cookies.jid;
 
     if(!token) {
@@ -65,7 +66,6 @@ export default mutationField("order", {
 
     const file = await args.file;
 
-    
     const order = new OrderEntity();
     
     order.userId = user.id;
@@ -76,7 +76,7 @@ export default mutationField("order", {
     order.additionalInfo = args.additionalInfo;
 
     const upload = await uploadFile(file.createReadStream(), file.mimetype);
-    
+
     order.fileUrl = upload;
 
     

@@ -49,6 +49,9 @@ export interface NexusGenEnums {
 
 export interface NexusGenRootTypes {
   Admin: {};
+  AdminOffers: { // root type
+    id: string; // ID!
+  }
   AdminOrder: { // root type
     additionalInfo: string; // String!
     amount: number; // Int!
@@ -61,7 +64,7 @@ export interface NexusGenRootTypes {
     userId: string; // ID!
   }
   AdminOrders: { // root type
-    orders: NexusGenRootTypes['AdminOrder'][]; // [AdminOrder!]!
+    adminOrders: NexusGenRootTypes['AdminOrder'][]; // [AdminOrder!]!
   }
   AdminPayment: { // root type
     amount: number; // Int!
@@ -92,16 +95,19 @@ export interface NexusGenRootTypes {
     accessToken: string; // String!
   }
   Mutation: {};
+  Offer: { // root type
+    id: string; // ID!
+  }
   Order: { // root type
     additionalInfo: string; // String!
     amount: number; // Int!
     colors: NexusGenEnums['OrderColorsEnum']; // OrderColorsEnum!
     email: string; // String!
     fileUrl: string; // String!
-    finishedInDays: string; // String!
+    finishedInDays?: string | null; // String
     id: string; // ID!
-    lastOffererUserId: string; // String!
-    priceInCents: string; // String!
+    lastOffererUserId?: string | null; // String
+    priceInCents?: string | null; // String
     telephone: string; // String!
     userId: string; // ID!
   }
@@ -150,12 +156,17 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Admin: { // field return type
-    order: NexusGenRootTypes['AdminOrder']; // AdminOrder!
-    orders: NexusGenRootTypes['AdminOrders']; // AdminOrders!
+    adminOrderById: NexusGenRootTypes['AdminOrder']; // AdminOrder!
+    adminOrders: NexusGenRootTypes['AdminOrders']; // AdminOrders!
+    adminUpdateOrderPrice: NexusGenRootTypes['AdminOrder']; // AdminOrder!
+    offers: NexusGenRootTypes['AdminOffers']; // AdminOffers!
     payment: NexusGenRootTypes['AdminPayment']; // AdminPayment!
     payments: NexusGenRootTypes['AdminPayments']; // AdminPayments!
     user: NexusGenRootTypes['AdminUser']; // AdminUser!
     users: NexusGenRootTypes['AdminUsers']; // AdminUsers!
+  }
+  AdminOffers: { // field return type
+    id: string; // ID!
   }
   AdminOrder: { // field return type
     additionalInfo: string; // String!
@@ -169,7 +180,7 @@ export interface NexusGenFieldTypes {
     userId: string; // ID!
   }
   AdminOrders: { // field return type
-    orders: NexusGenRootTypes['AdminOrder'][]; // [AdminOrder!]!
+    adminOrders: NexusGenRootTypes['AdminOrder'][]; // [AdminOrder!]!
   }
   AdminPayment: { // field return type
     amount: number; // Int!
@@ -200,6 +211,7 @@ export interface NexusGenFieldTypes {
     accessToken: string; // String!
   }
   Mutation: { // field return type
+    addOffer: NexusGenRootTypes['Offer']; // Offer!
     adminResetUserPassword: NexusGenRootTypes['AdminUser']; // AdminUser!
     changePassword: NexusGenRootTypes['Viewer']; // Viewer!
     createStripeCheckoutSession: NexusGenRootTypes['Payment']; // Payment!
@@ -209,7 +221,12 @@ export interface NexusGenFieldTypes {
     order: NexusGenRootTypes['Order']; // Order!
     registerUser: NexusGenRootTypes['User']; // User!
     updateOrderPrice: NexusGenRootTypes['Order']; // Order!
-    updateOrderStatus: NexusGenRootTypes['User']; // User!
+    updateOrderStatus: NexusGenRootTypes['Order']; // Order!
+    updateUserInformation: NexusGenRootTypes['User']; // User!
+    uploadFile: NexusGenRootTypes['Order']; // Order!
+  }
+  Offer: { // field return type
+    id: string; // ID!
   }
   Order: { // field return type
     additionalInfo: string; // String!
@@ -217,10 +234,10 @@ export interface NexusGenFieldTypes {
     colors: NexusGenEnums['OrderColorsEnum']; // OrderColorsEnum!
     email: string; // String!
     fileUrl: string; // String!
-    finishedInDays: string; // String!
+    finishedInDays: string | null; // String
     id: string; // ID!
-    lastOffererUserId: string; // String!
-    priceInCents: string; // String!
+    lastOffererUserId: string | null; // String
+    priceInCents: string | null; // String
     telephone: string; // String!
     userId: string; // ID!
   }
@@ -233,7 +250,9 @@ export interface NexusGenFieldTypes {
     userId: string; // ID!
   }
   Query: { // field return type
+    activeOrder: NexusGenRootTypes['Order'][]; // [Order!]!
     admin: NexusGenRootTypes['Admin']; // Admin!
+    offers: NexusGenRootTypes['Offer'][]; // [Offer!]!
     orders: NexusGenRootTypes['Order'][]; // [Order!]!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -255,7 +274,10 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Admin: {
-    order: { // args
+    adminOrderById: { // args
+      orderId?: string | null; // ID
+    }
+    adminUpdateOrderPrice: { // args
       orderId?: string | null; // ID
       priceInCents?: number | null; // Int
     }
@@ -272,6 +294,11 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    addOffer: { // args
+      finishedInDays?: string | null; // String
+      priceInCents?: number | null; // Int
+      userId?: string | null; // ID
+    }
     adminResetUserPassword: { // args
       userId?: string | null; // ID
     }
@@ -310,11 +337,15 @@ export interface NexusGenArgTypes {
     }
     updateOrderPrice: { // args
       finishedInDays?: number | null; // Int
-      lastOffererUserId?: number | null; // Int
+      offererUserId?: number | null; // Int
       orderId?: string | null; // ID
       priceInCents?: number | null; // Int
     }
     updateOrderStatus: { // args
+      orderId?: string | null; // ID
+      status?: NexusGenEnums['OrderProgressStatusEnum'] | null; // OrderProgressStatusEnum
+    }
+    updateUserInformation: { // args
       email?: string | null; // String
       firstName?: string | null; // String
       lastName?: string | null; // String
@@ -322,9 +353,15 @@ export interface NexusGenArgTypes {
       telephone?: string | null; // String
       userId?: string | null; // ID
     }
+    uploadFile: { // args
+      file?: any | null; // Upload
+    }
   }
   Query: {
-    orders: { // args
+    activeOrder: { // args
+      userId?: string | null; // ID
+    }
+    offers: { // args
       userId?: string | null; // ID
     }
   }
@@ -335,7 +372,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Admin" | "AdminOrder" | "AdminOrders" | "AdminPayment" | "AdminPayments" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Order" | "Payment" | "Query" | "User" | "Viewer";
+export type NexusGenObjectNames = "Admin" | "AdminOffers" | "AdminOrder" | "AdminOrders" | "AdminPayment" | "AdminPayments" | "AdminUser" | "AdminUsers" | "LoginResponse" | "Mutation" | "Offer" | "Order" | "Payment" | "Query" | "User" | "Viewer";
 
 export type NexusGenInputNames = "AdminUsersFilterInput" | "MatchInput" | "PaginationInput";
 

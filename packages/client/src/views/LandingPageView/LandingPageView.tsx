@@ -13,7 +13,7 @@ export const LandingPageView: React.FC = () => {
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>App error</div>;
   }
 
   return (

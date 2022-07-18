@@ -4,7 +4,7 @@ export default objectType({
   name: "AdminOrders",
   definition(t) {
  
-    t.list.field("orders", {
+    t.list.field("adminOrders", {
       type: "AdminOrder",
       description: "List of paginated orders",
     });
