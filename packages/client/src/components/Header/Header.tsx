@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useViewerQuery, ViewerQuery } from "../../generated/graphql";
 import "./header.scss";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 export interface HeaderProps {
   viewer?: ViewerQuery | undefined;
@@ -10,6 +12,8 @@ export interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isImageShown = true }) => {
   const { data, loading, error } = useViewerQuery();
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -37,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ isImageShown = true }) => {
               <ul className={"login-container"}>
                 {viewer?.viewer === null ? (
                   <li className={"login-text"} onClick={() => navigate("/login")}>
-                    LOG IN
+                    {i18next.t("LOG IN")}
                   </li>
                 ) : (
                   <span className={"login-text"} onClick={() => navigate("/client")}>
@@ -47,13 +51,13 @@ export const Header: React.FC<HeaderProps> = ({ isImageShown = true }) => {
 
                 {viewer?.viewer !== null ? (
                   <li className={"order-text"} onClick={() => navigate("/order")}>
-                    ORDER
+                    {i18next.t("ORDER")}
                   </li>
                 ) : null}
 
                 {viewer?.viewer !== null ? (
                   <li className={"price-text"} onClick={() => navigate("/our-price-offer")}>
-                    OUR PRICE OFFER
+                    {i18next.t("OUR PRICE OFFER")}
                   </li>
                 ) : null}
               </ul>
@@ -63,10 +67,10 @@ export const Header: React.FC<HeaderProps> = ({ isImageShown = true }) => {
             <div className="lang-custom-select">
               <select className="lang-select">
                 <option className="lang" value="">
-                  Eesti
+                  {i18next.t("Estonian")}
                 </option>
                 <option className="lang" value="">
-                  English
+                  {i18next.t("English")}
                 </option>
               </select>
               <span className="lang-custom-arrow"></span>
